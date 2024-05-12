@@ -1,0 +1,126 @@
+.errors{
+	color:  red;
+	background-color: white;
+}
+.muon-sach{
+	margin-top:  35px;
+	justify-content: space-around;
+}
+
+.muon-sach h1{
+	background:  #3a9ae4;
+	text-align: center;
+	color:  #fff;
+	height: 60px;
+}
+
+
+.muon-sach input{
+	width: 100%;
+}
+.muon-sach .row{
+	margin-left: 30px;
+	margin-right: 30px;
+	justify-content: space-around;
+	display: flex;
+}
+
+.muon-sach .row .taohoadon{
+	margin-bottom: 5px;
+	border-radius: 6px;
+	padding: 15px;
+	border : 1px solid #b2bec3;
+}
+
+.footer {
+	margin-top: 20px;
+}
+
+.footer p {
+	text-align: right;
+}
+
+
+.signature {
+	margin-top: 40px;
+	text-align: right;
+}
+
+.muon-sach .row .container{
+	width: 75%;
+	margin-bottom: 5px;
+	border-radius: 6px;
+	padding: 15px;
+	border : 1px solid #b2bec3
+	
+}
+.table th,
+.table td {
+	padding: 8px;
+	text-align: center;
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.title {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+
+.info label {
+	font-weight: bold;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+.muon-sach h1{
+	border-radius: 5px;
+	margin:  23px;
+}
+
+.muon-sach input[type="submit"] {
+	border-radius: 5px;
+	border: 1px solid #b2bec3;
+    margin-top: 30px;
+	background-color:#3a9ae4;
+	text-align: center;
+	color:  #fff;
+}
+
+
+.printButton{
+	margin-top: 40px;
+	width:  80px;
+	text-align: center;
+	margin-left: 46%;
+	border-radius:  5px;
+	border:  1px solid #b2bec3;
+	background-color:#3a9ae4;
+	color:  #fff;
+}
+
+@media print {
+	@page {
+		size: 300px; /* Định dạng kích thước trang in */
+	}
+}
+
+.ui-autocomplete {
+	width: 30%;
+    background-color: #fff; /* Đặt màu nền là màu trắng */
+    border: 1px solid #ccc; /* Đặt viền */
+    padding: 5px; /* Đặt lề */
+    max-height: 200px; /* Giới hạn chiều cao */
+    overflow-y: auto; /* Tạo thanh cuộn khi cần thiết */
+}
+
+.ui-menu-item{
+	border-bottom:  1px solid;
+}
