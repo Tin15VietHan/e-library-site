@@ -494,12 +494,12 @@
 
 .info-box .info-box .bg-warning,
 .info-box .info-box .bg-gradient-warning {
-  color: #1f2d3d;
+  color: #ffffff;
 }
 
 .info-box .info-box .bg-warning .progress-bar,
 .info-box .info-box .bg-gradient-warning .progress-bar {
-  background-color: #1f2d3d;
+  background-color: #ffffff;
 }
 
 .info-box .info-box .bg-danger,

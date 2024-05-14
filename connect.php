@@ -2,7 +2,7 @@
 $server = 'localhost';
 $user = 'root';
 $pass = '';
-$database = 'webtintuc';
+$database = 'elibrary';
 
 // $server = 'localhost';
 // $user = 'id21773647_library';

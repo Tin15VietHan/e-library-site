@@ -38,13 +38,15 @@ $totalPage = ceil($count / $limit) ?? 0;
   <section class="content">
     <div class="container-fluid">
       <h3><b>DANH SÁCH SINH VIÊN</b></h3></br>
+      <div class="form-wrapper">
       <form action="" method="GET" class="searchform">
         <input type="text" name="txtsearch" class="form" placeholder="Nhập mã sinh viên...">
         <!-- Giữ nguyên form tìm kiếm theo mã sinh viên -->
         <button class="sbutton" type="submit">Search</button>
       </form>
-      </br>
+      </div>  
       <!-- Form mới để tìm kiếm theo khoa -->
+      <div class="form-wrapper">
       <form action="" method="GET" class='searchform'>
         <select name="category_search" class='form' style="width: 190px;">
           <option value="" disabled selected>Chọn Khoa</option>
@@ -60,7 +62,9 @@ $totalPage = ceil($count / $limit) ?? 0;
           ?>
         </select>
         <button class='sbutton' type="submit">Search</button>
-      </form></br>
+      </form>
+    </div>
+  </br>
 
       <!-- Hiển thị dữ liệu sinh viên -->
       <div class="row">
@@ -149,4 +153,9 @@ h3 {
   color: #007bff;
   border-radius: 10px;
 }
+.form-wrapper {
+    display: inline-block;
+    margin-right: 20px;
+    /* Khoảng cách giữa hai form */
+  }
 </style>

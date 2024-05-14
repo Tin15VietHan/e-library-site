@@ -3,16 +3,11 @@ ob_start();
 session_start();
 require('./../connect.php');
 ?>
-
 <?php
 if (!isset($_SESSION['account_admin']) && basename($_SERVER['PHP_SELF']) != 'login.php') {
     header('Location: login.php');
 }
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -60,6 +55,8 @@ if (!isset($_SESSION['account_admin']) && basename($_SERVER['PHP_SELF']) != 'log
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- thư viện biểu đồ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -123,7 +120,7 @@ if (!isset($_SESSION['account_admin']) && basename($_SERVER['PHP_SELF']) != 'log
                                     </p>
                                 </a>
                             </li>
-                           
+
                             <li class="nav-item has-treeview">
                                 <a href="ds_binhluan.php" class="nav-link">
                                     <i class='bx bxs-chat'></i>
@@ -132,7 +129,7 @@ if (!isset($_SESSION['account_admin']) && basename($_SERVER['PHP_SELF']) != 'log
                                     </p>
                                 </a>
                             </li>
-                             <li class="nav-item has-treeview">
+                            <li class="nav-item has-treeview">
                                 <a href="ds_sinhvien.php" class="nav-link">
                                     <i class='bx bx-user'></i>
                                     <p>

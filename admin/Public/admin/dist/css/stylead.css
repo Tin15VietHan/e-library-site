@@ -124,3 +124,9 @@
 .ui-menu-item{
 	border-bottom:  1px solid;
 }
+
+.form-wrapper {
+    display: inline-block;
+    margin-right: 20px;
+    /* Khoảng cách giữa hai form */
+  }
