@@ -1,4 +1,5 @@
-﻿<?php
+﻿<?php session_start(); ?>
+<?php
 /* Payment Notify
  * IPN URL: Ghi nhận kết quả thanh toán từ VNPAY
  * Các bước thực hiện:
@@ -9,15 +10,18 @@
  * Cập nhật kết quả vào Database
  * Trả kết quả ghi nhận lại cho VNPAY
  */
-
+require('./../connect.php');
 require_once("./config.php");
+
+$iduser =  $_SESSION['account']['id'];
+
 $inputData = array();
 $returnData = array();
 foreach ($_GET as $key => $value) {
-            if (substr($key, 0, 4) == "vnp_") {
-                $inputData[$key] = $value;
-            }
-        }
+    if (substr($key, 0, 4) == "vnp_") {
+        $inputData[$key] = $value;
+    }
+}
 
 $vnp_SecureHash = $inputData['vnp_SecureHash'];
 unset($inputData['vnp_SecureHash']);
@@ -36,7 +40,7 @@ foreach ($inputData as $key => $value) {
 $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
 $vnpTranId = $inputData['vnp_TransactionNo']; //Mã giao dịch tại VNPAY
 $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
-$vnp_Amount = $inputData['vnp_Amount']/100; // Số tiền thanh toán VNPAY phản hồi
+$vnp_Amount = $inputData['vnp_Amount'] / 100; // Số tiền thanh toán VNPAY phản hồi
 
 $Status = 0; // Là trạng thái thanh toán của giao dịch chưa có IPN lưu tại hệ thống của merchant chiều khởi tạo URL thanh toán.
 $orderId = $inputData['vnp_TxnRef'];
@@ -51,7 +55,7 @@ try {
 
         $order = NULL;
         if ($order != NULL) {
-            if($order["Amount"] == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
+            if ($order["Amount"] == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
             {
                 if ($order["Status"] != NULL && $order["Status"] == 0) {
                     if ($inputData['vnp_ResponseCode'] == '00' && $inputData['vnp_TransactionStatus'] == '00') {
@@ -60,18 +64,21 @@ try {
                         $Status = 2; // Trạng thái thanh toán thất bại / lỗi
                     }
                     //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
-                    //
-                    //
-                    //
+                    $sql = "UPDATE accounts SET status='PREMIUM' WHERE id = $iduser";
+                    $result = mysqli_query($conn, $sql);
+                    if ($result && mysqli_affected_rows($conn) > 0) {
+                        $returnData['RspCode'] = '00';
+                        $returnData['Message'] = 'Confirm Success';
+                    } else {
+                        echo "Thất bại";
+                    }
                     //Trả kết quả về cho VNPAY: Website/APP TMĐT ghi nhận yêu cầu thành công                
-                    $returnData['RspCode'] = '00';
-                    $returnData['Message'] = 'Confirm Success';
+
                 } else {
                     $returnData['RspCode'] = '02';
                     $returnData['Message'] = 'Order already confirmed';
                 }
-            }
-            else {
+            } else {
                 $returnData['RspCode'] = '04';
                 $returnData['Message'] = 'invalid amount';
             }

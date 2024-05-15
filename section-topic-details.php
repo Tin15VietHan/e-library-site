@@ -1,5 +1,6 @@
 <?php include_once('./master_layout/header.php');
 require "connect.php";
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 <?php include_once 'functions.php'; ?>
 <!-- sticky header end -->

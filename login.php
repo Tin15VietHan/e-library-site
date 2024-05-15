@@ -20,11 +20,10 @@ if (isset($_POST['submit'])) {
      * Không có thì thông báo lỗi, để nhập lại.
      * Nếu có thì lưu thông tin bằng session và load lại trang
      */
-    $query = "SELECT id, username, email, fullname, gender, phone, birthday 
+    $query = "SELECT *
     FROM accounts 
     WHERE (username = '{$username}' OR email = '{$username}') 
-    AND password = '{$password}' 
-    AND (status = 'ACTIVE' OR status = 'PUBLIC')";
+    AND password = '{$password}' ";
 
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
     // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo

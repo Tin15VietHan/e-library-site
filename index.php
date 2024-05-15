@@ -1,7 +1,9 @@
 <?php
 include_once('./master_layout/header.php');
 include_once('functions.php');
-require('./connect.php'); ?>
+require('./connect.php'); 
+
+?>
 <div class="container blogging-style" style="background: #ffffff;">
   <div class="page-header" style="margin-top: 5px;">
 

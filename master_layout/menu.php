@@ -80,7 +80,8 @@ require('./connect.php');
             <?php endif; ?>
 
             <?php if (isset($_SESSION['account'])) : ?>
-              <li style="color: #fff;"><a href="ApiVnpay/vnpay_pay.php" data-effect="mfp-zoom-in"><span class="glyphicon glyphicon-circle-arrow-up"></span> GO PREMIUM</a></li>
+              <?php if  ($_SESSION['account']['status'] === 'PREMIUM') { echo" <li style='color: #fff;'><a href='' data-effect='mfp-zoom-in'><span class='glyphicon glyphicon-circle-arrow-up'></span>".$_SESSION['account']['status']. "</a></li> " ;} 
+              else{  echo" <li style='color: #fff;'><a href='ApiVnpay/vnpay_pay.php' data-effect='mfp-zoom-in'><span class='glyphicon glyphicon-circle-arrow-up'></span>GO PREMIUM</a></li> ";}?>
               <li style="color: #fff;"><a href="edit-account.php" data-effect="mfp-zoom-in" style="padding-left: 0px;"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a></li>
               <li style="color: #fff;"><a href="logout.php" data-effect="mfp-zoom-in"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
             <?php endif; ?>

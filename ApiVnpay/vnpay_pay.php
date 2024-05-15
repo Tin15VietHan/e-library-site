@@ -1,3 +1,14 @@
+<?php session_start(); ?>
+
+<?php
+// Kiểm tra xem người dùng đã đăng nhập chưa và có trạng thái là "PREMIUM" hay không
+if(isset($_SESSION['account']) && $_SESSION['account']['status'] === 'PREMIUM') {
+    // Nếu có, chuyển hướng người dùng đến trang khác hoặc hiển thị thông báo
+    echo "Bạn đã thanh toán thành công premium";
+    exit(); // Dừng việc thực thi mã PHP
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,9 +27,9 @@
     </head>
 
     <body>
-        <?php require_once("./config.php"); ?>             
+        <?php require_once("./config.php"); ?>     
         <div class="container">
-        <h3>Tạo mới đơn hàng</h3>
+        <h3>Tạo Hóa Đơn Nâng Cấp Tài Khoản <?php  echo $_SESSION['account']['fullname'] ; ?></h3>
             <div class="table-responsive">
                 <form action="vnpay_create_payment.php" id="frmCreateOrder" method="post">        
                     <div class="form-group">
