@@ -1,6 +1,7 @@
 <?php
 include_once('master_layout/header.php');
 require('connect.php');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 <?php
 if (isset($_POST['content']) && isset($_POST['submit'])) {

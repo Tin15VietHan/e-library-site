@@ -4,35 +4,38 @@ require "connect.php";
 <?php include_once 'functions.php'; ?>
 <!-- sticky header end -->
 <div class="container blogging-style">
-  <div class="page-header" style="margin-top: 20px;display: flex; align-items: center;">
+  <div class="page-header">
     <?php
+    $idkhoa = '';
+    $txtsearch = '';
+
+    if (isset($_GET['txtsearch'])){
+      $txtsearch = $_GET['txtsearch'];
+    }
     if (isset($_GET['id'])) {
-      $id = $_GET['id'];
-      $sql = "SELECT name FROM categories WHERE id ='$id'";
+      $idkhoa= $_GET['id'];
+      $sql = "SELECT name FROM categories WHERE id ='$idkhoa'";
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_assoc($result);
     ?>
       <h2><?php echo $row['name'] ?></h2>
-      <form class="navbar-form navbar-left" action="search-result-found.php" method="GET" role="search">
-            <div class="input-group" style="bottom: -5px;">
-              <input type="text" class="form-control" style="width: 270px;" placeholder="Search" name="txtsearch" id="search-input">
+      <form action="" class="navbar-form navbar-left1"  method="GET" >
+            <div class="input-group">
+              <input type="hidden" value="<?php echo $idkhoa; ?>" name = 'id'>
+              <input type="text" class="form-control" style="width: 240px;" placeholder="Tìm kiếm sách của khoa" name="txtsearch" id="txtsearch">
               <div class="input-group-btn">
-                <button class="btn btn-default" type="submit" id="submit">
-                  <i class="glyphicon glyphicon-search"></i>
-                </button>
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
               </div>
-              <ul id="search-suggestions"></ul>
             </div>
           </form>
   </div>
+
   <div class="row">
     <div class="ind">
     <?php
     }
-if(isset($_GET['submit'])){
-  $search = $_GET['txtsearch'];
-}
-    $sql = "SELECT * FROM posts WHERE category_id='$id' ";
+      $sql = "SELECT * FROM posts WHERE category_id='$idkhoa'  AND title LIKE '%$txtsearch%' ";
+ 
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
       $idtin = $row['id'];
@@ -41,7 +44,7 @@ if(isset($_GET['submit'])){
       $view = $row['view'] ;
       $image;
       if ($row['image'] == null) {
-        $image = "https://localhost/E-Library/database/anh_bia/SachChuacobia.jpg";
+        $image = "../database/anh_bia/SachChuacobia.jpg";
       } else {
         $image = $row['image'];
       }
@@ -72,7 +75,12 @@ if(isset($_GET['submit'])){
 
 <?php include_once('./master_layout/footer.php') ?>
 <style>
-
-
-
+ .page-header{
+     margin-top: 10px;
+     display: flex;
+     align-items: center;
+ }
+ .navbar-form.navbar-left1 {
+    margin-top: 20px; /* hoặc bất kỳ giá trị margin nào khác mà bạn muốn */
+}
 </style>
