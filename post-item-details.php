@@ -3,7 +3,6 @@ include_once('master_layout/header.php');
 require('connect.php');
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
-
 <?php
 if (isset($_GET['id']) && isset($_GET['khoaID'])) {
     $id = $_GET['id'];
@@ -82,7 +81,7 @@ if (isset($_GET['id']) && isset($_GET['khoaID'])) {
         </div>
         <div class="card">
         
-                <div class="fb-comments" data-href="https://e-library.site/" data-width="700" data-numposts="7"></div>
+                <div class="fb-comments" data-href="https://e-library.site/<?php echo $id; ?>" data-width="700" data-numposts="7"></div>
         </div>
     </div>
 </div>
