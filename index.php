@@ -24,7 +24,7 @@ require('./connect.php');
         $idtin = $row['id'];
         $tieude = $row['tensach'] ;
         $view = $row['luotxem'] ;
-        $category_id = $row['khoaID'];
+        $khoaID = $row['khoaID'];
 
         $image;
         if($row['anh'] == null){
@@ -38,9 +38,9 @@ require('./connect.php');
           <li class=bantin>
             <?php 
             if (isset($_SESSION['account'])){
-              echo "<a href='post-item-details.php?id=$idtin&category_id=$category_id'  ><div class='overlay' title='$view'><span class='	glyphicon glyphicon-eye-open'></span>  ".formatNumber($view)." views</div></a>";
-              echo "<a href='post-item-details.php?id=$idtin&category_id=$category_id'  ><img src='$image' title='$tieude' width='100%' height='260px' loading='lazy'/></a>";
-              echo "<a href='post-item-details.php?id=$idtin&category_id=$category_id' ><h4 style='font-size: 13px' title='$tieude'> $tieude</h4></a>";
+              echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><div class='overlay' title='$view'><span class='	glyphicon glyphicon-eye-open'></span>  ".formatNumber($view)." views</div></a>";
+              echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><img src='$image' title='$tieude' width='100%' height='260px' loading='lazy'/></a>";
+              echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID' ><h4 style='font-size: 13px' title='$tieude'> $tieude</h4></a>";
             }
             else{
               echo "<a href='#'><img src='$image' width='100%' height='260px' loading='lazy' title='$tieude' onclick='showAlert()';/></a>";

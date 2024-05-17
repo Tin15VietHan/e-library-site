@@ -18,7 +18,7 @@ require('./connect.php');
                 $count = 0;
                 while ($row = mysqli_fetch_array($result)) {
                   $id = $row['id'];
-                  $name = $row['name'];
+                  $name = $row['tenkhoa'];
                     echo "<li><a href ='section-topic-details.php?id=$id' style='overflow: hidden;text-overflow: ellipsis; width: 220px' title='$name'>$name</a></li>";
                 }
                 ?>
