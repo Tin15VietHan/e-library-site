@@ -1,19 +1,19 @@
 <?php
 include_once('./master_layout/header.php');
 include_once('functions.php');
-require('./connect.php'); 
+require('./connect.php');
 
 ?>
 <div class="container blogging-style" style="background: #ffffff;">
   <div class="page-header" style="margin-top: 5px;">
 
     <h2>Trang chủ</h2>
-    
+
   </div>
 
 
   <div class="row">
-    
+
     <div class="ind">
       <?php
 
@@ -22,27 +22,26 @@ require('./connect.php');
 
       while ($row = mysqli_fetch_array($result)) {
         $idtin = $row['id'];
-        $tieude = $row['tensach'] ;
-        $view = $row['luotxem'] ;
+        $tieude = $row['tensach'];
+        $view = $row['luotxem'];
         $khoaID = $row['khoaID'];
 
         $image;
-        if($row['anh'] == null){
+        if ($row['anh'] == null) {
           $image = "Database/anh_bia/SachChuacobia.jpg";
-        }else{
+        } else {
           $image = $row['anh'];
         }
 
       ?>
         <div class="col-md-3 col-sm-5 col-xs-8 items">
           <li class=bantin>
-            <?php 
-            if (isset($_SESSION['account'])){
-              echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><div class='overlay' title='$view'><span class='	glyphicon glyphicon-eye-open'></span>  ".formatNumber($view)." views</div></a>";
+            <?php
+            if (isset($_SESSION['account'])) {
+              echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><div class='overlay' title='$view'><span class='	glyphicon glyphicon-eye-open'></span>  " . formatNumber($view) . " views</div></a>";
               echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><img src='$image' title='$tieude' width='100%' height='260px' loading='lazy'/></a>";
               echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID' ><h4 style='font-size: 13px' title='$tieude'> $tieude</h4></a>";
-            }
-            else{
+            } else {
               echo "<a href='#'><img src='$image' width='100%' height='260px' loading='lazy' title='$tieude' onclick='showAlert()';/></a>";
               echo "<a href='#' onclick='showAlert();'><h4 style='font-size: 13px' title='$tieude'> $tieude</h4></a>";
             }
@@ -50,7 +49,6 @@ require('./connect.php');
           </li>
         </div>
       <?php } ?>
-
     </div>
   </div>
 
@@ -59,7 +57,7 @@ require('./connect.php');
     <div class="single pull-left"></div>
   </div>
   <!-- calendar end -->
-  <div class="fb-comments" data-href="https://localhost/E-LiBrary/index.php" data-width="700px" data-numposts="5"></div>
+  <div class="fb-comments" data-href="https://e-library.site/" data-width="700px" data-numposts="5"></div>
 </div>
 
 
@@ -67,12 +65,9 @@ require('./connect.php');
 <?php include_once('./master_layout/footer.php') ?>
 
 <script>
-    function showAlert() {
-        // Hiển thị thông báo khi hình ảnh được nhấp vào
-        alert('Vui lòng đăng nhập để đọc sách!');
-        window.handleAlertOK = window.location.href = 'login.php';
-    }
+  function showAlert() {
+    // Hiển thị thông báo khi hình ảnh được nhấp vào
+    alert('Vui lòng đăng nhập để đọc sách!');
+    window.handleAlertOK = window.location.href = 'login.php';
+  }
 </script>
-
-
-
