@@ -23,13 +23,13 @@ if (isset($_POST['submit'])) {
      * Nếu có thì thay đổi lại mật khẩu
      *Nếu không thì thông báo sai mật khẩu
      */
-    $query = "SELECT * FROM accounts WHERE id = '{$account['id']}' AND password = '{$old_password}'";
+    $query = "SELECT * FROM taikhoanadmin WHERE id = '{$account['id']}' AND password = '{$old_password}'";
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
     // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo
     if (mysqli_num_rows($result) > 0) { // mysqli_num_rows: kiểm tra (đếm) có bao nhiêu bản ghi (rows)
         // Lưu thông tin mật khẩu mới
         $dt = date("Y-m-d H:i:s");
-        $query = "UPDATE accounts SET password = '{$password}', updated_at = '{$dt}' WHERE id = '{$account['id']}'";
+        $query = "UPDATE taikhoanadmin SET password = '{$password}', updated_at = '{$dt}' WHERE id = '{$account['id']}'";
         $result = mysqli_query($conn, $query);
         if ($result) {
             $success = "Sửa mật khẩu thành công";

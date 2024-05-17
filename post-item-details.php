@@ -54,7 +54,7 @@ if (isset($_GET['id']) && isset($_GET['category_id'])) {
     $sql = "SELECT * FROM posts WHERE category_id='$category_id' AND id <> '$id'  ORDER BY id DESC LIMIT 5";
     $query_post = mysqli_query($conn, $sql);
 
-     $sql_comments = "SELECT c.id, c.account_id, c.content, c.post_id, c.updated_at, a.fullname FROM comments AS c INNER JOIN accounts AS a ON c.account_id = a.id WHERE c.post_id = $id ORDER BY  c.updated_at DESC";
+     $sql_comments = "SELECT c.id, c.account_id, c.content, c.post_id, c.updated_at, a.fullname FROM comments AS c INNER JOIN taikhoanadmin AS a ON c.account_id = a.id WHERE c.post_id = $id ORDER BY  c.updated_at DESC";
     $query_comments = mysqli_query($conn, $sql_comments);
     
 

@@ -64,7 +64,7 @@ try {
                         $Status = 2; // Trạng thái thanh toán thất bại / lỗi
                     }
                     //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
-                    $sql = "UPDATE accounts SET status='PREMIUM' WHERE id = $iduser";
+                    $sql = "UPDATE taikhoanadmin SET status='PREMIUM' WHERE id = $iduser";
                     $result = mysqli_query($conn, $sql);
                     if ($result && mysqli_affected_rows($conn) > 0) {
                         $returnData['RspCode'] = '00';

@@ -16,7 +16,7 @@ $birthday = isset($_POST['birthday']) ? trim($_POST['birthday']) : trim($account
 
 if (isset($_POST['delete'])) {
     // Gọi hàm xóa tài khoản
-    $query = "DELETE FROM accounts WHERE id = '{$account['id']}'";
+    $query = "DELETE FROM taikhoanadmin WHERE id = '{$account['id']}'";
     $result = mysqli_query($conn, $query);
     if ($result) {
         /**
@@ -44,10 +44,10 @@ if (isset($_POST['submit'])) {
      * $_POST['username']: lấy giá trị trong phương thức post của form với name là username
      */
     $dt = date("Y-m-d H:i:s");
-    $query = "UPDATE accounts SET fullname = '{$fullname}', gender = '{$gender}', phone = '{$phone}', birthday = '{$birthday}', updated_at = '{$dt}' WHERE id = '{$account['id']}'";
+    $query = "UPDATE taikhoanadmin SET fullname = '{$fullname}', gender = '{$gender}', phone = '{$phone}', birthday = '{$birthday}', updated_at = '{$dt}' WHERE id = '{$account['id']}'";
     $result = mysqli_query($conn, $query);
     if ($result) {
-        $query = "SELECT * FROM accounts WHERE id = '{$account['id']}'";
+        $query = "SELECT * FROM taikhoanadmin WHERE id = '{$account['id']}'";
         $result = mysqli_query($conn, $query);
         $account = $result->fetch_array(MYSQLI_ASSOC);
         $_SESSION['account'] = $account;

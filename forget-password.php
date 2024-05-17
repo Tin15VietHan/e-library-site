@@ -27,11 +27,11 @@ if (isset($_POST['submit'])) {
     $email = trim($_POST["email"]);
     $username = trim($_POST["username"]);
     /**
-     * Kiểm tra xem trong bảng accounts có tồn tại bản ghi nào với email và username trùng với thông tin ở form không
+     * Kiểm tra xem trong bảng taikhoanadmin có tồn tại bản ghi nào với email và username trùng với thông tin ở form không
      * Nếu không thỏa mãn thì thông báo không tồn tại tài khoản
      * Nếu thoả mãn thì mình đổi mật khẩu ngẫu nhiên và gửi mail lại kho người dùng
      */
-    $query = "SELECT * FROM accounts where email = '{$email}' AND username = '{$username}'";
+    $query = "SELECT * FROM taikhoanadmin where email = '{$email}' AND username = '{$username}'";
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
     // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo
     if (mysqli_num_rows($result) == 0) { // mysqli_num_rows: kiểm tra (đếm) có bao nhiêu bản ghi (rows)
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
         // Gửi email thông báo
         $dt = date("Y-m-d H:i:s");
         $password = generateRandomString(7);
-        $query = "UPDATE accounts SET password = '{$password}', updated_at = CURRENT_TIMESTAMP() where email = '{$email}' AND username = '{$username}'";
+        $query = "UPDATE taikhoanadmin SET password = '{$password}', updated_at = CURRENT_TIMESTAMP() where email = '{$email}' AND username = '{$username}'";
         if (mysqli_query($conn, $query)) {
             // Gửi thông báo về email
             $mail = new PHPMailer(true);

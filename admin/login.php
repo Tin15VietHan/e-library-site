@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
      * Không có thì thông báo lỗi, để nhập lại.
      * Nếu có thì lưu thông tin bằng session và load lại trang
      */
-    $query = "SELECT id, username, email, fullname, gender, phone, birthday FROM accounts WHERE (username = '{$username}' OR email = '{$username}') AND password = '{$password}' AND status = 'ACTIVE' OR status = 'PREMIUM' AND role = 'admin' OR role = 'manage'";
+    $query = "SELECT id, username, email, fullname, gender, phone, birthday FROM taikhoanadmin WHERE (username = '{$username}' OR email = '{$username}') AND password = '{$password}' AND status = 'ACTIVE' OR status = 'PREMIUM' AND role = 'admin' OR role = 'manage'";
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
     // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo
     if (mysqli_num_rows($result) > 0) { // mysqli_num_rows: kiểm tra (đếm) có bao nhiêu bản ghi (rows)

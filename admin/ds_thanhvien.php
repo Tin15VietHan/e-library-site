@@ -15,7 +15,7 @@ if (isset($_GET['txtsearch'])) {
 }
 
 $offset = ($page - 1) * $limit;
-$sql = "SELECT * FROM accounts WHERE username LIKE '%$search%'";
+$sql = "SELECT * FROM taikhoanadmin WHERE username LIKE '%$search%'";
 $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
 $count = mysqli_num_rows(mysqli_query($conn, $sql));
 $totalPage = ceil($count / $limit) ?? 0;

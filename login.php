@@ -21,8 +21,8 @@ if (isset($_POST['submit'])) {
      * Nếu có thì lưu thông tin bằng session và load lại trang
      */
     $query = "SELECT *
-    FROM accounts 
-    WHERE (username = '{$username}' OR email = '{$username}') 
+    FROM docgia 
+    WHERE (username = '{$username}' OR madocgia = '{$username}') 
     AND password = '{$password}' ";
 
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)

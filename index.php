@@ -17,21 +17,20 @@ require('./connect.php');
     <div class="ind">
       <?php
 
-      $sql = "SELECT * FROM posts ORDER BY id ASC";
+      $sql = "SELECT * FROM sach ORDER BY id ASC";
       $result = mysqli_query($conn, $sql);
 
       while ($row = mysqli_fetch_array($result)) {
         $idtin = $row['id'];
-        $tieude = $row['title'] ;
-        $view = $row['view'] ;
-        $category_id = $row['category_id'];
-        $time = $row['created_at'];
+        $tieude = $row['tensach'] ;
+        $view = $row['luotxem'] ;
+        $category_id = $row['khoaID'];
 
         $image;
-        if($row['image'] == null){
+        if($row['anh'] == null){
           $image = "Database/anh_bia/SachChuacobia.jpg";
         }else{
-          $image = $row['image'];
+          $image = $row['anh'];
         }
 
       ?>

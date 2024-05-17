@@ -69,7 +69,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="row  text-center">
                   <?php if (isset($_SESSION['account'])) : ?>
-                    <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #106494; font-family: 'Reem Kufi Fun', sans-serif;" ><?php echo 'Xin chào, ' . $_SESSION['account']['fullname'] . ' . Cảm ơn bạn đã truy cập trang web của chúng tôi !'; ?>.</marquee>
+                    <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #106494; font-family: 'Reem Kufi Fun', sans-serif;" ><?php echo 'Xin chào, ' . $_SESSION['account']['hoten'] . ' . Cảm ơn bạn đã truy cập trang web của chúng tôi !'; ?>.</marquee>
                   <?php else : ?>
                     <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #106494; font-family: 'Reem Kufi Fun', sans-serif;" >Xin chào bạn đọc thân mến, Để nâng cao quyền riêng tư Vui lòng đăng nhập để đọc truyện.</marquee>
                   <?php endif; ?>

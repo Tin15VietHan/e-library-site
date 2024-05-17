@@ -91,12 +91,12 @@ if (isset($_POST['sbm'])) {
     $category_id = (int)$category;
     $soluong = $_POST['soluong'];
     $idaccount = $_SESSION['account_admin']['id'];  
-    $accounts_id = (int)$idaccount;
+    $taikhoanadmin_id = (int)$idaccount;
 
 
     $status = $_POST['status'];
 
-    $sql = "INSERT INTO posts (title,  image, content, contens, category_id, soluong, accounts_id, status, view) VALUES ('$title', '$Url_Anh_Bia', '$content', '$Url_Pdf', '$category_id', '$soluong','$accounts_id', '$status', '0')";
+    $sql = "INSERT INTO posts (title,  image, content, contens, category_id, soluong, taikhoanadmin_id, status, view) VALUES ('$title', '$Url_Anh_Bia', '$content', '$Url_Pdf', '$category_id', '$soluong','$taikhoanadmin_id', '$status', '0')";
     if (mysqli_query($conn, $sql))
     //Thông báo nếu thành công
     {

@@ -13,7 +13,7 @@ require('./connect.php');
             <li class="active theloaikhoi dropdown"><a href='#' class='dropdown-toggle' data-toggle='dropdown' style="color: #fff;" <?php if (!isset($_SESSION['account'])) : echo "onclick='showAlerts(event);'";  endif; ?>>Khoa Sách<span class='caret'></span></a>
               <ul class="dropdown-menu" <?php if (!isset($_SESSION['account'])) : echo "onclick='showAlerts(event);'";  endif; ?>>
                 <?php
-                $sql = "SELECT * FROM categories ORDER BY id ASC";
+                $sql = "SELECT * FROM khoa ORDER BY id ASC";
                 $result = mysqli_query($conn, $sql);
                 $count = 0;
                 while ($row = mysqli_fetch_array($result)) {
@@ -27,14 +27,14 @@ require('./connect.php');
             <li class="theloaikhoi dropdown"><a href='#' class='dropdown-toggle' data-toggle='dropdown' style="color: #fff; "  <?php if (!isset($_SESSION['account'])) : echo "onclick='showAlerts(event);'";  endif; ?> >Mới nhất<span class='caret'></span></a>
               <ul class="dropdown-menu"  <?php if (!isset($_SESSION['account'])) : echo "onclick='showAlerts(event);'" ; echo "disabled";  endif; ?>>
                 <?php
-                $sql = "SELECT * FROM posts ORDER BY id DESC LIMIT 7";
+                $sql = "SELECT * FROM sach ORDER BY id DESC LIMIT 7";
                 $result = mysqli_query($conn, $sql);
                 $count = 0;
                 while ($row = mysqli_fetch_array($result)) {
                   $idtin = $row['id'];
-                  $tieude = $row['title'];
-                  $category_id = $row['category_id'];
-                    echo "<li><a href ='post-item-details.php?id=$idtin&category_id=$category_id' style='overflow: hidden;text-overflow: ellipsis; width: 220px' title='$tieude'>$tieude</a></li>";
+                  $tensach = $row['tensach'];
+                  $khoaID = $row['khoaID'];
+                    echo "<li><a href ='post-item-details.php?id=$idtin&khoaID=$khoaID' style='overflow: hidden;text-overflow: ellipsis; width: 220px' title='$tensach'>$tensach</a></li>";
                 }
                 ?>
               </ul>
@@ -42,16 +42,16 @@ require('./connect.php');
             <li class="theloaikhoi dropdown"<?php if (!isset($_SESSION['account'])) : echo "onclick='showAlerts(event);'";  endif; ?>><a href='#' class='dropdown-toggle' data-toggle='dropdown' style="color: #fff;">Xem nhiều nhất<span class='caret'></span></a>
               <ul class="dropdown-menu"<?php if (!isset($_SESSION['account'])) : echo "onclick='showAlerts(event);'";  endif; ?>>
                 <?php
-                $sql = "SELECT * FROM posts ORDER BY view DESC LIMIT 9";
+                $sql = "SELECT * FROM sach ORDER BY luotxem DESC LIMIT 9";
                 $result = mysqli_query($conn, $sql);
                 $count = 0;
                 while ($row = mysqli_fetch_array($result)) {
                   $idtin = $row['id'];
-                  $tieude = $row['title'];
-                  $category_id = $row['category_id'];
+                  $tensach = $row['tensach'];
+                  $khoaID = $row['khoaID'];
                   $count++;
                   if ($count <= 7) {
-                    echo "<li><a href ='post-item-details.php?id=$idtin&category_id=$category_id' style='overflow: hidden;text-overflow: ellipsis; width: 220px' title='$tieude'>$tieude</a></li>";
+                    echo "<li><a href ='post-item-details.php?id=$idtin&khoaID=$khoaID' style='overflow: hidden;text-overflow: ellipsis; width: 220px' title='$tensach'>$tensach</a></li>";
                   } else {
                     break;
                   }
@@ -80,7 +80,7 @@ require('./connect.php');
             <?php endif; ?>
 
             <?php if (isset($_SESSION['account'])) : ?>
-              <?php if  ($_SESSION['account']['status'] === 'PREMIUM') { echo" <li style='color: #fff;'><a href='' data-effect='mfp-zoom-in'><span class='glyphicon glyphicon-circle-arrow-up'></span>".$_SESSION['account']['status']. "</a></li> " ;} 
+              <?php if  ($_SESSION['account']['trangthai'] === 'PREMIUM') { echo" <li style='color: #fff;'><a href='' data-effect='mfp-zoom-in'><span class='glyphicon glyphicon-circle-arrow-up'></span>".$_SESSION['account']['trangthai']. "</a></li> " ;} 
               else{  echo" <li style='color: #fff;'><a href='ApiVnpay/vnpay_pay.php' data-effect='mfp-zoom-in'><span class='glyphicon glyphicon-circle-arrow-up'></span>GO PREMIUM</a></li> ";}?>
               <li style="color: #fff;"><a href="edit-account.php" data-effect="mfp-zoom-in" style="padding-left: 0px;"><span class="glyphicon glyphicon-user"></span> ACCOUNT</a></li>
               <li style="color: #fff;"><a href="logout.php" data-effect="mfp-zoom-in"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>

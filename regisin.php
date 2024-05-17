@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
      * $_POST['username']: lấy giá trị trong phương thức post của form với name là username
      */
     $username =  trim($_POST['username']);
-    $email =  trim($_POST['email']);
+    $madocgia =  trim($_POST['madocgia']);
     $fullname =  trim($_POST['fullname']);
     $password =  trim($_POST['password']);
     $phone = trim($_POST['phone']);
@@ -32,20 +32,20 @@ if (isset($_POST['submit'])) {
     // Làm việc với database
     if (count($errors) == 0) {
         /**
-         * B1: Kiểm tra xem trong csdl đã có acccount tồn tại tên đăng nhập hoặc email nhập từ form chưa. 
+         * B1: Kiểm tra xem trong csdl đã có acccount tồn tại tên đăng nhập hoặc madocgia nhập từ form chưa. 
          *     Có rồi thì thông báo nhập lại
          * B2: Nếu không có thì thêm dữ liệu từ form vào csdl
          */
-        $query = "select * from accounts where username = '{$username}' OR email = '{$email}'"; // câu lệnh sql cần thực hiện
+        $query = "select * from taikhoanadmin where username = '{$username}' OR madocgia = '{$madocgia}'"; // câu lệnh sql cần thực hiện
         $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
         // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo
         if (mysqli_num_rows($result) > 0) { // mysqli_num_rows: kiểm tra (đếm) có bao nhiêu bản ghi (rows)
             // Thông báo 
-            $errors[] = "Tên đăng nhập hoặc email đã tồn tại";
+            $errors[] = "Tên đăng nhập hoặc madocgia đã tồn tại";
         } else {
             // Thêm dữ liệu vào csdl
             $dt = date("Y-m-d H:i:s");
-            $query = "insert into accounts values (null, '{$username}', '{$email}', '{$fullname}', '{$password}', '{$phone}', '{$gender}', '{$birthday}', 'member', '${dt}', '${dt}', 'PUBLIC')";
+            $query = "insert into taikhoanadmin values (null, '{$username}', '{$madocgia}', '{$fullname}', '{$password}', '{$phone}', '{$gender}', '{$birthday}', 'member', '${dt}', '${dt}', 'PUBLIC')";
             if (mysqli_query($conn, $query)) {
                 $success = "Thêm tài khoản thành công";
             } else {
@@ -78,8 +78,8 @@ if (isset($_POST['submit'])) {
                             <input type="text" class="form-control" name="username" id="username" placeholder="Nhập tên">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Nhập Email">
+                            <label for="madocgia">madocgia</label>
+                            <input type="text" class="form-control" name="madocgia" id="madocgia" placeholder="Nhập madocgia">
                         </div>
                         <div class="form-group">
                             <label for="fullname">Tên đầy đủ</label>

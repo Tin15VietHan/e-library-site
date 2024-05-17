@@ -88,7 +88,7 @@
                     <?php
                     if ($secureHash == $vnp_SecureHash) {
                         if ($_GET['vnp_ResponseCode'] == '00') {
-                            $sql = "UPDATE accounts SET status='PREMIUM' WHERE id = $iduser";
+                            $sql = "UPDATE taikhoanadmin SET status='PREMIUM' WHERE id = $iduser";
                             $result = mysqli_query($conn, $sql);
                             if ($result && mysqli_affected_rows($conn) <= 0) {
                                 echo "<span style='color:red'>Lỗi cơ sở dữ liệu</span>";
@@ -122,6 +122,8 @@
 <script>
     // Số giây để đếm ngược
     var seconds = 10;
+
+
 
     // Lấy phần tử có id="countdown" từ HTML
     var countdownElement = document.getElementById("countdown");

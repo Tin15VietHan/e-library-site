@@ -15,7 +15,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
     if (isset($_GET['id'])) {
       $idkhoa= $_GET['id'];
-      $sql = "SELECT name FROM categories WHERE id ='$idkhoa'";
+      $sql = "SELECT name FROM khoa WHERE id ='$idkhoa'";
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_assoc($result);
     ?>
@@ -29,22 +29,22 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
               </div>
             </div>
           </form>
-  </div>
+  </div>                                                                       
 
   <div class="row">
     <div class="ind">
     <?php
     }
-      $sql = "SELECT * FROM posts WHERE category_id='$idkhoa'  AND title LIKE '%$txtsearch%' ";
+      $sql = "SELECT * FROM sach WHERE khoaID='$idkhoa'  AND tensach LIKE '%$txtsearch%' ";
  
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
       $idtin = $row['id'];
-      $tieude = substr($row['title'], 0, 50);
-      $category_id = $row['category_id'];
-      $view = $row['view'] ;
+      $tieude = substr($row['tensach'], 0, 50);
+      $khoaID = $row['khoaID'];
+      $view = $row['luotxem'] ;
       $image;
-      if ($row['image'] == null) {
+      if ($row['anh'] == null) {
         $image = "../database/anh_bia/SachChuacobia.jpg";
       } else {
         $image = $row['image'];
@@ -56,9 +56,9 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
       <div class="col-md-3 col-sm-5 col-xs-8 items">
         <li class=bantin>
           <?php
-          echo "<a href='post-item-details.php?id=$idtin&category_id=$category_id'  ><div class='overlay' title='$view'><span class='	glyphicon glyphicon-eye-open'></span>  " . formatNumber($view) . " views</div></a>";
-          echo "<a href='post-item-details.php?id=$idtin&category_id=$category_id'  ><img src='$image' title='$tieude' width='100%' height='260px' loading='lazy'/></a>";
-          echo "<a href='post-item-details.php?id=$idtin&category_id=$category_id' ><h4 style='font-size: 13px' title='$tieude'> $tieude</h4></a>";
+          echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><div class='overlay' tensach='$view'><span class='	glyphicon glyphicon-eye-open'></span>  " . formatNumber($view) . " views</div></a>";
+          echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID'  ><img src='$image' tensach='$tieude' width='100%' height='260px' loading='lazy'/></a>";
+          echo "<a href='post-item-details.php?id=$idtin&khoaID=$khoaID' ><h4 style='font-size: 13px' tensach='$tieude'> $tieude</h4></a>";
           ?>
         </li>
       </div>

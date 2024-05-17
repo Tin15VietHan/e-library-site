@@ -63,10 +63,10 @@ function sanitize_input($data) {
 
         $status = $_POST['status'];
 
-        $account = $_POST['accounts_id'];
-        $accounts_id = (int)$account;
+        $account = $_POST['taikhoanadmin_id'];
+        $taikhoanadmin_id = (int)$account;
 
-        $sql = "UPDATE posts SET title ='$title', image = '$image', content = '$content', category_id= $category_id,status= '$status',  accounts_id= $accounts_id, updated_at = CURRENT_TIMESTAMP() where id = $id";
+        $sql = "UPDATE posts SET title ='$title', image = '$image', content = '$content', category_id= $category_id,status= '$status',  taikhoanadmin_id= $taikhoanadmin_id, updated_at = CURRENT_TIMESTAMP() where id = $id";
         
         $query = mysqli_query($conn, $sql);
        
@@ -128,7 +128,7 @@ function sanitize_input($data) {
     
                     <div class="form-group">
                         <label for="">Người viết</label>
-                        <input type="text" name="accounts_id" class="form-control" require value="<?php echo $row_up['accounts_id'] ?>">
+                        <input type="text" name="taikhoanadmin_id" class="form-control" require value="<?php echo $row_up['taikhoanadmin_id'] ?>">
                     </div>
                     
                     <button name= "sbm" class="btn btn-success">Sửa</button>

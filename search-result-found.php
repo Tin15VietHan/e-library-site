@@ -17,7 +17,7 @@
   }
 
   $offset = ($page - 1) * $limit;
-  $sql = "SELECT * FROM posts WHERE title LIKE '%$search%'";
+  $sql = "SELECT * FROM sach WHERE tensach LIKE '%$search%'";
   $query = mysqli_query($conn ,$sql . " LIMIT $offset, $limit");
   $count = mysqli_num_rows(mysqli_query($conn ,$sql));
   $totalPage = ceil($count/$limit) ?? 0;
@@ -34,19 +34,19 @@
         <?php while ($row = mysqli_fetch_array($query)) : ?>
           <li>
             <div class="news_item">
-              <a class="news_item_avatar" title="<?php echo $row['title']; ?>" href=<?php echo "post-item-details.php?id=" . $row['id'] . "&category_id=" . $row['category_id']; ?>>
+              <a class="news_item_avatar" tensach="<?php echo $row['tensach']; ?>" href=<?php echo "post-item-details.php?id=" . $row['id'] . "&category_id=" . $row['category_id']; ?>>
 
                 <div class="news_item_img">
-                  <img alt="<?php echo $row['title']; ?>" src="<?php echo $row['image'] ?>" class="rounded" width="190" height="260px">
+                  <img alt="<?php echo $row['tensach']; ?>" src="<?php echo $row['image'] ?>" class="rounded" width="190" height="260px">
                 </div>
               </a>
               <div class="news_item_content">
-                <h3 class="news_item_title" style="margin-top:  0px;">
+                <h3 class="news_item_tensach" style="margin-top:  0px;">
                   <a>
-                    <?php echo $row['title']; ?>
+                    <?php echo $row['tensach']; ?>
                   </a>
                 </h3>
-                <p class="news_item_sapo" title="<?php echo $row['title']; ?>" href="">
+                <p class="news_item_sapo" tensach="<?php echo $row['tensach']; ?>" href="">
                   <?php echo substr($row['content'], 0, 650); ?>
 
                 </p>
@@ -58,19 +58,19 @@
         <?php while ($row = mysqli_fetch_array($query)) : ?>
           <li>
             <div class="news_item"  onclick='showAlert()';>
-              <a class="news_item_avatar" title="<?php echo $row['title']; ?>"   >
+              <a class="news_item_avatar" tensach="<?php echo $row['tensach']; ?>"   >
 
                 <div class="news_item_img">
-                  <img alt="<?php echo $row['title']; ?>" src="<?php echo $row['image'] ?>" class="rounded" width="190" height="260px">
+                  <img alt="<?php echo $row['tensach']; ?>" src="<?php echo $row['image'] ?>" class="rounded" width="190" height="260px">
                 </div>
               </a>
               <div class="news_item_content">
-                <h3 class="news_item_title" style="margin-top:  0px;">
+                <h3 class="news_item_tensach" style="margin-top:  0px;">
                   <a>
-                    <?php echo $row['title']; ?>
+                    <?php echo $row['tensach']; ?>
                   </a>
                 </h3>
-                <p class="news_item_sapo" title="<?php echo $row['title']; ?>" href="">
+                <p class="news_item_sapo" tensach="<?php echo $row['tensach']; ?>" href="">
                   <?php echo substr($row['content'], 0, 650); ?>
 
                 </p>

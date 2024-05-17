@@ -5,7 +5,7 @@ require('./../connect.php'); ?>
 
 <?php
 $id=$_GET['id'];
-$query=mysqli_query($conn,"select * from `accounts` where id='$id'");
+$query=mysqli_query($conn,"select * from `taikhoanadmin` where id='$id'");
 $row=mysqli_fetch_assoc($query);
 ?>
 <div class="fix_form">
@@ -54,7 +54,7 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE `accounts` SET username='$username', password='$password', email='$email', fullname='$fullname', phone='$phone', birthday='$birthday', gender='$gender', role='$role', status='$status', updated_at = CURRENT_TIMESTAMP()WHERE id='$id'";
+$sql = "UPDATE `taikhoanadmin` SET username='$username', password='$password', email='$email', fullname='$fullname', phone='$phone', birthday='$birthday', gender='$gender', role='$role', status='$status', updated_at = CURRENT_TIMESTAMP()WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";
