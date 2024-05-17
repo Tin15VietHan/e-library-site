@@ -43,8 +43,7 @@ if (isset($_POST['submit'])) {
      * $_POST['submit']: lấy giá trị trong phương thức post của form với name là submit
      * $_POST['username']: lấy giá trị trong phương thức post của form với name là username
      */
-    $dt = date("Y-m-d H:i:s");
-    $query = "UPDATE docgia SET `hoten` = '{$fullname}', `gioitinh` = '{$gender}', `sdt` = '{$phone}', `ngaysinh` = '{$birthday}',  WHERE id = '{$account['id']}'";
+    $query = "UPDATE docgia SET `hoten` = '{$fullname}', `gioitinh` = '{$gender}', `sdt` = '{$phone}', `ngaysinh` = '{$birthday}' WHERE id = '{$account['id']}'";
     $result = mysqli_query($conn, $query);
     if ($result) {
         $query = "SELECT * FROM docgia WHERE id = '{$account['id']}'";
@@ -64,7 +63,7 @@ if (isset($_POST['submit'])) {
         <div class="col col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Sửa thông tin tài khoản
+                    Sửa thông tin tài khoản <?php echo $account['id'] ?>
                 </div>
                 <div class="panel-body">
                     <?php if (count($errors) > 0) : ?>

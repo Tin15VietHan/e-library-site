@@ -5,7 +5,6 @@ require('./../connect.php');
 $errors = []; // biến để lưu tất cả các lỗi ở server thực hiện và trả về cho người dùng (1 mảng)
 $success = ""; // là 1 chuỗi thông báo thành công (1 chuỗi)
 
-$fullname = "";
 $username = "";
 $idaccount = "";
 ?>
@@ -25,7 +24,7 @@ if (isset($_POST['submit'])) {
      * Không có thì thông báo lỗi, để nhập lại.
      * Nếu có thì lưu thông tin bằng session và load lại trang
      */
-    $query = "SELECT id, username, email, fullname, gender, phone, birthday FROM taikhoanadmin WHERE (username = '{$username}' OR email = '{$username}') AND password = '{$password}' AND status = 'ACTIVE' OR status = 'PREMIUM' AND role = 'admin' OR role = 'manage'";
+    $query = "SELECT id, username FROM taikhoanadmin WHERE (username = '{$username}' AND password = '{$password}' AND quyen = 'admin' )";
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
     // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo
     if (mysqli_num_rows($result) > 0) { // mysqli_num_rows: kiểm tra (đếm) có bao nhiêu bản ghi (rows)
@@ -34,7 +33,6 @@ if (isset($_POST['submit'])) {
         //$row = mysqli_fetch_assoc($result);
         $account = $result->fetch_array(MYSQLI_ASSOC); //fetch_array đọc kết quả của result (tìm và trả về 1 dòng kết quả của câu truy vấn)
         $_SESSION['account_admin'] = $account; // $_SESSION: biến toàn cục và là kiểu mảng
-        $_SESSION['fullname'] = $account['fullname']; // $_SESSION: biến toàn cục và là kiểu mảng
         $_SESSION['username'] = $account['username']; // $_SESSION: biến toàn cục và là kiểu mảng
         $_SESSION['id'] = $account['id'];
         header('Location: index.php');

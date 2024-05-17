@@ -7,10 +7,10 @@ $totalsach = 0;
 $totalcmt = 0;
 $totalmuonsach = 0;
 
-$sqldanhmuc = "SELECT COUNT(*) AS total FROM categories";
-$sqlnguoidung = "SELECT COUNT(*) AS total FROM sinhvien ";
-$sqlsach = "SELECT COUNT(*) AS total FROM posts";
-$sqlcmt = "SELECT COUNT(*) AS total FROM muon_sach WHERE trang_thai = 'Đang Mượn'";
+$sqldanhmuc = "SELECT COUNT(*) AS total FROM khoa";
+$sqlnguoidung = "SELECT COUNT(*) AS total FROM docgia ";
+$sqlsach = "SELECT COUNT(*) AS total FROM sach";
+$sqlcmt = "SELECT COUNT(*) AS total FROM muon_sach WHERE trangthai = 'Đang Mượn'";
 $sqlmuonsach = "SELECT COUNT(*) AS total FROM muon_sach ";
 
 $sql_weekly_borrows = "
@@ -164,7 +164,7 @@ mysqli_close($conn);
 					<div class="small-box bg-warning" style="color: aliceblue !important;" ;>
 						<div class="inner">
 							<h3><?php echo $totalnguoidung; ?></h3>
-							<h4>SINH VIÊN</h4>
+							<h4>ĐỘC GIẢ</h4>
 						</div>
 						<div class="icon">
 							<i class='bx bx-user'></i>
