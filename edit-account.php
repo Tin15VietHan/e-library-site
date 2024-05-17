@@ -9,14 +9,14 @@ $success = ""; // là 1 chuỗi thông báo thành công (1 chuỗi)
 date_default_timezone_set("Asia/Ho_Chi_Minh"); // xét timezone (múi giờ)
 
 $account = $_SESSION['account'];
-$fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : trim($account['fullname']);
-$gender = isset($_POST['gender']) ? trim($_POST['gender']) : trim($account['gender']);
-$phone = isset($_POST['phone']) ? trim($_POST['phone']) : trim($account['phone']);
-$birthday = isset($_POST['birthday']) ? trim($_POST['birthday']) : trim($account['birthday']);
+$fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : trim($account['hoten']);
+$gender = isset($_POST['gender']) ? trim($_POST['gender']) : trim($account['gioitinh']);
+$phone = isset($_POST['phone']) ? trim($_POST['phone']) : trim($account['sdt']);
+$birthday = isset($_POST['birthday']) ? trim($_POST['birthday']) : trim($account['ngaysinh']);
 
 if (isset($_POST['delete'])) {
     // Gọi hàm xóa tài khoản
-    $query = "DELETE FROM taikhoanadmin WHERE id = '{$account['id']}'";
+    $query = "DELETE FROM docgia WHERE id = '{$account['id']}'";
     $result = mysqli_query($conn, $query);
     if ($result) {
         /**
@@ -44,10 +44,10 @@ if (isset($_POST['submit'])) {
      * $_POST['username']: lấy giá trị trong phương thức post của form với name là username
      */
     $dt = date("Y-m-d H:i:s");
-    $query = "UPDATE taikhoanadmin SET fullname = '{$fullname}', gender = '{$gender}', phone = '{$phone}', birthday = '{$birthday}', updated_at = '{$dt}' WHERE id = '{$account['id']}'";
+    $query = "UPDATE docgia SET `hoten` = '{$fullname}', `gioitinh` = '{$gender}', `sdt` = '{$phone}', `ngaysinh` = '{$birthday}',  WHERE id = '{$account['id']}'";
     $result = mysqli_query($conn, $query);
     if ($result) {
-        $query = "SELECT * FROM taikhoanadmin WHERE id = '{$account['id']}'";
+        $query = "SELECT * FROM docgia WHERE id = '{$account['id']}'";
         $result = mysqli_query($conn, $query);
         $account = $result->fetch_array(MYSQLI_ASSOC);
         $_SESSION['account'] = $account;
@@ -113,6 +113,8 @@ if (isset($_POST['submit'])) {
         </div> -->
     </div>
 </div>
+
+<?php include_once('./master_layout/footer.php') ?>
 <script src="./assets/js/edit-account.js"></script>
 <script src="./assets/js/login.js"></script>
 <script src="./assets/js/jquery.min.js"></script> 

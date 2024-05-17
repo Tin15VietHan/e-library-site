@@ -16,27 +16,6 @@ if (isset($_POST['content']) && isset($_POST['submit'])) {
 }
  //-----------------------------------------------------------------------------------------------
 
-if (isset($_POST['idCmt']) && isset($_POST['deleteCmt'])) {
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-    if (isset($_SESSION['account'])) {
-        $id = $_POST['idCmt'];
-        // Escape biến $id để tránh SQL Injection
-        $id = mysqli_real_escape_string($conn, $id);
-
-        // Sử dụng câu lệnh DELETE FROM thay vì DELETE *
-        $deletecmt = "DELETE FROM comments WHERE id = '$id'";
-        $result2 = mysqli_query($conn, $deletecmt);
-    }
-}
- //-----------------------------------------------------------------------------------------------
- if (isset($_POST['cmt']) && isset($_POST['editCmt'])) {
-    $content = $_POST['cmt'];
-    $cmt_id = $_POST['idCmt'];
-    $queryedit = "UPDATE comments SET content = '$content', updated_at = NOW()  WHERE id = '$cmt_id'";
-    $resultedit = mysqli_query($conn, $queryedit);
-}
-
-
 
 ?>
 <?php
