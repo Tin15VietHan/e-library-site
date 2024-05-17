@@ -15,11 +15,11 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
     if (isset($_GET['id'])) {
       $idkhoa= $_GET['id'];
-      $sql = "SELECT name FROM khoa WHERE id ='$idkhoa'";
+      $sql = "SELECT tenkhoa FROM khoa WHERE id ='$idkhoa'";
       $result = mysqli_query($conn, $sql);
       $row = mysqli_fetch_assoc($result);
     ?>
-      <h2><?php echo $row['name'] ?></h2>
+      <h2><?php echo $row['tenkhoa'] ?></h2>
       <form action="" class="navbar-form navbar-left1"  method="GET" >
             <div class="input-group">
               <input type="hidden" value="<?php echo $idkhoa; ?>" name = 'id'>
@@ -47,7 +47,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
       if ($row['anh'] == null) {
         $image = "../database/anh_bia/SachChuacobia.jpg";
       } else {
-        $image = $row['image'];
+        $image = $row['anh'];
       }
 
 
