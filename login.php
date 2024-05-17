@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
      *  + tên đăng nhập hoặc email trùng với thông tin username ở form 
      *  + mật khẩu trùng với password ở form
      * Không có thì thông báo lỗi, để nhập lại.
-     * Nếu có thì lưu thông tin bằng session và load lại trang
+     * Nếu có thì lưu thông tin bằng session và load lại trangok nha
      */
     $query = "SELECT *
     FROM docgia 
