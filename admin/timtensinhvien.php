@@ -6,7 +6,7 @@ require('./../connect.php');
 $searchTerm = $_GET['term'];
 
 // Câu lệnh SQL truy vấn dữ liệu gợi ý
-$sql = "SELECT `tensach` FROM `sach` WHERE `tensach` LIKE '%$searchTerm%' ORDER BY `ngaycapnhat` DESC";
+$sql = "SELECT `id`, `hoten` FROM `docgia` WHERE `hoten` LIKE '%$searchTerm%' ORDER BY `ngaycapnhat` DESC";
 
 // Thực hiện truy vấn
 $result = $conn->query($sql);

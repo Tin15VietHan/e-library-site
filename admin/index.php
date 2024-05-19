@@ -19,45 +19,46 @@ mysqli_close($conn);
 			</div>
 		</div>
 	</div>
+
+	<!-- Thêm banner thông tin ở đây -->
+	<div class="banner">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="alert alert-info text-center">
+						<h2>Chào mừng đến với E-library</h2>
+						<p>Thư viện trực tuyến hàng đầu cung cấp hàng ngàn đầu sách phong phú. Hãy mượn sách và tận hưởng trải nghiệm đọc tuyệt vời!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="muon-sach">
 		<h1>MƯỢN SÁCH</h1>
 		<div class="row">
 			<div class="col-6 taohoadon">
 				<form name="muonsach" action="" id="FormHD">
 					<div class="form-group">
-						<label for="">Mã Sinh Viên</label>
-						<input type="text" id="masv">
-					</div>
-					<div class="form-group">
 						<label for="">Tên Sinh Viên Mượn Sách</label>
-						<input type="text" id="tensv">
-					</div>
-					<div class="form-group">
-						<label for="">Số Điện Thoại</label>
-						<input type="text" id="sdt">
-					</div>
-					<div class="form-group">
-						<label for="">Địa Chỉ</label>
-						<input type="text" id="diachi">
+						<input type="text"class="autocomplete-sinhvien"  id="tensv">
 					</div>
 					<div class="form-group">
 						<label for="">Sách</label>
 						<div id="inputContainer">
-							<input type="text"class="autocomplete-sach"  id="sach"> <br>
+							<input type="text" class="autocomplete-sach" id="sach"> <br>
 						</div>
 						<i id="addbook" class='bx bx-plus-circle' style="font-size: 25px; margin-top: 10px; margin-left: 49%; width: 100%;"></i>
 					</div>
 					<div class="form-group">
 						<label for="">Ngày Mượn</label>
-						<input type="text" id="diachi" value="<?php $currentDate = date('Y-m-d');
+						<input type="text" id="diachi" value="<?php $currentDate = date('Y-m-d-h-i-s');
 																echo "$currentDate"; ?>" readonly>
 					</div>
-
 					<div class="form-group">
 						<label for="">Ngày Hẹn Trả</label>
 						<input type="date" id="ngayhentra">
 					</div>
-
 					<input type="submit" name="" id="" value="Tạo Phiếu Mượn">
 				</form>
 			</div>
@@ -70,10 +71,7 @@ mysqli_close($conn);
 						<div>SĐT: 0799339567 – 0876492111</div>
 					</div>
 					<div class="info">
-					    <div id="htmasv">Mã Sinh Viên: </div>
 						<div id="htnguoimuon">Người mượn: </div>
-						<div id="htsdt">Số Điện Thoại:</div>
-						<div id="htdiachi">Địa chỉ: </div>
 					</div>
 					<div class="book">
 						<table class="table">
@@ -97,7 +95,8 @@ mysqli_close($conn);
 					</div>
 					<div class="footer" style="margin-top: 70px; ">
 						<p style="margin-right: 30px">Người tạo phiếu</p>
-						<p class="signature"><?php $fullname = isset($_SESSION['fullname']) ? $_SESSION['fullname'] : 'ad';echo $fullname ?></p>
+						<p class="signature"><?php $fullname = isset($_SESSION['hoten']) ? $_SESSION['hoten'] : 'ad';
+												echo $fullname ?></p>
 					</div>
 
 				</div>
@@ -109,43 +108,41 @@ mysqli_close($conn);
 
 	</div>
 </div>
+
 <?php require('layouts/footer.php'); ?>
 
 
 <script>
-// Bắt sự kiện khi nhấn vào nút "+"
-// Biến cờ để kiểm tra xem đã thêm hàng mới hay chưa
-var isNewRowAdded = false;
+	// Bắt sự kiện khi nhấn vào nút "+"
+	// Biến cờ để kiểm tra xem đã thêm hàng mới hay chưa
+	var isNewRowAdded = false;
 
-// Sự kiện click của button "+"
-document.getElementById("addbook").addEventListener("click", function() {
-    // Kiểm tra nếu chưa thêm hàng mới
-    if (!isNewRowAdded) {
-        var inputContainer = document.getElementById("inputContainer");
-        var newInput = document.createElement("input");
-        newInput.type = "text";
-        newInput.className = "autocomplete-sach";
-        newInput.style.marginTop = "10px";
-        inputContainer.appendChild(newInput);
-        inputContainer.appendChild(document.createElement("br"));
+	// Sự kiện click của button "+"
+	document.getElementById("addbook").addEventListener("click", function() {
+		// Kiểm tra nếu chưa thêm hàng mới
+		if (!isNewRowAdded) {
+			var inputContainer = document.getElementById("inputContainer");
+			var newInput = document.createElement("input");
+			newInput.type = "text";
+			newInput.className = "autocomplete-sach";
+			newInput.style.marginTop = "10px";
+			inputContainer.appendChild(newInput);
+			inputContainer.appendChild(document.createElement("br"));
 
-        // Gọi lại hàm tạo dữ liệu gợi ý cho input mới
-        createAutocompleteForNewInput(newInput);
+			// Gọi lại hàm tạo dữ liệu gợi ý cho input mới
+			createAutocompleteForNewInput(newInput);
 
-        // Đặt giá trị của biến cờ thành true
-        isNewRowAdded = true;
-    }
-});
+			// Đặt giá trị của biến cờ thành true
+			isNewRowAdded = true;
+		}
+	});
 
-// Xử lý khi form được gửi đi
-document.getElementById('FormHD').addEventListener('submit', function(event) {
-    // Đặt lại giá trị của biến cờ thành false
-    isNewRowAdded = false;
-    // Các xử lý khác ở đây...
-});
-
-
-
+	// Xử lý khi form được gửi đi
+	document.getElementById('FormHD').addEventListener('submit', function(event) {
+		// Đặt lại giá trị của biến cờ thành false
+		isNewRowAdded = false;
+		// Các xử lý khác ở đây...
+	});
 </script>
 
 
@@ -154,23 +151,17 @@ document.getElementById('FormHD').addEventListener('submit', function(event) {
 		// Ngăn chặn việc gửi biểu mẫu đi
 		// Hiển thị thông báo xác nhận trước khi submit
 		event.preventDefault();
-		var ValueMaSv = document.getElementById('masv').value;
 		var ValueNguoiMuon = document.getElementById('tensv').value;
-		var ValueSdt = document.getElementById('sdt').value;
-		var ValueDiaChi = document.getElementById('diachi').value;
 		var ValueNgayHenTra = document.getElementById('ngayhentra').value;
 
-		
-		document.getElementById('htmasv').innerText = "Mã Sinh Viên: " + ValueMaSv;
+
 		document.getElementById('htnguoimuon').innerText = "Người Mượn: " + ValueNguoiMuon;
-		document.getElementById('htsdt').innerText = "Số Điện Thoại: " + ValueSdt;
-		document.getElementById('htdiachi').innerText = "Địa Chỉ: " + ValueDiaChi;
 		document.getElementById('htngayhentra').innerText = ValueNgayHenTra;
 
 		var ValueSach = document.querySelectorAll('input.autocomplete-sach'); // Lấy tất cả các phần tử input có id là "sach"
 		var output = "";
 		for (var i = 0; i < ValueSach.length; i++) {
-			output +=ValueSach[i].value + "<br> </br> ";
+			output += ValueSach[i].value + "<br> </br> ";
 		}
 		document.getElementById('htsach').innerHTML = output;
 	});
@@ -215,116 +206,109 @@ document.getElementById('FormHD').addEventListener('submit', function(event) {
 
 <script>
 	$('#FormHD').submit(function(event) {
-    // Ngăn chặn sự kiện mặc định của form
-    event.preventDefault();
-	var confirmation = confirm("Vui lòng kiểm tra lại dữ liệu trước khi tạo hóa đơn, hóa đơn này sẽ được lưu vào hệ thống ngay sao đó");
+		// Ngăn chặn sự kiện mặc định của form
+		event.preventDefault();
+		var confirmation = confirm("Vui lòng kiểm tra lại dữ liệu trước khi tạo hóa đơn, hóa đơn này sẽ được lưu vào hệ thống ngay sao đó");
 		if (confirmation) {
-    // Lấy giá trị từ các trường input
-    var ValueMaSv = $('#masv').val();
-    var ValueNguoiMuon = $('#tensv').val();
-    var ValueSdt = $('#sdt').val();
-    var ValueDiaChi = $('#diachi').val();
-    var ValueNgayHenTra = $('#ngayhentra').val();
+			// Lấy giá trị từ các trường input
+			var ValueNguoiMuon = $('#tensv').val();
+			var ValueNgayHenTra = $('#ngayhentra').val();
 
-    // Tạo một mảng để lưu các giá trị của trường sách
-    var sachArr = [];
-    $('#inputContainer input').each(function() {
-        sachArr.push($(this).val());
-    });
-    var ValueSach = sachArr.join(', ');
+			// Tạo một mảng để lưu các giá trị của trường sách
+			var sachArr = [];
+			$('#inputContainer input').each(function() {
+				sachArr.push($(this).val());
+			});
+			var ValueSach = sachArr.join(', ');
 
-    // Gửi dữ liệu bằng AJAX
-    $.ajax({
-        type: 'POST',
-        url: 'them_nguoi_muon.php',
-        data: {
-            masv: ValueMaSv,
-            nguoimuon: ValueNguoiMuon,
-            sdt: ValueSdt,
-            diachi: ValueDiaChi,
-            ngayhentra: ValueNgayHenTra,
-            sach: ValueSach,
-        },
-        success: function(response) {
-            // Xử lý kết quả từ máy chủ (nếu cần)
-            alert(response); // Hiển thị thông báo từ máy chủ
-			console.log(sachArr);
+			// Gửi dữ liệu bằng AJAX
+			$.ajax({
+				type: 'POST',
+				url: 'them_nguoi_muon.php',
+				data: {
+					masv: ValueMaSv,
+					nguoimuon: ValueNguoiMuon,
+					sdt: ValueSdt,
+					diachi: ValueDiaChi,
+					ngayhentra: ValueNgayHenTra,
+					sach: ValueSach,
+				},
+				success: function(response) {
+					// Xử lý kết quả từ máy chủ (nếu cần)
+					alert(response); // Hiển thị thông báo từ máy chủ
+					console.log(sachArr);
 
-        },
-        error: function() {
-            // Xử lý lỗi nếu có
-            alert('Đã xảy ra lỗi khi gửi dữ liệu.');
-        }
-    });
-}
-});
-
-
+				},
+				error: function() {
+					// Xử lý lỗi nếu có
+					alert('Đã xảy ra lỗi khi gửi dữ liệu.');
+				}
+			});
+		}
+	});
 </script>
 <script>
-    // Thêm sự kiện change cho ô nhập mã sinh viên
-   // Sử dụng sự kiện "blur" cho ô nhập mã sinh viên để bắt sự kiện khi người dùng nhập xong
-$('#masv').on('blur', function() {
-    var masv = $(this).val();
-    $.ajax({
-        type: 'POST',
-        url: 'them_nguoimuonsach.php', // Địa chỉ xử lý AJAX trên máy chủ
-        data: { masv: masv }, // Gửi mã sinh viên lên máy chủ
-        success: function(response) {
-            // Xử lý kết quả trả về từ máy chủ
-            var data = JSON.parse(response);
-            $('#tensv').val(data.tensv); // Cập nhật tên người mượn
-            $('#sdt').val(data.sdt); // Cập nhật số điện thoại
-            $('#diachi').val(data.diachi); // Cập nhật địa chỉ
-        },
-        error: function() {
-            // Xử lý lỗi nếu có
-            alert('Đã xảy ra lỗi khi lấy thông tin người mượn.');
-        }
-    });
-});
-
+	// Thêm sự kiện change cho ô nhập mã sinh viên
+	// Sử dụng sự kiện "blur" cho ô nhập mã sinh viên để bắt sự kiện khi người dùng nhập xong
+	$('#masv').on('blur', function() {
+		var masv = $(this).val();
+		$.ajax({
+			type: 'POST',
+			url: 'them_nguoimuonsach.php', // Địa chỉ xử lý AJAX trên máy chủ
+			data: {
+				masv: masv
+			}, // Gửi mã sinh viên lên máy chủ
+			success: function(response) {
+				// Xử lý kết quả trả về từ máy chủ
+				var data = JSON.parse(response);
+				$('#tensv').val(data.tensv); // Cập nhật tên người mượn
+			},
+			error: function() {
+				// Xử lý lỗi nếu có
+				alert('Đã xảy ra lỗi khi lấy thông tin người mượn.');
+			}
+		});
+	});
 </script>
 
 
 <script>
+	// Hàm tạo dữ liệu gợi ý cho input mới
+	function createAutocompleteForNewInput(input) {
+		$(input).autocomplete({
+			source: function(request, response) {
+				$.ajax({
+					url: "timsach.php",
+					dataType: "json",
+					data: {
+						term: request.term
+					},
+					success: function(data) {
+						var formattedData = data.map(function(item) {
+							return {
+								label: item,
+								value: item
+							};
+						});
+						response(formattedData);
+					}
+				});
+			},
+			open: function(event, ui) {
+				var autocompleteList = $(this).data("ui-autocomplete").menu.element;
+				autocompleteList.css("overflow-y", "auto"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
+				autocompleteList.css("width", "41%"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
+				autocompleteList.css("overflow-x", "hidden"); // Ẩn thanh cuộn ngang
+			}
+		}).data("ui-autocomplete")._renderItem = function(ul, item) {
+			return $("<li>")
+				.append("<div>" + item.label + "</div>")
+				.appendTo(ul);
+		};
+	}
 
-// Hàm tạo dữ liệu gợi ý cho input mới
-function createAutocompleteForNewInput(input) {
-    $(input).autocomplete({
-        source: function(request, response) {
-            $.ajax({
-                url: "timsach.php",
-                dataType: "json",
-                data: {
-                    term: request.term
-                },
-                success: function(data) {
-                    var formattedData = data.map(function(item) {
-                        return { label: item, value: item };
-                    });
-                    response(formattedData);
-                }
-            });
-        },
-        open: function(event, ui) {
-            var autocompleteList = $(this).data("ui-autocomplete").menu.element;
-            autocompleteList.css("overflow-y", "auto"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
-            autocompleteList.css("width", "41%"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
-            autocompleteList.css("overflow-x", "hidden"); // Ẩn thanh cuộn ngang
-        }
-    }).data("ui-autocomplete")._renderItem = function(ul, item) {
-        return $("<li>")
-            .append("<div>" + item.label + "</div>")
-            .appendTo(ul);
-    };
-}
-
-// Gọi hàm tạo dữ liệu gợi ý cho tất cả các input hiện có
-$(".autocomplete-sach").each(function() {
-    createAutocompleteForNewInput(this);
-});
-
-
-
+	// Gọi hàm tạo dữ liệu gợi ý cho tất cả các input hiện có
+	$(".autocomplete-sach").each(function() {
+		createAutocompleteForNewInput(this);
+	});
 </script>

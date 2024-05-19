@@ -5,17 +5,14 @@ session_start();
 require('./../connect.php'); 
 
 // Lấy dữ liệu từ form
-$masv = $_POST['masv'];
 $nguoimuon = $_POST['nguoimuon'];
-$sdt = $_POST['sdt'];
-$diachi = $_POST['diachi'];
 $ngayhentra = $_POST['ngayhentra'];
 $sach = $_POST['sach'];
-$fullname =  $_SESSION['fullname'];
+$fullname =  $_SESSION['hoten'];
 
 // Xây dựng câu lệnh insert
 
-$sql = "INSERT INTO `muon_sach`( `masv`,`ten_nguoi_muon`, `sdt`, `dia_chi`, `sach_muon`, `ngay_hen_tra`, `data_creator`)  VALUES ('$masv','$nguoimuon', '$sdt', '$diachi','$sach', '$ngayhentra', '$fullname')";
+$sql = "INSERT INTO `muon_sach`( `docgiaID` , `sachID`, `ngay_hen_tra`, `nguoitaoID`)  VALUES ('$nguoimuon', '$sach', '$ngayhentra', '$fullname')";
 
 // Thực thi câu lệnh insert
 if (mysqli_query($conn, $sql)) {

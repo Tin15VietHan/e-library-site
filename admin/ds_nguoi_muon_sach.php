@@ -17,15 +17,15 @@ if (isset($_GET['status'])) {
 }
 
 $offset = ($page - 1) * $limit;
-$sql = "SELECT * FROM muon_sach WHERE masv LIKE '%$search%'";
+$sql = "SELECT * FROM muon_sach WHERE docgiaID LIKE '%$search%'";
 if (!empty($status)) {
-  $sql .= " AND trang_thai = '$status'";
+  $sql .= " AND trangthai = '$status'";
 }
 $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
 $count = mysqli_num_rows(mysqli_query($conn, $sql));
 $totalPage = ceil($count / $limit) ?? 0;
 
-$sql_muon_sach = "SELECT * FROM `muon_sach` ORDER BY `muon_sach`.`updated_at` DESC";
+$sql_muon_sach = "SELECT * FROM `muon_sach` ORDER BY `muon_sach`.`ngaycapnhat` DESC";
 $queryy = mysqli_query($conn, $sql_muon_sach);
 ?>
 
@@ -58,10 +58,7 @@ $queryy = mysqli_query($conn, $sql_muon_sach);
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Mã Sinh Viên</th>
                 <th>Tên Người Mượn</th>
-                <th>Số Điện Thoại</th>
-                <th>Địa Chỉ</th>
                 <th>Tên Sách</th>
                 <th>Ngày Mượn</th>
                 <th>Ngày Hẹn Trả</th>
@@ -74,20 +71,34 @@ $queryy = mysqli_query($conn, $sql_muon_sach);
             <tbody>
               <?php
               $stt = ($page - 1) * $limit + 1; // Sửa lại tính toán STT
+
               while ($row = mysqli_fetch_array($query)) :
+                // Sử dụng prepared statement để truy vấn tên sinh viên                
+                $stmt = $conn->prepare("SELECT hoten FROM docgia WHERE id = ?");
+                $stmt->bind_param("i", $row['docgiaID']);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $rowtensv = $result->fetch_assoc();
+                $stmt->close();
+
+                // Thêm truy vấn để lấy tên sách mượn
+                $sqltensach = "SELECT tensach FROM sach WHERE id = " . $row['sachID'];
+                $querytensach = mysqli_query($conn, $sqltensach);
+                $rowtensach = mysqli_fetch_array($querytensach);
+                // Thêm truy vấn để lấy tên người tạo
+                $sqltenadmin = "SELECT hoten FROM taikhoanadmin WHERE id = " . $row['nguoitaoID'];
+                $querytenadmin = mysqli_query($conn, $sqltenadmin);
+                $rowtenadmin = mysqli_fetch_array($querytenadmin);
               ?>
                 <tr>
                   <td><?php echo $stt; ?></td>
-                  <td><?php echo $row['masv']; ?></td>
-                  <td><?php echo $row['ten_nguoi_muon']; ?></td>
-                  <td><?php echo $row['sdt']; ?></td>
-                  <td><?php echo $row['dia_chi']; ?></td>
-                  <td><?php echo $row['sach_muon']; ?></td>
+                  <td><?php echo $rowtensv['hoten']; ?></td>
+                  <td><?php echo $rowtensach['tensach']; ?></td>
                   <td><?php echo $row['ngay_muon']; ?></td>
                   <td><?php echo $row['ngay_hen_tra']; ?></td>
-                  <td><?php echo $row['trang_thai']; ?></td>
-                  <td><?php echo $row['updated_at']; ?></td>
-                  <td><?php echo $row['data_creator']; ?></td>
+                  <td><?php echo $row['trangthai']; ?></td>
+                  <td><?php echo $row['ngaycapnhat']; ?></td>
+                  <td><?php echo $rowtenadmin['hoten']; ?></td>
                   <td><a href="trasach.php?id=<?php echo $row['id']; ?>">Trả Sách</a></td>
                   <td><a href="sua_nguoi_muon_sach.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
                   <td><a href="xoa_nguoi_muon.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
@@ -96,6 +107,7 @@ $queryy = mysqli_query($conn, $sql_muon_sach);
                 $stt++; // Tăng giá trị STT cho dòng tiếp theo
               endwhile;
               ?>
+
 
             </tbody>
           </table>

@@ -223,7 +223,7 @@ if (isset($_GET['id']) && isset($_GET['khoaID'])) {
 </style>
 
 <script>
-    var link = "<?php echo $rn['contens']; ?>";
+    var link = "<?php echo $rn['noidungdientu']; ?>";
     // Chọn div có id là myDiv
     var divElement = document.getElementById("read-book");
 

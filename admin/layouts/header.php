@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 require('./../connect.php');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 ?>
 <?php
 if (!isset($_SESSION['account_admin']) && basename($_SERVER['PHP_SELF']) != 'login.php') {
@@ -78,7 +79,7 @@ if (!isset($_SESSION['account_admin']) && basename($_SERVER['PHP_SELF']) != 'log
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex" style="justify-content: space-around;">
                         <div class="info">
-                            <a href="#" class="d-block"><?php $fullname = isset($_SESSION['username']) ? $_SESSION['username'] : 'ad';
+                            <a href="#" class="d-block"><?php $fullname = isset($_SESSION['hoten']) ? $_SESSION['hoten'] : 'ad';
                                                         echo $fullname ?></a>
                         </div>
                     </div>
