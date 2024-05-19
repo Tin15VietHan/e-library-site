@@ -3,7 +3,7 @@ require('layouts/header.php');
 require('./../connect.php');
 
 $errors = [];
-$category_query = "SELECT name FROM categories";
+$category_query = "SELECT name FROM khoa";
 $category_result = mysqli_query($conn, $category_query);
 $categories = mysqli_fetch_all($category_result, MYSQLI_ASSOC);
 
