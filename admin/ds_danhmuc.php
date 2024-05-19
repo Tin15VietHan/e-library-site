@@ -35,9 +35,7 @@ require('./../connect.php'); ?>
               <thead>
                 <tr>
                    <td scope="row">ID</td>
-                   <td scope="row">Tên Danh Mục</td>
-                   <td scope="row">Ngày tạo</td>
-	               <td scope="row">Ngày cập nhật</td>
+                   <td scope="row">Tên Khoa</td>
 	               <td scope="row">Trạng thái</td>
                    <td scope="row" colspan="2"><a href="them_danhmuc.php">Thêm</a></td>
                 </tr>
@@ -45,10 +43,8 @@ require('./../connect.php'); ?>
 <?php while($row=mysqli_fetch_array($query)): ?>
                 <tr>
                    <td><?php echo $row['id']; ?></td>
-                   <td><?php echo $row['name']; ?></td>
-                   <td><?php echo $row['created_at']; ?></td>
-                   <td><?php echo $row['updated_at']; ?></td>
-                   <td><?php echo $row['status']; ?></td>
+                   <td><?php echo $row['tenkhoa']; ?></td>
+                   <td><?php echo $row['trangthai']; ?></td>
                    <td><a href="sua_danhmuc.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
                    <td><a href="xoa_danhmuc.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
                 </tr>
