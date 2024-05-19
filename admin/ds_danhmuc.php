@@ -15,7 +15,7 @@ require('./../connect.php'); ?>
   }
 
   $offset = ($page - 1) * $limit;
-  $sql = "SELECT * FROM categories WHERE name LIKE '%$search%'";
+  $sql = "SELECT * FROM khoa WHERE tenkhoa LIKE '%$search%'";
   $query = mysqli_query($conn ,$sql . " LIMIT $offset, $limit");
   $count = mysqli_num_rows(mysqli_query($conn ,$sql));
   $totalPage = ceil($count/$limit) ?? 0;
