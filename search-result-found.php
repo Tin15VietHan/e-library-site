@@ -34,10 +34,10 @@
         <?php while ($row = mysqli_fetch_array($query)) : ?>
           <li>
             <div class="news_item">
-              <a class="news_item_avatar" tensach="<?php echo $row['tensach']; ?>" href=<?php echo "post-item-details.php?id=" . $row['id'] . "&category_id=" . $row['category_id']; ?>>
+              <a class="news_item_avatar" tensach="<?php echo $row['tensach']; ?>" href=<?php echo "post-item-details.php?id=" . $row['id'] . "&khoaID=" . $row['khoaID']; ?>>
 
                 <div class="news_item_img">
-                  <img alt="<?php echo $row['tensach']; ?>" src="<?php echo $row['image'] ?>" class="rounded" width="190" height="260px">
+                  <img alt="<?php echo $row['tensach']; ?>" src="<?php echo $row['anh'] ?>" class="rounded" width="190" height="260px">
                 </div>
               </a>
               <div class="news_item_content">
@@ -47,7 +47,7 @@
                   </a>
                 </h3>
                 <p class="news_item_sapo" tensach="<?php echo $row['tensach']; ?>" href="">
-                  <?php echo substr($row['content'], 0, 650); ?>
+                  <?php echo substr($row['gioithieusach'], 0, 650); ?>
 
                 </p>
               </div>
@@ -61,7 +61,7 @@
               <a class="news_item_avatar" tensach="<?php echo $row['tensach']; ?>"   >
 
                 <div class="news_item_img">
-                  <img alt="<?php echo $row['tensach']; ?>" src="<?php echo $row['image'] ?>" class="rounded" width="190" height="260px">
+                  <img alt="<?php echo $row['tensach']; ?>" src="<?php echo $row['anh'] ?>" class="rounded" width="190" height="260px">
                 </div>
               </a>
               <div class="news_item_content">
@@ -71,7 +71,7 @@
                   </a>
                 </h3>
                 <p class="news_item_sapo" tensach="<?php echo $row['tensach']; ?>" href="">
-                  <?php echo substr($row['content'], 0, 650); ?>
+                  <?php echo substr($row['gioithieusach'], 0, 650); ?>
 
                 </p>
               </div>

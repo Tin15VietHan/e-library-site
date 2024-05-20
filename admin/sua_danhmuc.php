@@ -45,14 +45,14 @@ function sanitize_input($data) {
  }
 
 $id=$_GET['id'];
-$query=mysqli_query($conn,"select * from `categories` where id='$id'");
+$query=mysqli_query($conn,"select * from `khoa` where id='$id'");
 $row=mysqli_fetch_assoc($query);
 ?>
 <div class="fix_form">
 <form method="POST" class="form">
-<h2>Sửa danh mục</h2>
-<label>Tên danh mục: <input type="text" value="<?php echo $row['name']; ?>" name="name"></label><br/>
-<label>Trạng thái:<select name="status" class="status" value="<?php echo $row['status']; ?>" name="status">
+<h2>Sửa khoa</h2>
+<label>Tên khoa: <input type="text" value="<?php echo $row['tenkhoa']; ?>" name="tenkhoa"></label><br/>
+<label>Trạng thái:<select name="trangthai" class="trangthai" value="<?php echo $row['trangthai']; ?>" name="trangthai">
             <option value="ACTIVE">ACTIVE</option>
             <option value="INACTIVE">INACTIVE</option>
          </select></br> 
@@ -67,8 +67,8 @@ $row=mysqli_fetch_assoc($query);
 <?php
 if (isset($_POST['update_categories'])){
 $id=$_GET['id'];
-$name=$_POST['name'];
-$status=$_POST['status'];
+$name=$_POST['tenkhoa'];
+$status=$_POST['trangthai'];
 
 
 // Create connection
@@ -78,7 +78,7 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE `categories` SET name='$name', status='$status',  updated_at = CURRENT_TIMESTAMP() WHERE id='$id'";
+$sql = "UPDATE `khoa` SET name='$name', status='$status',  updated_at = CURRENT_TIMESTAMP() WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";

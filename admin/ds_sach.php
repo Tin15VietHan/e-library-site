@@ -17,18 +17,18 @@ if (isset($_GET['txtsearch'])) {
   $search = $_GET['txtsearch'];
 }
 
-if (isset($_GET['category_search'])) { // Kiểm tra xem người dùng đã chọn khoa nào từ dropdown chưa
-  $category = $_GET['category_search'];
+if (isset($_GET['khoa_search'])) { // Kiểm tra xem người dùng đã chọn khoa nào từ dropdown chưa
+  $category = $_GET['khoa_search'];
 }
 
 $offset = ($page - 1) * $limit;
 
 // Sửa câu truy vấn để lọc theo cả mã sinh viên và khoa
-$sql = "SELECT * FROM posts WHERE title LIKE '%$search%'";
+$sql = "SELECT * FROM sach WHERE tensach LIKE '%$search%'";
 
 // Nếu người dùng đã chọn khoa từ dropdown, thêm điều kiện vào câu truy vấn
 if ($category !== "") {
-  $sql .= " AND category_id = '$category'";
+  $sql .= " AND khoaID = '$category'";
 }
 
 $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
@@ -54,7 +54,7 @@ if (isset($_POST['btngui'])) {
     $image = $sheetData[$row]['B'];
     $content = $sheetData[$row]['C'];
     $contens = $sheetData[$row]['D'];
-    $sql = "INSERT INTO posts (title, image, content, contens,) VALUES ('$title', '$image', '$content', '$contens',)";
+    $sql = "INSERT INTO sach (tensach, anh, gioithieusach, noidungdientu,) VALUES ('$tensach', '$anh', '$gioithieusach', '$noidungdientu',)";
 
     if (mysqli_query($conn, $sql)) {
       $success_count++; // Tăng biến đếm nếu thêm thành công
@@ -83,16 +83,16 @@ if (isset($_POST['btngui'])) {
         </div>
         <div class="form-wrapper">
           <form action="" method="GET" class='searchform'>
-            <select name="category_search" class='form' style="width: 190px;">
+            <select name="khoa_search" class='form' style="width: 190px;">
               <option value="" disabled selected>Chọn Khoa</option>
               <?php
               // Kết nối CSDL và truy vấn các danh mục
-              $sql_categories = "SELECT * FROM categories";
+              $sql_categories = "SELECT * FROM khoa";
               $result_categories = mysqli_query($conn, $sql_categories);
               // Tạo option cho select box từ kết quả truy vấn
               while ($row_category = mysqli_fetch_assoc($result_categories)) {
-                $selected = ($row_category['name'] == $category) ? 'selected' : ''; // Chọn mục đã được chọn trước đó
-                echo "<option value='" . $row_category['id'] . "' $selected>" . $row_category['name'] . "</option>";
+                $selected = ($row_category['tenkhoa'] == $category) ? 'selected' : ''; // Chọn mục đã được chọn trước đó
+                echo "<option value='" . $row_category['id'] . "' $selected>" . $row_category['tenkhoa'] . "</option>";
               }
               ?>
             </select>
@@ -121,25 +121,27 @@ if (isset($_POST['btngui'])) {
               <td scope="row">Nội dung</td>
               <td scope="row">Khoa</td>
               <td scope="row">Số Lượng</td>
-              <td scope="row">Ngày tạo</td>
-              <td scope="row">Ngày sửa</td>
-              <td scope="row">Trạng thái</td>
+              <td scope="row">Số Lượng Còn Lại</td>
+              <td scope="row">Nhà Xuất Bản</td>
+              <td scope="row">Tác Giả</td>
+              <td scope="row">Ngôn Ngữ</td>
+              <td scope="row">Năm Xuất Bản</td>
               <td scope="row" colspan="2"><a href="them_sach.php">Thêm</a></td>
             </tr>
             <thead>
               <?php while ($row = mysqli_fetch_array($query)) : ?>
                 <tr>
                   <td><?php echo   $row['id']; ?></td>
-                  <td><?php echo $row['title']; ?></td>
-                  <td><?php echo '<img  src=' . $row['image'] . ' width=170px;/>'; ?></td>
-                  <td style="text-align: left;"><?php echo substr($row['content'], 0, 500); ?></td>
+                  <td><?php echo $row['tensach']; ?></td>
+                  <td><?php echo '<img  src=' . $row['anh'] . ' width=170px;/>'; ?></td>
+                  <td style="text-align: left;"><?php echo substr($row['gioithieusach'], 0, 500); ?></td>
                   <td>
                     <?php
-                    $id = $row['category_id'];
+                    $id = $row['khoaID'];
                     if ($id == 0 || $id == null) {
                       echo "Chưa có thể loại";
                     } else {
-                      $querytheloai =  "SELECT `name` FROM `categories` WHERE `id` = $id";
+                      $querytheloai =  "SELECT `tenkhoa` FROM `khoa` WHERE `id` = $id";
                       // Thực thi truy vấn
                       $result = $conn->query($querytheloai);
                       if ($result->num_rows == 1) {
@@ -157,9 +159,11 @@ if (isset($_POST['btngui'])) {
                     ?>
                   </td>
                   <td><?php echo $row['soluong']; ?></td>
-                  <td><?php echo $row['created_at']; ?></td>
-                  <td><?php echo $row['updated_at']; ?></td>
-                  <td><?php echo $row['status']; ?></td>
+                  <td><?php echo $row['soluong_conlai']; ?></td>
+                  <td><?php echo $row['nhaxuatban']; ?></td>
+                  <td><?php echo $row['tacgia']; ?></td>
+                  <td><?php echo $row['ngonngu']; ?></td>
+                  <td><?php echo $row['namxuatban']; ?></td>
                   <td><a href="sua_sach.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
                   <td><a href="xoa_sach.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
                 </tr>
