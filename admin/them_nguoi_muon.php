@@ -1,5 +1,4 @@
 <?php
-// Kết nối đến cơ sở dữ liệu
 ob_start();
 session_start();
 require('./../connect.php'); 

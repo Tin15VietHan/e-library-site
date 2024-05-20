@@ -41,7 +41,7 @@ mysqli_close($conn);
 				<form name="muonsach" action="" id="FormHD">
 					<div class="form-group">
 						<label for="">Tên Sinh Viên Mượn Sách</label>
-						<input type="text"class="autocomplete-sinhvien"  id="tensv">
+						<input type="text" class="autocomplete-sinhvien" id="tensv">
 					</div>
 					<div class="form-group">
 						<label for="">Sách</label>
@@ -62,7 +62,7 @@ mysqli_close($conn);
 					<input type="submit" name="" id="" value="Tạo Phiếu Mượn">
 				</form>
 			</div>
-			<div class="col-6">
+			<div class="col-6" style="margin-bottom: 5px;border-radius: 6px;padding: 15px;border: 1px solid #b2bec3;">
 				<div class="container" id="printContent" style="display: block !important;">
 					<div class="header">
 						<div class="title">PHIẾU MƯỢN SÁCH</div>
@@ -153,17 +153,20 @@ mysqli_close($conn);
 		event.preventDefault();
 		var ValueNguoiMuon = document.getElementById('tensv').value;
 		var ValueNgayHenTra = document.getElementById('ngayhentra').value;
+		if (ValueNguoiMuon == null || ValueNgayHenTra == null) {
+			alert("Vui lòng nhập đầy đủ thông tin");
+		} else {
+			document.getElementById('htnguoimuon').innerText = "Người Mượn: " + ValueNguoiMuon;
+			document.getElementById('htngayhentra').innerText = ValueNgayHenTra;
 
-
-		document.getElementById('htnguoimuon').innerText = "Người Mượn: " + ValueNguoiMuon;
-		document.getElementById('htngayhentra').innerText = ValueNgayHenTra;
-
-		var ValueSach = document.querySelectorAll('input.autocomplete-sach'); // Lấy tất cả các phần tử input có id là "sach"
-		var output = "";
-		for (var i = 0; i < ValueSach.length; i++) {
-			output += ValueSach[i].value + "<br> </br> ";
+			var ValueSach = document.querySelectorAll('input.autocomplete-sach'); // Lấy tất cả các phần tử input có id là "sach"
+			var output = "";
+			for (var i = 0; i < ValueSach.length; i++) {
+				output += ValueSach[i].value + "<br> </br> ";
+			}
+			document.getElementById('htsach').innerHTML = output;
 		}
-		document.getElementById('htsach').innerHTML = output;
+
 	});
 </script>
 
@@ -247,30 +250,6 @@ mysqli_close($conn);
 		}
 	});
 </script>
-<script>
-	// Thêm sự kiện change cho ô nhập mã sinh viên
-	// Sử dụng sự kiện "blur" cho ô nhập mã sinh viên để bắt sự kiện khi người dùng nhập xong
-	$('#masv').on('blur', function() {
-		var masv = $(this).val();
-		$.ajax({
-			type: 'POST',
-			url: 'them_nguoimuonsach.php', // Địa chỉ xử lý AJAX trên máy chủ
-			data: {
-				masv: masv
-			}, // Gửi mã sinh viên lên máy chủ
-			success: function(response) {
-				// Xử lý kết quả trả về từ máy chủ
-				var data = JSON.parse(response);
-				$('#tensv').val(data.tensv); // Cập nhật tên người mượn
-			},
-			error: function() {
-				// Xử lý lỗi nếu có
-				alert('Đã xảy ra lỗi khi lấy thông tin người mượn.');
-			}
-		});
-	});
-</script>
-
 
 <script>
 	// Hàm tạo dữ liệu gợi ý cho input mới
@@ -297,7 +276,7 @@ mysqli_close($conn);
 			open: function(event, ui) {
 				var autocompleteList = $(this).data("ui-autocomplete").menu.element;
 				autocompleteList.css("overflow-y", "auto"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
-				autocompleteList.css("width", "41%"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
+				autocompleteList.css("width", "40%"); // Tạo thanh cuộn khi nội dung dài hơn chiều cao tối đa
 				autocompleteList.css("overflow-x", "hidden"); // Ẩn thanh cuộn ngang
 			}
 		}).data("ui-autocomplete")._renderItem = function(ul, item) {
