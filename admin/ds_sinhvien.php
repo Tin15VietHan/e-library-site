@@ -33,7 +33,7 @@ $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
 $count = mysqli_num_rows(mysqli_query($conn, $sql));
 $totalPage = ceil($count / $limit) ?? 0;
 ?>
-<?php require('layouts/footer.php'); ?>
+
 <div class="content-wrapper" style="min-height: 365px;">
   <section class="content">
     <div class="container-fluid">
@@ -141,7 +141,7 @@ while ($row = mysqli_fetch_array($query)) : ?>
 </div>
 
 
-
+<?php require('layouts/footer.php'); ?>
 <style>
 h3 {
   padding-top: 25px;

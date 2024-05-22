@@ -20,7 +20,7 @@ $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
 $count = mysqli_num_rows(mysqli_query($conn, $sql));
 $totalPage = ceil($count / $limit) ?? 0;
 ?>
-<?php require('layouts/footer.php'); ?>
+
 <div class="content-wrapper" style="min-height: 365px;">
 
   <section class="content">
@@ -82,7 +82,7 @@ $totalPage = ceil($count / $limit) ?? 0;
   </section>
 </div>
 
-
+<?php require('layouts/footer.php'); ?>
 
 <style>
 h3 {
