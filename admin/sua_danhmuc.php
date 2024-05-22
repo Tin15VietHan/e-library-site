@@ -1,3 +1,5 @@
+<?php
+require('layouts/header.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,10 +7,7 @@
 <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<?php
 
-// Kết nối Database
-require('layouts/header.php'); ?>
 <?php
 require('./../connect.php'); ?>
 
@@ -48,37 +47,46 @@ $id=$_GET['id'];
 $query=mysqli_query($conn,"select * from `khoa` where id='$id'");
 $row=mysqli_fetch_assoc($query);
 ?>
-<div class="fix_form">
-<form method="POST" class="form">
-<h2>Sửa khoa</h2>
-<label>Tên khoa: <input type="text" value="<?php echo $row['tenkhoa']; ?>" name="tenkhoa"></label><br/>
-<label>Trạng thái:<select name="trangthai" class="trangthai" value="<?php echo $row['trangthai']; ?>" name="trangthai">
-            <option value="ACTIVE">ACTIVE</option>
-            <option value="INACTIVE">INACTIVE</option>
-         </select></br> 
-<div class="funtion">
-        <ul>
-           <li><input type="submit" name="update_categories" value="Update" class="update_categories" /></li>
-        </ul>   
+
+<div class="container">
+    <div class="row">
+        <div class="fix_form">
+            <div class="card">
+                <div class="card-header text-center" style="background-color:#106494;color:#fff;text-align:center">
+                    <h4>Chỉnh Sửa Khoa</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="form" action="" onsubmit="return handeFormSubmit();">
+                        <div class="form-group">
+                            <label>Tên Khoa:</label><br/>
+                            <input type=" text" value="<?php echo $row['tenkhoa']; ?>" name="tenkhoa">
+                        </div>
+                         <button class="btn btn-primary mt-4" class="update_khoa" type="submit" name="update_khoa"style="background-color: #106494;border-color:#106494;color: white;width: 200px;margin: 0 auto; display: block;">
+                             Cập Nhật
+                         </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm-12 col-md-5" style="height:100px; background-color: red;">
+
+        </div> -->
     </div>
-</div>   
+</div>
 
 <?php require('layouts/footer.php'); ?>
 <?php
-if (isset($_POST['update_categories'])){
+if (isset($_POST['update_khoa'])){
 $id=$_GET['id'];
 $name=$_POST['tenkhoa'];
-$status=$_POST['trangthai'];
-
-
 // Create connection
-$conn = new mysqli("localhost", "id21773647_library", "", "id21773647_library");
+$conn = new mysqli("localhost", "u395921506_thuvienviethan", "AnhquocQH@2002@", "u395921506_thuvienviethan");
 // Check connection
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE `khoa` SET name='$name', status='$status',  updated_at = CURRENT_TIMESTAMP() WHERE id='$id'";
+$sql = "UPDATE `khoa` SET tenkhoa='$name' WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";
@@ -103,14 +111,14 @@ $conn->close();
 
 .fix_form{
     justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 250px;
+    margin-top: 50px;
+    margin-bottom: 530px;
+    margin-left: 450px;
 }
 
 .form{
- width: 900px;
- padding: 20px 20px 5px 20px;
+ width: 400px;
+ padding: 20px 20px 10px 20px;
  margin: 0 auto;
  font-weight: 700px;
  background-color: white;
@@ -121,7 +129,7 @@ $conn->close();
 }
 
 .form input{
- width:  900px;
+ width:  360px;
  height: 35px;
  padding: 10px 0;
  margin: 10px 0;

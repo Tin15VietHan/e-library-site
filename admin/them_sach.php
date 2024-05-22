@@ -40,8 +40,8 @@ $Url_Anh_Bia = "";
 $Url_Pdf = "";
 // $sql = "SELECT *FROM posts inner join account on posts.user_id=account.id";
 // $sql = "SELECT *FROM posts inner join categories on posts.category_id=categories.id";
-$sql_category = "SELECT * FROM categories";
-$sql_post = "SELECT * FROM posts";
+$sql_category = "SELECT * FROM khoa";
+$sql_post = "SELECT * FROM sach";
 
 
 $query_category = mysqli_query($conn, $sql_category);
@@ -87,16 +87,13 @@ if (isset($_POST['sbm'])) {
     }
 
 
-    $category = $_POST['category_id'];
+    $category = $_POST['khoaID'];
     $category_id = (int)$category;
     $soluong = $_POST['soluong'];
     $idaccount = $_SESSION['account_admin']['id'];  
-    $taikhoanadmin_id = (int)$idaccount;
-
-
-    $status = $_POST['status'];
-
-    $sql = "INSERT INTO posts (title,  image, content, contens, category_id, soluong, taikhoanadmin_id, status, view) VALUES ('$title', '$Url_Anh_Bia', '$content', '$Url_Pdf', '$category_id', '$soluong','$taikhoanadmin_id', '$status', '0')";
+    $accounts_id = (int)$idaccount;
+    
+    $sql = "INSERT INTO sach (tensach, anh, gioithieusach, noidungdientu, khoaID, soluong, loaisach, luotxem) VALUES ('$title', '$Url_Anh_Bia', '$content', '$Url_Pdf', '$category_id', '$soluong', '0', '0')";
     if (mysqli_query($conn, $sql))
     //Thông báo nếu thành công
     {
@@ -128,7 +125,7 @@ if (isset($_POST['sbm'])) {
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h2>Thêm Sách</h2>
+                <h2><b>Thêm Sách</b></h2>
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
@@ -154,13 +151,24 @@ if (isset($_POST['sbm'])) {
                         <input type="file" name="file" id="file" onchange="checkFile()" class="form-control">
                         <div id="fileError2" style="color: red;"></div>
                     </div>
+                    <div class="form-group">
+                        <label for="">Tác Giả</label>
+                        <input type="text" name="tacgia" class="form-control" require>
+                    </div>
+                    
+                   
+                   
+                    <div class="form-group">
+                        <label for="">Năm Xuất Bản</label>
+                        <input type="text" name="namxuatban" class="form-control" require>
+                    </div>
 
                     <div class="form-group">
 
-                        <label for="">Thể loại</label>
+                        <label for="">Khoa</label>
                         <select name="category_id" id="category_id">
                             <?php while ($row = mysqli_fetch_assoc($query_category)) : ?>
-                                <option value=<?php echo $row['id']; ?>> <?php echo $row['name']; ?></option>
+                                <option value=<?php echo $row['id']; ?>> <?php echo $row['tenkhoa']; ?></option>
                             <?php endwhile; ?>
                         </select>
                     </div>
@@ -170,9 +178,9 @@ if (isset($_POST['sbm'])) {
                     </div>
 
                     <div class="form-group">
-                        <label for="">Status</label>
-                        <input type="radio" name="status" value="PUBLIC" checked>Public
-                        <input type="radio" name="status" value="PRIVATE"> Private
+                        <label for="">Loại Sách</label>
+                        <input type="radio" name="loaisach" value="GIẤY" checked>Giấy
+                        <input type="radio" name="loaisach" value="GIẤY+ĐIỆN TỬ"> Giấy+ Điện Tử
                     </div>
 
                     <button name="sbm" class="btn btn-success">Thêm</button>

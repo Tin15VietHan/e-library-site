@@ -1,4 +1,3 @@
-
 <?php
 require('./../connect.php'); 
 
@@ -36,15 +35,15 @@ $data = str_replace(' ', '-', $data);
 <?php
     $errors = [];
     if (isset($_POST['add'])) {
-    $name = $_POST["name"];
-    $status = $_POST['status'];
+    $tenkhoa= $_POST['tenkhoa'];
 
-    if ($name == "") {
+
+    if ($tenkhoa == "") {
         $errors[] =  "Vui lòng nhập tên danh mục!";
     }
 
     // Kiểm tra xem tên danh mục đã tồn tại chưa
-    $sql_check = "SELECT COUNT(*) AS count FROM categories WHERE name = '$name'";
+    $sql_check = "SELECT COUNT(*) AS count FROM khoa WHERE tenkhoa = '$tenkhoa'";
     $result_check = mysqli_query($conn, $sql_check);
     $row_check = mysqli_fetch_assoc($result_check);
     if ($row_check['count'] > 0) {
@@ -52,7 +51,7 @@ $data = str_replace(' ', '-', $data);
     }
 
     if (count($errors) == 0) {
-        $sql = "INSERT INTO categories(name, status) VALUES('$name', '$status')";
+        $sql = "INSERT INTO khoa (tenkhoa) VALUES('$tenkhoa')";
         $query = mysqli_query($conn, $sql);
         header("location: ds_danhmuc.php");
     }
@@ -69,11 +68,8 @@ $data = str_replace(' ', '-', $data);
             <li style="color: red;background-color: white;"><?php echo $error; ?></li>
         <?php endforeach;?>
     </ul>
-    <label>Tên danh muc</label><input type="text" name="name" /><br /><br />
-    <label>Trạng thái</label> <select name="status"class="status">
-             <option value="ACTIVE">ACTIVE</option>
-             <option value="INACTIVE">INACTIVE</option>
-           </select><br/><br/>
+    <label>Tên danh muc</label><input type="text" name="tenkhoa" /><br /><br />
+   
     <div class="funtion">
         <ul>
            <li><input type="submit" name="add" value="Thêm" class="add" /></li>

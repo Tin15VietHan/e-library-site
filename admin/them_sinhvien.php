@@ -3,48 +3,41 @@ require('layouts/header.php');
 require('./../connect.php');
 
 $errors = [];
-$category_query = "SELECT name FROM khoa";
+$category_query = "SELECT tenkhoa FROM khoa";
 $category_result = mysqli_query($conn, $category_query);
 $categories = mysqli_fetch_all($category_result, MYSQLI_ASSOC);
 
 
 if (isset($_POST['add'])) {
-    $img = $_FILES['img']['name'];
-    $masv = $_POST["masv"];
-    $tensv = $_POST['tensv'];
-    $matkhau = $_POST["matkhau"];
-    $chucvu = $_POST["chucvu"];
+    $madocgia = $_POST['madocgia'];
+    $hoten = $_POST['hoten'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
     $gioitinh = $_POST['gioitinh'];
     $ngaysinh = $_POST['ngaysinh'];
     $sdt = $_POST['sdt'];
     $diachi = $_POST['diachi'];
-    $lop = $_POST['lop'];
     $khoa = $_POST['khoa'];
-    $gvchunhiem = $_POST['gvchunhiem'];
-
-   
-    if (empty($img)) {
-        $errors[] =  "Vui lòng chọn ảnh!";
-    }
-    if (empty($masv)) {
-        $errors[] =  "Vui lòng nhập mã sinh viên!";
+ 
+    if (empty($madocgia)) {
+        $errors[] =  "Vui lòng nhập mã độc giả!";
     } else {
         // Kiểm tra xem mã sinh viên đã tồn tại trong cơ sở dữ liệu chưa
-        $check_query = "SELECT * FROM sinhvien WHERE masv = '$masv'";
+        $check_query = "SELECT * FROM docgia WHERE madocgia = '$madocgia'";
         $check_result = mysqli_query($conn, $check_query);
 
         if (mysqli_num_rows($check_result) > 0) {
-            $errors[] = "Mã sinh viên đã tồn tại. Vui lòng nhập mã sinh viên khác!";
+            $errors[] = "Mã độc giả đã tồn tại. Vui lòng nhập mã độc giả khác!";
         }
     }
-    if (empty($tensv)) {
-        $errors[] =  "Vui lòng nhập tên sinh viên!";
+    if (empty($hoten)) {
+        $errors[] =  "Vui lòng nhập họ tên độc giả !";
     }
-    if (empty($matkhau)) {
-        $errors[] =  "Vui lòng nhập mk sinh viên!";
+     if (empty($username)) {
+        $errors[] =  "Vui lòng nhập username!";
     }
-    if (empty($chucvu)) {
-        $errors[] =  "Vui lòng nhập chuc vu sinh viên!";
+    if (empty($password)) {
+        $errors[] =  "Vui lòng nhập mk độc giả!";
     }
     if (empty($gioitinh)) {
         $errors[] =  "Vui lòng chọn giới tính!";
@@ -58,65 +51,36 @@ if (isset($_POST['add'])) {
     if (empty($diachi)) {
         $errors[] =  "Vui lòng nhập địa chỉ!";
     }
-    if (empty($lop)) {
-        $errors[] =  "Vui lòng nhập lớp!";
-    }
     if (empty($khoa)) {
         $errors[] =  "Vui lòng nhập khoa!";
     }
-    if (empty($gvchunhiem)) {
-        $errors[] =  "Vui lòng nhập giáo viên chủ nhiệm!";
-    }
 
-    if (empty($errors)) {
-        $file_tmp = $_FILES['img']['tmp_name'];
-        $file_name = $_FILES['img']['name'];
-        $upload_directory = "../Database/anh_bia/";
-
-        if(move_uploaded_file($file_tmp, $upload_directory . $file_name)) {
-            $url_anh = "https://dulieuappdoctruyen.000webhostapp.com/Database/anh_bia/" . $file_name;
-            $sql = "INSERT INTO sinhvien(img, masv, tensv, matkhau, chucvu, gioitinh, ngaysinh, sdt, diachi, lop, khoa, gvchunhiem) VALUES('$url_anh', '$masv', '$tensv', '$matkhau', '$chucvu', '$gioitinh', '$ngaysinh', '$sdt', '$diachi', '$lop', '$khoa', '$gvchunhiem')";
-            $query = mysqli_query($conn, $sql);
-            if ($query) {
-                header("location: ds_sinhvien.php");
-                exit();
-            } else {
-                $errors[] = "Có lỗi xảy ra khi thêm sinh viên!";
-            }
-        } else {
-            $errors[] = "Có lỗi xảy ra khi tải lên ảnh.";
-        }
-    }
+    
 }
 ?>
-
+<?php require('layouts/footer.php'); ?>
 <div class="login_form">
     <form method="POST" action="" class="form" enctype="multipart/form-data">
-        <h2>THÊM SINH VIÊN</h2>
-        
-        <label for="img">Ảnh</label>
-        <input type="file" name="img" id="img" class="form-control" onchange="checkFileImage()">
-        <div id="fileError" style="color: red;"></div>
-        <img id="preview" src="#" alt="Ảnh sinh viên" style="display: none; width: 100px; 100height: px;">
+        <h2>THÊM ĐỘC GIẢ</h2>
                    
-        <label>Mã SV</label><input type="text" name="masv" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['masv'])) : ?>
-            <p class="errors">Vui lòng nhập mã sinh viên</p>
+        <label>Mã Độc Giả</label><input type="text" name="madocgia" /><br />
+        <?php if (isset($_POST['add']) && empty($_POST['madocgia'])) : ?>
+            <p class="errors">Vui lòng nhập mã độc giả</p>
         <?php endif; ?>
 
-        <label>Tên SV</label><input type="text" name="tensv" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['tensv'])) : ?>
-            <p class="errors">Vui lòng nhập tên sinh viên</p>
+        <label>Họ Tên Độc Giả</label><input type="text" name="hoten" /><br />
+        <?php if (isset($_POST['add']) && empty($_POST['hoten'])) : ?>
+            <p class="errors">Vui lòng nhập tên độc giả</p>
         <?php endif; ?>
-        <label>Mật khẩu</label><input type="text" name="matkhau" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['matkhau'])) : ?>
+        <label>Username</label><input type="text" name="username" /><br />
+        <?php if (isset($_POST['add']) && empty($_POST['username'])) : ?>
+            <p class="errors">Vui lòng nhập tên độc giả</p>
+        <?php endif; ?>
+        <label>Mật khẩu</label><input type="text" name="password" /><br />
+        <?php if (isset($_POST['add']) && empty($_POST['passwword'])) : ?>
             <p class="errors">Vui lòng nhập mật khẩu</p>
         <?php endif; ?>
-        <label>Chức vụ</label><input type="text" name="chucvu" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['chucvu'])) : ?>
-            <p class="errors">Vui lòng nhập chức vụ</p>
-        <?php endif; ?>
-
+        <br />
         <label>Giới tính</label>
         <select name="gioitinh" class="gioitinh">
             <option value="Nam" <?php if(isset($_POST['gioitinh']) && $_POST['gioitinh'] == 'Nam') echo 'selected'; ?>>Nam</option>
@@ -138,26 +102,14 @@ if (isset($_POST['add'])) {
         <?php if (isset($_POST['add']) && empty($_POST['diachi'])) : ?>
             <p class="errors">Vui lòng nhập địa chỉ</p>
         <?php endif; ?>
-
-        <label>Lớp</label><input type="text" name="lop" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['lop'])) : ?>
-            <p class="errors">Vui lòng nhập lớp</p>
-        <?php endif; ?>
-
+        <br />
         <label>Khoa</label>
         <select name="khoa">
             <?php foreach ($categories as $category) : ?>
-                <option value="<?php echo $category['name']; ?>"><?php echo $category['name']; ?></option>
+                <option value="<?php echo $category['tenkhoa']; ?>"><?php echo $category['tenkhoa']; ?></option>
             <?php endforeach; ?>
         </select>
         <br />
-        
-
-        <label>Giáo Viên Chủ Nhiệm</label><input type="text" name="gvchunhiem" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['gvchunhiem'])) : ?>
-            <p class="errors">Vui lòng nhập giáo viên chủ nhiệm</p>
-        <?php endif; ?>
-
         <div class="funtion">
             <ul>
                 <li><input type="submit" name="add" value="Thêm" class="add" /></li>
@@ -192,7 +144,7 @@ if (isset($_POST['add'])) {
     }
 </script>
 
-<?php require('layouts/footer.php'); ?>
+
 
 
 

@@ -20,14 +20,14 @@ $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
 $count = mysqli_num_rows(mysqli_query($conn, $sql));
 $totalPage = ceil($count / $limit) ?? 0;
 ?>
-
+<?php require('layouts/footer.php'); ?>
 <div class="content-wrapper" style="min-height: 365px;">
 
   <section class="content">
     <div class="container-fluid">
       <h3><b>DANH SÁCH NGƯỜI DÙNG</b></h3></br>
       <form action="" method="GET" class='searchform'>
-        <input type="text" name="txtsearch" class='form'/>
+        <input type="text" name="txtsearch" class='form' placeholder="Tìm kiếm..."/>
         <button class='sbutton' type="submit">Search</button>
       </form></br>
       <div class="row">
@@ -36,49 +36,43 @@ $totalPage = ceil($count / $limit) ?? 0;
             <thead>
               <tr>
                 <th scope="row">ID</th>
+                <th scope="row">Họ Tên</th>
                 <th scope="row">Tên tài khoản</th>
                 <th scope="row">Mật khẩu</th>
-                <th scope="row">Email</th>
-                <th scope="row">Tên đầy đủ</th>
-                <th scope="row">Số điện thoại</th>
-                <th scope="row">Giới tính</th>
-                <th scope="row">Ngày sinh</th>
+                <th scope="row">Giới Tính</th>
+                
                 <th scope="row">Quyền</th>
-                <th scope="row">Ngày tạo</th>
-                <th scope="row">Ngày cập nhật</th>
-                <th scope="row">Trạng thái</th>
+                
                 <th scope="row" colspan="2"><a href="them_thanhvien.php">Thêm</a></th>
               </tr>
             </thead>
             <tbody>
-              <?php while ($row = mysqli_fetch_array($query)) : ?>
+              <?php
+              $stt = ($page - 1) * $limit + 1; // Bắt đầu STT dựa trên trang hiện tại
+              while ($row = mysqli_fetch_array($query)) : ?>
                 <tr>
-                  <td><?php echo $row['id']; ?></td>
+                   <td><?php echo $row['id']; ?></td>
+                   <td><?php echo $row['hoten']; ?></td>
                   <td><?php echo $row['username']; ?></td>
                   <td><?php echo $row['password']; ?></td>
-                  <td><?php echo $row['email']; ?></td>
-                  <td><?php echo $row['fullname']; ?></td>
-                  <td><?php echo $row['phone']; ?></td>
-                  <td><?php echo $row['gender']; ?></td>
-                  <td><?php echo $row['birthday']; ?></td>
-                  <td><?php echo $row['role']; ?></td>
-                  <td><?php echo $row['created_at']; ?></td>
-                  <td><?php echo $row['updated_at']; ?></td>
-                  <td><?php echo $row['status']; ?></td>
+                  <td><?php echo $row['gioitinh']; ?></td>
+                   <td><?php echo $row['quyen']; ?></td>
+                 
+                  
                   <td><a href="sua_thanhvien.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
                   <td><a href="xoa_thanhvien.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
                 </tr>
               <?php endwhile; ?>
             </tbody>
           </table>
-
          
           <?php 
-           for ($i=1; $i <= $totalPage; $i++)
-           if($i == $page) {
-            echo "<a href = 'ds_thanhvien.php?p=$i' style='font-size: 20px; color: red; margin: 0px 4px;'> $i </a>";
-           } else{
-            echo "<a href = 'ds_thanhvien.php?p=$i' style='margin: 0px 2px;'> $i </a>";
+           for ($i=1; $i <= $totalPage; $i++) {
+             if($i == $page) {
+               echo "<a href='ds_thanhvien.php?p=$i' style='font-size: 20px; color: red; margin: 0px 4px;'> $i </a>";
+             } else {
+               echo "<a href='ds_thanhvien.php?p=$i' style='margin: 0px 2px;'> $i </a>";
+             }
            }
           ?>
         </div>
@@ -88,23 +82,21 @@ $totalPage = ceil($count / $limit) ?? 0;
   </section>
 </div>
 
-<?php require('layouts/footer.php'); ?>
+
 
 <style>
-
-h3{
- padding-top: 30px;
- color:#1E90FF;
+h3 {
+  padding-top: 30px;
+  color: #1E90FF;
 }
-  
-.form{
+
+.form {
   border: 2px solid black;
   border-radius: 5px;
 }
 
 .sbutton {
-color: #007bff;
-border-radius: 10px;
+  color: #007bff;
+  border-radius: 10px;
 }
- 
 </style>

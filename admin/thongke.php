@@ -6,11 +6,10 @@ $totalnguoidung = 0;
 $totalsach = 0;
 $totalcmt = 0;
 $totalmuonsach = 0;
-
 $sqldanhmuc = "SELECT COUNT(*) AS total FROM khoa";
 $sqlnguoidung = "SELECT COUNT(*) AS total FROM docgia ";
 $sqlsach = "SELECT COUNT(*) AS total FROM sach";
-$sqlcmt = "SELECT COUNT(*) AS total FROM muon_sach WHERE trangthai = 'Đang Mượn'";
+$sqlcmt = "SELECT COUNT(*) AS total FROM muon_sach WHERE trang_thai = 'Đang Mượn'";
 $sqlmuonsach = "SELECT COUNT(*) AS total FROM muon_sach ";
 
 $sql_weekly_borrows = "
@@ -27,7 +26,6 @@ $result3 = mysqli_query($conn, $sqlsach);
 $result4 = mysqli_query($conn, $sqlcmt);
 $result5 = mysqli_query($conn, $sqlmuonsach);
 $result_weekly_borrows = mysqli_query($conn, $sql_weekly_borrows);
-
 // Kiểm tra nếu truy vấn thành công
 if ($result1 && $result2 && $result3 && $result4 && $result5)  {
 	// Lấy kết quả trả về
@@ -124,7 +122,7 @@ mysqli_close($conn);
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark"><b>BẢNG THỐNG KÊ THƯ VIỆN</b></h1>
+					<h1 class="m-0 text-dark"><b style="color:#1E90FF">BẢNG THỐNG KÊ THƯ VIỆN</b></h1>
 				</div><!-- /.col -->
 			</div>
 		</div>
@@ -189,33 +187,86 @@ mysqli_close($conn);
 				<!-- ./col -->
 			</div>
 		</div>
+           <div class="row justify-content-end pr-3">
+            <button id="printWeekly" class="print-btn">
+                <img src="https://img.upanh.tv/2024/05/22/printer.png" alt="Printer Icon" style="width: 16px; height: 16px; margin-right: 5px;">
+                In Tuần
+            </button>
+            <button id="printMonthly" class="print-btn">
+                <img src="https://img.upanh.tv/2024/05/22/printer.png" alt="Printer Icon" style="width: 16px; height: 16px; margin-right: 5px;">
+                In Tháng
+            </button>
+            <button id="printYearly" class="print-btn">
+                <img src="https://img.upanh.tv/2024/05/22/printer.png" alt="Printer Icon" style="width: 16px; height: 16px; margin-right: 5px;">
+                In Năm
+            </button>
+            </div>
+
+
 	</section>
 
 	<!-- Thẻ canvas để vẽ biểu đồ -->
-	<canvas id="waveChart" width="800" height="300"></canvas>
-
-	<div class="row justify-content-center">
-		<!-- Nút chọn tuần -->
-		<button id="weekBtn" style="margin-right: 20px;">Tuần</button>
-		<!-- Nút chọn tháng -->
-		<button id="monthBtn" style="margin-right: 20px;">Tháng</button>
-		<!-- Nút chọn năm -->
-		<button id="yearBtn">Năm</button>
-	</div>
-
+    	<canvas id="waveChart" width="800" height="300"></canvas>
+          <div class="row justify-content-center">
+        <!-- Nút chọn tuần -->
+        <button id="weekBtn" class="print-btn">Tuần</button>
+        <!-- Nút chọn tháng -->
+        <button id="monthBtn" class="print-btn" >Tháng</button>
+        <!-- Nút chọn năm -->
+        <button id="yearBtn"  class="print-btn">Năm</button>
+    </div>
+    
+    <style>
+        /* Màu chữ khi hover */
+        button:hover {
+            color: #1e88e5; /* Màu xanh trời */
+        }
+    
+        /* Màu chữ khi focus */
+        button:focus {
+            color: #1e88e5; /* Màu xanh trời */
+            outline: none; /* Loại bỏ đường viền khi focus */
+        }
+    
+        /* Màu viền khi hover */
+        button:hover {
+            border-color: #1e88e5; /* Màu viền xanh trời */
+        }
+    
+        /* Màu viền khi focus */
+        button:focus {
+            border-color: #1e88e5; /* Màu viền xanh trời */
+        }
+        .print-btn {
+        margin-right: 20px;
+        width: 110px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        border: 2px solid rgb(213, 213, 213);
+        border-radius: 10px;
+        gap: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        overflow: hidden;
+        font-weight: 500;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.065);
+        transition: all 0.3s;
+        }
+    </style>
 	<script>
 		// Lấy tham chiếu đến canvas
 		var ctx = document.getElementById('waveChart').getContext('2d');
 
 		// Dữ liệu lượt mượn sách hàng tuần từ PHP
 		var weeklyBorrowData = <?php echo json_encode(array_values($weekly_borrow_data_adjusted)); ?>;
-		
-
 		// Khởi tạo biểu đồ mặc định là biểu đồ tuần
 		var defaultData = {
 			labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
 			datasets: [{
-				label: 'Lượt Mượn Sách: ( ' + <?php echo $total_weekly_borrow; ?> + ' ) - Tổng lượt mượn sách: ( ' + <?php echo $totalmuonsach; ?> + ')',
+				label: 'Lượt Mượn Sách:  ' + <?php echo $total_weekly_borrow; ?> + '  / ( ' + <?php echo $totalmuonsach; ?> + ')',
 				data: weeklyBorrowData,
 				borderColor: 'rgba(75, 192, 192, 1)',
 				backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -237,13 +288,12 @@ mysqli_close($conn);
 				}
 			}
 		});
-
 		// Lắng nghe sự kiện khi người dùng nhấp vào nút "Tuần"
 		document.getElementById('weekBtn').addEventListener('click', function() {
 			var WeekData = {
 				labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
 				datasets: [{
-					label: 'Lượt Mượn Sách: ( ' + <?php echo $total_weekly_borrow; ?> + ' )  - Tổng lượt mượn sách: ( ' + <?php echo $totalmuonsach; ?> + ')',
+					label: 'Lượt Mượn Sách:  ' + <?php echo $total_weekly_borrow; ?> + '   / ( ' + <?php echo $totalmuonsach; ?> + ')',
 					data: weeklyBorrowData,
 					borderColor: 'rgba(75, 192, 192, 1)',
 					backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -256,16 +306,14 @@ mysqli_close($conn);
 			waveChart.data = WeekData;
 			waveChart.update();
 		});
-
 		// Lắng nghe sự kiện khi người dùng nhấp vào nút "Tháng"
 		document.getElementById('monthBtn').addEventListener('click', function() {
-
 			var monthBorrowData = <?php echo json_encode(array_values($monthly_borrow_data)); ?>;
 			// Cập nhật dữ liệu cho biểu đồ tháng
 			var monthData = {
 				labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
 				datasets: [{
-					label: 'Lượt Mượn Sách: ( ' + <?php echo $total_month_borrow; ?> + ' )  - Tổng lượt mượn sách: ( ' + <?php echo $totalmuonsach; ?> + ')',
+					label: 'Lượt Mượn Sách:  ' + <?php echo $total_month_borrow; ?> + '   / ( ' + <?php echo $totalmuonsach; ?> + ')',
 					data: monthBorrowData,
 					borderColor: 'rgba(75, 192, 192, 1)',
 					backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -278,16 +326,14 @@ mysqli_close($conn);
 			waveChart.data = monthData;
 			waveChart.update();
 		});
-
 		// Lắng nghe sự kiện khi người dùng nhấp vào nút "Năm"
 		document.getElementById('yearBtn').addEventListener('click', function() {
-
 			var yearBorrowData = <?php echo json_encode(array_values($yearly_borrow_data)); ?>;
 			// Cập nhật dữ liệu cho biểu đồ năm
 			var yearData = {
 				labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
 				datasets: [{
-					label: 'Lượt Mượn Sách: ( ' + <?php echo $total_year_borrow; ?> + ' )  - Tổng lượt mượn sách: ( ' + <?php echo $totalmuonsach; ?> + ')',
+					label: 'Lượt Mượn Sách:  ' + <?php echo $total_year_borrow; ?> + '   / ( ' + <?php echo $totalmuonsach; ?> + ')',
 					data: yearBorrowData,
 					borderColor: 'rgba(75, 192, 192, 1)',
 					backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -300,6 +346,127 @@ mysqli_close($conn);
 			waveChart.data = yearData;
 			waveChart.update();
 		});
+// Lắng nghe sự kiện khi người dùng nhấp vào nút "In Tuần"
+document.getElementById('printWeekly').addEventListener('click', function() {
+    // Lấy ngày, tháng và năm hiện tại
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var currentWeek = getWeekNumber(currentDate);
+    var weekStartDate = getStartDateOfWeek(currentDate);
+    var weekEndDate = new Date(weekStartDate);
+    weekEndDate.setDate(weekEndDate.getDate() + 6);
+    // Gọi hàm in với thông kê lượt mượn sách của tuần và thêm thông tin về tuần vào tiêu đề
+    printStatistics(
+        'Trường Cao đẳng Việt Nam Hàn Quốc',
+        `Thông Kê Lượt Mượn Sách Của Tuần ${currentWeek} (${formatDate(weekStartDate)} - ${formatDate(weekEndDate)})`,
+        <?php echo $total_weekly_borrow; ?>,
+        <?php echo $totalmuonsach; ?>,
+        currentWeek,
+        null,
+        currentYear
+    );
+});
+// Lắng nghe sự kiện khi người dùng nhấp vào nút "In Tháng"
+document.getElementById('printMonthly').addEventListener('click', function() {
+    // Lấy ngày, tháng và năm hiện tại
+    var currentDate = new Date();
+    var currentMonth = currentDate.getMonth() + 1; // Tháng bắt đầu từ 0 nên cần cộng thêm 1
+    var currentYear = currentDate.getFullYear();
+    var monthStartDate = new Date(currentYear, currentMonth - 1, 1);
+    var monthEndDate = new Date(currentYear, currentMonth, 0);
+    // Gọi hàm in với thông kê lượt mượn sách của tháng và thêm thông tin về tháng vào tiêu đề
+    printStatistics(
+        'Trường Cao đẳng Việt Nam Hàn Quốc',
+        `Thông Kê Lượt Mượn Sách Của Tháng ${currentMonth}/${currentYear} (${formatDate(monthStartDate)} - ${formatDate(monthEndDate)})`,
+        <?php echo $total_month_borrow; ?>,
+        <?php echo $totalmuonsach; ?>,
+        null,
+        currentMonth,
+        currentYear
+    );
+});
+// Lắng nghe sự kiện khi người dùng nhấp vào nút "In Năm"
+document.getElementById('printYearly').addEventListener('click', function() {
+    // Lấy ngày, tháng và năm hiện tại
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var yearStartDate = new Date(currentYear, 0, 1);
+    var yearEndDate = new Date(currentYear, 11, 31);
+    // Gọi hàm in với thông kê lượt mượn sách của năm và thêm thông tin về năm vào tiêu đề
+    printStatistics(
+        'Trường Cao đẳng Việt Nam Hàn Quốc',
+        `Thông Kê Lượt Mượn Sách Của Năm ${currentYear} (${formatDate(yearStartDate)} - ${formatDate(yearEndDate)})`,
+        <?php echo $total_year_borrow; ?>,
+        <?php echo $totalmuonsach; ?>,
+        null,
+        null,
+        currentYear
+    );
+});
+// Hàm in thông kê lượt mượn sách
+function printStatistics(schoolName, chartTitle, borrowCount, totalMuonsach, weekInfo, monthInfo, yearInfo) {
+    // Tạo một chuỗi chứa nội dung bạn muốn in
+    var contentToPrint = `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+            <h1 style="text-align: center; margin-bottom: 20px;">${schoolName}</h1>
+            <div style="text-align: center; margin-top: 20px;">
+            <img src="https://vkc.edu.vn/wp-content/uploads/2018/03/logo_viethan.png" alt="Descriptive text for the image" style=" width: 100px;height: 100px; border-radius: 10px;">
+        </div>
+            <div style="background-color: #f2f2f2; padding: 20px; border-radius: 10px;">
+                <h2 style="margin-bottom: 10px;">${chartTitle}</h2>
+                <p style="margin-bottom: 10px;">Lượt mượn sách: <strong>${borrowCount}</strong></p>
+                <p>Tổng số sách Được Mượn: <strong>${totalMuonsach}</strong></p>
+            </div>
+             <div class="footer" style="margin-top: 70px; text-align: right;">
+                <p style="margin-right:10px">Người Tạo Thống Kê</p>
+                <p class="signature">
+                    <?php 
+                        $fullname = isset($_SESSION['hoten']) ? $_SESSION['hoten'] : 'ad'; 
+                        echo $fullname; 
+                    ?>
+                </p>
+            </div>
+        </div>
+    `;
+    // Tạo một cửa sổ mới và hiển thị nội dung bạn muốn in
+    var printWindow = window.open('', '_blank');
+    printWindow.document.open();
+    printWindow.document.write(contentToPrint);
+    printWindow.document.close();
+    // In nội dung
+    printWindow.print();
+}
+// Hàm lấy số tuần trong năm
+function getWeekNumber(d) {
+    // Copy date để tránh thay đổi date gốc
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    // Lấy thứ tự thứ của ngày 1 tháng 1
+    var dayNum = d.getUTCDay() || 7;
+    // Di chuyển ngày đến thứ 2 của tuần đầu tiên
+    d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+    // Tuần đầu tiên của năm là tuần 1
+    var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    // Tính toán số tuần
+    var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+    // Trả về số tuần
+    return weekNo;
+}
+
+// Hàm lấy ngày bắt đầu của tuần từ một ngày cho trước
+function getStartDateOfWeek(date) {
+    var day = date.getDay() || 7;
+    if (day !== 1) 
+        date.setHours(-24 * (day - 1)); 
+    return date;
+}
+// Hàm định dạng ngày theo định dạng dd/mm/yyyy
+function formatDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 	</script>
 </div>
 <?php require('layouts/footer.php'); ?>

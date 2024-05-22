@@ -15,7 +15,7 @@ require('./../connect.php'); ?>
   }
 
   $offset = ($page - 1) * $limit;
-  $sql = "SELECT * FROM comments WHERE content LIKE '%$search%'";
+  $sql = "SELECT * FROM binhluan WHERE noidungbinhluan LIKE '%$search%'";
   $query = mysqli_query($conn ,$sql . " LIMIT $offset, $limit");
   $count = mysqli_num_rows(mysqli_query($conn ,$sql));
   $totalPage = ceil($count/$limit) ?? 0;
@@ -34,41 +34,38 @@ require('./../connect.php'); ?>
             <table cellspacing="0" cellpadding="0" class="table" style="display: block !important; overflow-x: auto !important; width: 100% !important;">
               <thead>
                 <tr>
-                   <td scope="row">ID</td>
-                   <td scope="row">Content</td>
-                   <td scope="row">Post_id1</td>
-                   <td scope="row">Account_id1</td>
-                   <td scope="row">Ngày tạo</td>
-	               <td scope="row">Ngày cập nhật</td>
-	               <td scope="row">Trạng thái</td>
-                   <td scope="row">           </td>
+                   <th scope="col">STT</th>
+                   <th scope="col">NỘI DUNG</th>
+                   <th scope="col">SÁCH_ID</th>
+                   <th scope="col">ĐỘCGIẢ_ID</th>
+        
+                   <th scope="col">Thao tác</th>
                 </tr>
-             <thead>
-<?php while($row=mysqli_fetch_array($query)): ?>
+              </thead>
+              <tbody>
+<?php 
+$stt = $offset + 1; // Khởi tạo STT dựa trên trang hiện tại
+while($row = mysqli_fetch_array($query)): ?>
                 <tr>
-                   <td><?php echo $row['id']; ?></td>
-                   <td><?php echo $row['content']; ?></td>
-                   <td><?php echo $row['post_id']; ?></td>
-                   <td><?php echo $row['account_id']; ?></td>
-                   <td><?php echo $row['created_at']; ?></td>
-                   <td><?php echo $row['updated_at']; ?></td>
-                   <td><?php echo $row['status']; ?></td>
+                   <td><?php echo $stt++; ?></td>
+                   <td><?php echo $row['noidungbinhluan']; ?></td>
+                   <td><?php echo $row['sach_id']; ?></td>
+                   <td><?php echo $row['docgia_id']; ?></td>
+                  
                    <td><a href="xoa_binhluan.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
                 </tr>
-             </thead>
-<?php endwhile;?>
-              </table>
-          
-
-
-</div>
+<?php endwhile; ?>
+              </tbody>
+            </table>
+          </div>
   <?php 
-  for ($i=1; $i <= $totalPage; $i++)
+  for ($i = 1; $i <= $totalPage; $i++) {
     if($i == $page) {
-      echo "<a href = 'ds_binhluan.php?p=$i' style='font-size: 20px; color: red; margin: 0px 4px;'> $i </a>";
-    } else{
-      echo "<a href = 'ds_binhluan.php?p=$i' style='margin: 0px 2px;'> $i </a>";
+      echo "<a href='ds_binhluan.php?p=$i' style='font-size: 20px; color: red; margin: 0px 4px;'> $i </a>";
+    } else {
+      echo "<a href='ds_binhluan.php?p=$i' style='margin: 0px 2px;'> $i </a>";
     }
+  }
   ?>
       </div>
     </div>
@@ -79,24 +76,19 @@ require('./../connect.php'); ?>
 
 <?php require('layouts/footer.php'); ?>
 
- 
 <style>
-
 .sbutton {
-color: #007bff;
-border-radius: 10px;
+  color: #007bff;
+  border-radius: 10px;
 }
 
-h3{
- padding-top: 30px;
- color:#1E90FF;
+h3 {
+  padding-top: 30px;
+  color: #1E90FF;
 }
-  
-.form{
+
+.form {
   border: 2px solid black;
   border-radius: 5px;
 }
-
-
-
 </style>

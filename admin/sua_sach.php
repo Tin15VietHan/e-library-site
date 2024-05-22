@@ -34,7 +34,7 @@ function sanitize_input($data) {
     $id = $_GET['id'];
 
 
-    // $sql_post = "SELECT * FROM posts";
+    // $sql_post = "SELECT * FROM sach";
     $sql_category= "SELECT * FROM khoa";
     $sql_post = "SELECT * FROM sach";
 
@@ -47,27 +47,20 @@ function sanitize_input($data) {
 
     $query_category = mysqli_query($conn, $sql_category);
     if(isset($_POST['sbm'])){
-
         $title = $_POST['tensach'];
         
-        $image = $_FILES['anh']['tenkhoa'];
-        $image_tmp = $_FILES['anh']['tmp_tenkhoa'];
+        $image = $_FILES['anh']['name'];
+        $image_tmp = $_FILES['anh']['tmp_name'];
         if(!empty($image_tmp)){
-            move_uploaded_file($image_tmp, '../../anh/'.$image);
+            move_uploaded_file($image_tmp, '../../image/'.$image);
         }
 
         
         $content = $_POST['gioithieusach'];
-        
-        $category_id = $_POST['khoaID'];
-
-        $status = $_POST['status'];
-
-        $account = $_POST['taikhoanadmin_id'];
-        $taikhoanadmin_id = (int)$account;
-
-        $sql = "UPDATE sach SET tensach ='$title', anh = '$image', gioithieusach = '$content', khoaID= $category_id,status= '$status',  taikhoanadmin_id= $taikhoanadmin_id, updated_at = CURRENT_TIMESTAMP() where id = $id";
-        
+        $category_id = $_POST['category_id'];
+  
+         $sql = "UPDATE sach SET tensach ='$title', anh = '$image', gioithieusach = '$content', khoaID= $category_id where id = $id";
+    
         $query = mysqli_query($conn, $sql);
        
         header("Location: ../admin/ds_sach.php");
@@ -108,28 +101,25 @@ function sanitize_input($data) {
     
                     <div class="form-group">
                         <label for="">Nội dung</label>
-                        <textarea name="content" class="form-control form-control-size" id="content" value="" require><?php echo $row_up['gioithieusach'] ?></textarea>
+                        <textarea name="gioithieusach" class="form-control form-control-size" id="content" value="" require><?php echo $row_up['gioithieusach'] ?></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="">Thể loại</label>
-                        <select name="khoaID" id="khoaID">
+                        <label for="">Khoa</label>
+                        <select name="category_id" id="category_id">
                             <?php while ($row = mysqli_fetch_assoc($query_category)):?>
-                                <option value=<?php echo $row['id'];?> <?php if($row['id'] == $row_up['khoaID']) echo 'checked';?>> <?php echo $row['tenkhoa'];?></option>
+                                <option value=<?php echo $row['id'];?> <?php if($row['id'] == $row_up['id']) echo 'checked';?>> <?php echo $row['tenkhoa'];?></option>
                             <?php endwhile;?>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="">Status</label>
-                        <input type="radio" name="status" value="PUBLIC" <?php if($row_up['status'] == 'PUBLIC') echo 'checked';?>>Public
-                        <input type="radio" name="status" value="PRIVATE" <?php if($row_up['status'] == 'PRIVATE') echo 'checked';?>> Private
+                     <div class="form-group">
+                        <label for="">Loại Sách</label>
+                        <input type="radio" name="status" value="GIẤY" <?php if($row_up['loaisach'] == 'GIẤY') echo 'checked';?>>Giấy
+                        <input type="radio" name="status" value="GIẤY+ĐIỆN TỬ" <?php if($row_up['loaisach'] == 'GIẤY+ĐIỆN TỬ') echo 'checked';?>> Giấy+ Điện Tử
                     </div>
     
-                    <div class="form-group">
-                        <label for="">Người viết</label>
-                        <input type="text" name="taikhoanadmin_id" class="form-control" require value="<?php echo $row_up['taikhoanadmin_id'] ?>">
-                    </div>
+                    
                     
                     <button name= "sbm" class="btn btn-success">Sửa</button>
                 </form>

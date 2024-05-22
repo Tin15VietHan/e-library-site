@@ -1,22 +1,36 @@
 <?php
-// Kết nối đến cơ sở dữ liệu
 require('./../connect.php');
 
-// Lấy ID của sách từ AJAX
-$id_sach = $_POST['id'];
+// Kiểm tra xem POST request có chứa danh sách ID sách hay không
+if (isset($_POST['books']) && is_array($_POST['books'])) {
+    $bookIDs = $_POST['books'];
 
-// Giảm số lượng sách trong bảng posts
-$sql_giam_soluong = "UPDATE posts SET soluong = soluong - 1 WHERE id = '$id'";
+    // Chuẩn bị câu lệnh SQL với prepared statements để tránh SQL injection
+    $stmt = $conn->prepare("UPDATE posts SET soluong_conlai = soluong_conlai - 1 WHERE id = ?");
 
-// Thực hiện truy vấn
-if(mysqli_query($conn, $sql_giam_soluong)) {
-    // Trả về kết quả thành công nếu không có lỗi
-    echo "Số lượng sách đã được cập nhật.";
+    if ($stmt) {
+        // Lặp qua từng ID sách và thực hiện cập nhật số lượng
+        foreach ($bookIDs as $bookID) {
+            // Kiểm tra xem ID sách có hợp lệ hay không
+            if (filter_var($bookID, FILTER_VALIDATE_INT) !== false) {
+                $stmt->bind_param("i", $bookID);
+                $stmt->execute();
+            } else {
+                // Xử lý trường hợp ID sách không hợp lệ
+                echo "ID sách không hợp lệ: $bookID";
+            }
+        }
+
+        // Đóng câu lệnh chuẩn bị
+        $stmt->close();
+    } else {
+        // Xử lý lỗi nếu không thể chuẩn bị câu lệnh SQL
+        echo "Lỗi: " . $conn->error;
+    }
+
+    // Đóng kết nối cơ sở dữ liệu
+    mysqli_close($conn);
 } else {
-    // Trả về thông báo lỗi nếu có lỗi xảy ra
-    echo "Lỗi: " . mysqli_error($conn);
+    echo "Dữ liệu không hợp lệ hoặc không tồn tại.";
 }
-
-// Đóng kết nối
-mysqli_close($conn);
 ?>

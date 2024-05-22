@@ -49,13 +49,13 @@ if (isset($_POST['add'])) {
 
 
     if (count($errors) == 0) {
-        $sql = "INSERT INTO taikhoanadmin(username, password, email, fullname, phone, birthday, gender, role, status) VALUES('$username','$password', '$email', '$fullname','$phone', '$birthday', '$gender', '$role', '$status')";
+        $sql = "INSERT INTO accounts(username, password, email, fullname, phone, birthday, gender, role, status) VALUES('$username','$password', '$email', '$fullname','$phone', '$birthday', '$gender', '$role', '$status')";
         $query = mysqli_query($conn, $sql);
         header("location: ds_thanhvien.php");
     }
 }
 ?>
-
+<?php require('layouts/footer.php'); ?>
 <div class="login_form">
     <form method="POST" action="" class="form">
 
@@ -137,7 +137,7 @@ if (isset($_POST['add'])) {
         </div>
     </form>
 </div>
-<?php require('layouts/footer.php'); ?>
+
 
 <style>
     .login_form {

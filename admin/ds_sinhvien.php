@@ -15,8 +15,8 @@ if (isset($_GET['txtsearch'])) {
   $search = $_GET['txtsearch'];
 }
 
-if (isset($_GET['khoa_search'])) { // Kiểm tra xem người dùng đã chọn khoa nào từ dropdown chưa
-  $category = $_GET['khoa_search'];
+if (isset($_GET['category_search'])) { // Kiểm tra xem người dùng đã chọn khoa nào từ dropdown chưa
+  $category = $_GET['category_search'];
 }
 
 $offset = ($page - 1) * $limit;
@@ -26,36 +26,36 @@ $sql = "SELECT * FROM docgia WHERE madocgia LIKE '%$search%'";
 
 // Nếu người dùng đã chọn khoa từ dropdown, thêm điều kiện vào câu truy vấn
 if ($category !== "") {
-  $sql .= " AND khoaID = '$category'";
+  $sql .= " AND khoa = '$category'";
 }
 
 $query = mysqli_query($conn, $sql . " LIMIT $offset, $limit");
 $count = mysqli_num_rows(mysqli_query($conn, $sql));
 $totalPage = ceil($count / $limit) ?? 0;
 ?>
-
+<?php require('layouts/footer.php'); ?>
 <div class="content-wrapper" style="min-height: 365px;">
   <section class="content">
     <div class="container-fluid">
       <h3><b>DANH SÁCH ĐỘC GIẢ</b></h3></br>
       <div class="form-wrapper">
       <form action="" method="GET" class="searchform">
-        <input type="text" name="txtsearch" class="form" placeholder="Nhập mã sinh viên...">
-        <!-- Giữ nguyên form tìm kiếm theo mã sinh viên -->
+        <input type="text" name="txtsearch" class="form" placeholder="Nhập mã độc giả...">
+        <!-- Giữ nguyên form tìm kiếm theo mã độc giả -->
         <button class="sbutton" type="submit">Search</button>
       </form>
       </div>  
       <!-- Form mới để tìm kiếm theo khoa -->
       <div class="form-wrapper">
       <form action="" method="GET" class='searchform'>
-        <select name="khoa_search" class='form' style="width: 190px;">
+        <select name="category_search" class='form' style="width: 190px;">
           <option value="" disabled selected>Chọn Khoa</option>
           <?php
           // Kết nối CSDL và truy vấn các danh mục
-          $sql_categories = "SELECT * FROM khoa";
-          $result_categories = mysqli_query($conn, $sql_categories);
+          $sql_khoa = "SELECT * FROM khoa";
+          $result_khoa = mysqli_query($conn, $sql_khoa);
           // Tạo option cho select box từ kết quả truy vấn
-          while ($row_category = mysqli_fetch_assoc($result_categories)) {
+          while ($row_category = mysqli_fetch_assoc($result_khoa)) {
             $selected = ($row_category['tenkhoa'] == $category) ? 'selected' : ''; // Chọn mục đã được chọn trước đó
             echo "<option value='" . $row_category['tenkhoa'] . "' $selected>" . $row_category['tenkhoa'] . "</option>";
           }
@@ -63,8 +63,7 @@ $totalPage = ceil($count / $limit) ?? 0;
         </select>
         <button class='sbutton' type="submit">Search</button>
       </form>
-    </div>
-  </br>
+    </div></br></br>
 
       <!-- Hiển thị dữ liệu sinh viên -->
       <div class="row">
@@ -74,17 +73,16 @@ $totalPage = ceil($count / $limit) ?? 0;
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Ảnh</th>
                 <th>Mã Độc Giả</th>
-                <th>Tên Độc Giả</th>
-                <th>Email</th>
+                <th>Họ Tên</th>
+                <th>Tên Tài Khoản</th>
+                <th>Mật Khẩu</th>
                 <th>Giới Tính</th>
                 <th>Ngày Sinh</th>
                 <th>Số Điện Thoại</th>
-                <th>Địa chỉ</th>
-                <th>Tên Đăng Nhập</th>
-                <th>Mật Khẩu</th>
-                <th>Trạng Thái</th>
+                <th>Địa Chỉ</th>
+                <th>Khoa</th>
+               
                 <th colspan="2"><a href="them_sinhvien.php">Thêm</a></th>
 
               </tr>
@@ -95,17 +93,31 @@ $stt = $offset + 1; // Tính toán STT bắt đầu từ vị trí của dòng h
 while ($row = mysqli_fetch_array($query)) : ?>
   <tr>
     <td><?php echo $stt; ?></td>
-    <td><?php echo '<anh src="' . $row['anh'] . '" style="width: 100px; height: auto;" />'; ?></td>
+    
     <td><?php echo $row['madocgia']; ?></td>
     <td><?php echo $row['hoten']; ?></td>
-    <td><?php echo $row['email']; ?></td>
+    <td><?php echo $row['username']; ?></td>    
+    <td><?php echo $row['password']; ?></td>    
     <td><?php echo $row['gioitinh']; ?></td>
     <td><?php echo date('d/m/Y', strtotime($row['ngaysinh'])); ?></td>
     <td><?php echo $row['sdt']; ?></td>
     <td><?php echo $row['diachi']; ?></td>
-    <td><?php echo $row['username']; ?></td>
-    <td><?php echo $row['password']; ?></td>
-    <td><?php echo $row['trangthai']; ?></td>     
+    <td><?php
+                  $id = $row['khoaID'];
+                  if ($id == 0 || $id == null) {
+                    echo "Chưa có thể loại";
+                  } else {
+                    $querytheloai =  "SELECT `tenkhoa` FROM `khoa` WHERE `id` = $id";
+                    $result = $conn->query($querytheloai);
+                    if ($result->num_rows == 1) {
+                      $rows = $result->fetch_row();
+                      $name = $rows[0];
+                      echo "$name";
+                    }
+                  }
+                  ?></td>
+    <td><a href="sua_docgia.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
+    <td><a href="xoa_docgia.php?id=<?php echo $row['id']; ?>">Xóa</a></td>  
   </tr>
   <?php $stt++; // Tăng STT sau mỗi vòng lặp ?>
 <?php endwhile; ?>
@@ -128,7 +140,7 @@ while ($row = mysqli_fetch_array($query)) : ?>
   </section>
 </div>
 
-<?php require('layouts/footer.php'); ?>
+
 
 <style>
 h3 {

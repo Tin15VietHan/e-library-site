@@ -5,7 +5,7 @@ require('./../connect.php'); ?>
 
 <?php
 $id=$_GET['id'];
-$query=mysqli_query($conn,"select * from `taikhoanadmin` where id='$id'");
+$query=mysqli_query($conn,"select * from `docgia` where id='$id'");
 $row=mysqli_fetch_assoc($query);
 ?>
 
@@ -14,44 +14,44 @@ $row=mysqli_fetch_assoc($query);
         <div class="fix_form">
             <div class="card">
                 <div class="card-header text-center" style="background-color:#106494;color:#fff;text-align:center">
-                    <h5>Sửa Thành Viên</h5>
+                    <h5>Sửa Độc Giả</h5>
                 </div>
                 <div class="card-body">
                     <form method="post" class="form" action="" onsubmit="return handeFormSubmit();">
                         <div class="form-group">
+                            <label>Mã độc giả: <input type="text" value="<?php echo $row['madocgia']; ?>" name="madocgia"></label><br/>
                             <label>Họ tên: <input type="text" value="<?php echo $row['hoten']; ?>" name="hoten"></label><br/>
                             <label>Tên tài khoản: <input type="text" value="<?php echo $row['username']; ?>" name="username"></label><br/>
                             <label>Mật khẩu: <input type="text" value="<?php echo $row['password']; ?>" name="password"></label><br/>
-                            <label>Giới tính:<select name="gioitinh" class="gioitinh" value="<?php echo $row['gioitinh']; ?>" name="gioitinh" >
+                            <label>Giới tính:<select name="gender" class="gender" value="<?php echo $row['gioitinh']; ?>" name="gioitinh" >
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
                                         <option value="Khác">Khác</option>
-                                       </select></br></br>
-                            <label>Quyền:<select name="quyen" class="quyen" value="<?php echo $row['quyen']; ?>" name="quyen">
-                                        <option value="Admin">Admin</option>
-                                         </select></br>
+                                       </select></br>
+                            <label>Ngày sinh: <input type="date" value="<?php echo $row['ngaysinh']; ?>" name="ngaysinh"></label><br/>
+                            <label>Số điện thoại: <input type="number" value="<?php echo $row['sdt']; ?>" name="sdt"></label><br/>
+                            <label>Địa chỉ: <input type="text" value="<?php echo $row['diachi']; ?>" name="diachi"></label><br/>
+                            <label>Khoa: <input type="text" value="<?php echo $row['khoaID']; ?>" name="khoaID"></label><br/>
                         </div>
-                         <button class="btn btn-primary mt-4" class="update_user" type="submit" name="update_user"style="background-color: #106494;border-color:#106494;color: white;width: 200px;margin: 0 auto; display: block;">
+                         <button class="btn btn-primary mt-4" class="update_khoa" type="submit" name="update_user"style="background-color: #106494;border-color:#106494;color: white;width: 200px;margin: 0 auto; display: block;">
                              Cập Nhật
                          </button>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- <div class="col-sm-12 col-md-5" style="height:100px; background-color: red;">
-
-        </div> -->
-    </div>
-</div>
 <?php
 if (isset($_POST['update_user'])){
 $id=$_GET['id'];
+$madocgia=$_POST['madocgia'];
 $hoten=$_POST['hoten'];
 $username=$_POST['username'];
 $password=$_POST['password'];
 $gioitinh=$_POST['gioitinh'];
-$quyen=$_POST['quyen'];
-
+$ngaysinh=$_POST['ngaysinh'];
+$sdt=$_POST['sdt'];
+$diachi=$_POST['diachi'];
+$khoaID=$_POST['khoaID'];
 
 
 // Create connection
@@ -61,11 +61,11 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE `taikhoanadmin` SET hoten='$hoten',username='$username', password='$password', gioitinh='$gioitinh', quyen='$quyen' WHERE id='$id'";
+$sql = "UPDATE `docgia` SET madocgia='$madocgia', hoten='$hoten', username='$username', password='$password', gioitinh='$gioitinh', ngaysinh='$ngaysinh', sdt='$sdt', diachi='$diachi', khoaID='$khoaID' WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";
-header("location: ds_thanhvien.php");
+header("location: ds_sinhvien.php");
 } else {
 echo "Cập nhật thất bại: " . $conn->error;
 }
@@ -83,14 +83,12 @@ $conn->close();
 <style>
 
 
-.form h2{
-    background-color: white;
- }
+
 
 .fix_form{
     justify-content: center;
     padding-top: 15px;
-    padding-bottom: 305px;
+    padding-bottom: 20px;
     margin-left: 500px;
 }
 
