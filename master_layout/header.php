@@ -57,11 +57,11 @@ session_start(); ?>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script> -->
   <!-- preloader start -->
-  <div id="preloader">
+  <!-- <div id="preloader">
     <div id="status">
 
     </div>
-  </div>
+  </div> -->
   <div class="wrapper">
     <!-- header toolbar start -->
     <div class="header-toolbar" style="background: #dfe4ea;">
