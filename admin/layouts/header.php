@@ -89,8 +89,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                 <p>Quản Lý Độc Giả</p>
                             </a>
                         </li>
-                        <?php $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'ad';
-                        if ($username == 'admin') : ?>
+                        <?php $username = isset($_SESSION['quyen']) ? $_SESSION['quyen'] : 'ad';
+                        if ($username == 'Admin') : ?>
                         <li class="nav-item">
                             <a href="ds_quantri.php" class="nav-link <?php echo $current_page == 'ds_quantri.php' ? 'active' : ''; ?>">
                                 <i class='bx bx-user'></i>

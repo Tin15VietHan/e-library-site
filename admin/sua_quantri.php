@@ -20,15 +20,11 @@ $row=mysqli_fetch_assoc($query);
                     <form method="post" class="form" action="" onsubmit="return handeFormSubmit();">
                         <div class="form-group">
                             <label>Họ tên: <input type="text" value="<?php echo $row['hoten']; ?>" name="hoten"></label><br/>
-                            <label>Tên tài khoản: <input type="text" value="<?php echo $row['username']; ?>" name="username"></label><br/>
+                            <label>Tài khoản: <input type="text" value="<?php echo $row['username']; ?>" name="username"></label><br/>
                             <label>Mật khẩu: <input type="text" value="<?php echo $row['password']; ?>" name="password"></label><br/>
-                            <label>Giới tính:<select name="gioitinh" class="gioitinh" value="<?php echo $row['gioitinh']; ?>" name="gioitinh" >
-                                        <option value="Nam">Nam</option>
-                                        <option value="Nữ">Nữ</option>
-                                        <option value="Khác">Khác</option>
-                                       </select></br></br>
                             <label>Quyền:<select name="quyen" class="quyen" value="<?php echo $row['quyen']; ?>" name="quyen">
                                         <option value="Admin">Admin</option>
+                                        <option value="Manage">Manage</option>
                                          </select></br>
                         </div>
                          <button class="btn btn-primary mt-4" class="update_user" type="submit" name="update_user"style="background-color: #106494;border-color:#106494;color: white;width: 200px;margin: 0 auto; display: block;">
@@ -49,19 +45,18 @@ $id=$_GET['id'];
 $hoten=$_POST['hoten'];
 $username=$_POST['username'];
 $password=$_POST['password'];
-$gioitinh=$_POST['gioitinh'];
 $quyen=$_POST['quyen'];
 
 
 
 // Create connection
-$conn = new mysqli("localhost", "u395921506_thuvienviethan", "AnhquocQH@2002@", "u395921506_thuvienviethan");
+$conn = new mysqli("localhost", "root", "", "elibrary");
 // Check connection
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE `taikhoanadmin` SET hoten='$hoten',username='$username', password='$password', gioitinh='$gioitinh', quyen='$quyen' WHERE id='$id'";
+$sql = "UPDATE `taikhoanadmin` SET hoten='$hoten',username='$username', password='$password', quyen='$quyen' WHERE id='$id'";
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";

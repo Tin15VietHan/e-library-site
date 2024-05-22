@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
      * If not, display an error message for re-entry.
      * If yes, save the information in session and reload the page
      */
-    $query = "SELECT id, username, hoten FROM taikhoanadmin WHERE (username = '{$username}' AND password = '{$password}' AND quyen = 'admin' )";
+    $query = "SELECT * FROM taikhoanadmin WHERE (username = '{$username}' AND password = '{$password}') ";
     $result = mysqli_query($conn, $query); // execute the sql command => return an array (records)
     // Count how many records match the sql query. If > 0 => success
     if (mysqli_num_rows($result) > 0) { // mysqli_num_rows: check (count) how many records (rows) there are
@@ -36,6 +36,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['hoten'] = $account['hoten']; // $_SESSION: global variable and is an array
         $_SESSION['username'] = $account['username'];
         $_SESSION['id'] = $account['id'];
+        $_SESSION['quyen'] = $account['quyen'];
         header('Location: index.php');
     } else {
         // Failed login

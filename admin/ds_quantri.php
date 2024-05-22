@@ -39,11 +39,9 @@ $totalPage = ceil($count / $limit) ?? 0;
                 <th scope="row">Họ Tên</th>
                 <th scope="row">Tên tài khoản</th>
                 <th scope="row">Mật khẩu</th>
-                <th scope="row">Giới Tính</th>
-                
                 <th scope="row">Quyền</th>
                 
-                <th scope="row" colspan="2"><a href="them_thanhvien.php">Thêm</a></th>
+                <th scope="row" colspan="2"><a href="them_quantri.php">Thêm</a></th>
               </tr>
             </thead>
             <tbody>
@@ -55,12 +53,11 @@ $totalPage = ceil($count / $limit) ?? 0;
                    <td><?php echo $row['hoten']; ?></td>
                   <td><?php echo $row['username']; ?></td>
                   <td><?php echo $row['password']; ?></td>
-                  <td><?php echo $row['gioitinh']; ?></td>
                    <td><?php echo $row['quyen']; ?></td>
                  
                   
-                  <td><a href="sua_thanhvien.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
-                  <td><a href="xoa_thanhvien.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
+                  <td><a href="sua_quantri.php?id=<?php echo $row['id']; ?>">Sửa</a></td>
+                  <td><a href="xoa_quantri.php?id=<?php echo $row['id']; ?>">Xóa</a></td>
                 </tr>
               <?php endwhile; ?>
             </tbody>
