@@ -65,7 +65,7 @@ $sql = "UPDATE `docgia` SET madocgia='$madocgia', hoten='$hoten', username='$use
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";
-header("location: ds_sinhvien.php");
+header("location: ds_docgia.php");
 } else {
 echo "Cập nhật thất bại: " . $conn->error;
 }

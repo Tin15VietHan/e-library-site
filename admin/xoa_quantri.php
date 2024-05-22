@@ -9,7 +9,7 @@ $id=$_GET['id'];
     if ($result_delete) {
         echo "Xoá thành công!";
         echo "<div id='countdown'></div>";
-        echo "<a href='https://e-library.site/admin/ds_thanhvien.php'></a>";
+        echo "<a href='https://e-library.site/admin/ds_quantri.php'></a>";
     } else {
         echo "Error deleting category: " . mysqli_error($conn);
     }
@@ -35,7 +35,7 @@ $conn->close();
         // Nếu countdown kết thúc, chuyển hướng về trang index
         if (seconds <= 0) {
             clearInterval(countdownInterval); // Dừng đếm ngược
-            window.location.href = "https://e-library.site/admin/ds_thanhvien.php"; // Chuyển hướng về trang index.php
+            window.location.href = "https://e-library.site/admin/ds_quantri.php"; // Chuyển hướng về trang index.php
 
         }
     }, 1000); // Cập nhật mỗi 1 giây (1000 milliseconds)

@@ -84,7 +84,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="ds_sinhvien.php" class="nav-link <?php echo $current_page == 'ds_sinhvien.php' ? 'active' : ''; ?>">
+                            <a href="ds_docgia.php" class="nav-link <?php echo $current_page == 'ds_docgia.php' ? 'active' : ''; ?>">
                                 <i class='bx bx-user'></i>
                                 <p>Quản Lý Độc Giả</p>
                             </a>
@@ -92,7 +92,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <?php $username = isset($_SESSION['username']) ? $_SESSION['username'] : 'ad';
                         if ($username == 'admin') : ?>
                         <li class="nav-item">
-                            <a href="ds_thanhvien.php" class="nav-link <?php echo $current_page == 'ds_thanhvien.php' ? 'active' : ''; ?>">
+                            <a href="ds_quantri.php" class="nav-link <?php echo $current_page == 'ds_quantri.php' ? 'active' : ''; ?>">
                                 <i class='bx bx-user'></i>
                                 <p>Quản Lý Thành Viên</p>
                             </a>

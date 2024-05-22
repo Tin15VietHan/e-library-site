@@ -65,7 +65,7 @@ $sql = "UPDATE `taikhoanadmin` SET hoten='$hoten',username='$username', password
 
 if ($conn->query($sql) === TRUE) {
 echo "Cập nhật thành công";
-header("location: ds_thanhvien.php");
+header("location: ds_quantri.php");
 } else {
 echo "Cập nhật thất bại: " . $conn->error;
 }

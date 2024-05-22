@@ -69,9 +69,9 @@ $totalPage = ceil($count / $limit) ?? 0;
           <?php 
            for ($i=1; $i <= $totalPage; $i++) {
              if($i == $page) {
-               echo "<a href='ds_thanhvien.php?p=$i' style='font-size: 20px; color: red; margin: 0px 4px;'> $i </a>";
+               echo "<a href='ds_quantri.php?p=$i' style='font-size: 20px; color: red; margin: 0px 4px;'> $i </a>";
              } else {
-               echo "<a href='ds_thanhvien.php?p=$i' style='margin: 0px 2px;'> $i </a>";
+               echo "<a href='ds_quantri.php?p=$i' style='margin: 0px 2px;'> $i </a>";
              }
            }
           ?>
