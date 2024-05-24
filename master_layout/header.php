@@ -50,8 +50,6 @@
             event.preventDefault();
         });
     </script>
-    Content-Disposition: inline; filename="filename.pdf"
-X-Content-Type-Options: nosniff
 </head>
 
 <body>
