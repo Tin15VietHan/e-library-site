@@ -72,7 +72,7 @@ if (isset($_POST['submit'])) {
                             <label for="re_password">Nhập lại mật khẩu</label>
                             <input type="password" class="form-control" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu">
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4" name="submit">Đổi mật khẩu</button>
+                        <button type="submit" class="btn btn-primary btn-block mt-4" name="submit">Đổi Mật Khẩu</button>
                     </form>
                 </div>
             </div>

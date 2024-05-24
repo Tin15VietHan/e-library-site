@@ -88,36 +88,3 @@ const handeFormSubmit = () => { // arrow funtion
 }
 console.log('xxxxx')
 
-
-// Hàm kiểm tra định dạng email
-function isValidEmail(email) {
-    // Biểu thức chính quy kiểm tra định dạng email
-    const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
-    return emailPattern.test(email);
-}
-
-// Thêm sự kiện 'blur' cho trường email để kiểm tra định dạng khi rời khỏi trường nhập liệu
-document.getElementById('email').addEventListener('blur', function() {
-    const email = this.value;
-    const emailHelp = document.getElementById('emailHelp');
-    if (!isValidEmail(email)) {
-        emailHelp.textContent = 'Email không hợp lệ. Vui lòng nhập email định dạng @gmail.com';
-        emailHelp.style.color = 'red';
-    } else {
-        emailHelp.textContent = '';
-    }
-});
-
-// Kiểm tra email khi submit form
-document.getElementById('FormHD').addEventListener('submit', function(event) {
-    const email = document.getElementById('email').value;
-    const emailHelp = document.getElementById('emailHelp');
-    if (!isValidEmail(email)) {
-        emailHelp.textContent = 'Email không hợp lệ. Vui lòng nhập email định dạng @gmail.com';
-        emailHelp.style.color = 'red';
-        event.preventDefault(); // Ngăn không cho form gửi đi
-        document.getElementById('email').focus(); // Di chuyển con trỏ đến trường email
-    }
-});
-
-

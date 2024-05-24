@@ -99,9 +99,19 @@ if (isset($_POST['submit'])) {
                             <label for="birthday">Ngày sinh</label>
                             <input type="date" class="form-control" name="birthday" id="birthday" placeholder="Nhập ngày sinh" value=<?php echo $birthday ?> />
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4" name="submit">Sửa thông tin</button>
-                        <button type="submit" class="btn btn-primary mt-4"><a href="change-password.php" style="color: #fff">Đổi mật khẩu</a></button>
-                        <button type="submit" onclick="return handeSubmitDelete()" name="delete" class="btn btn-danger mt-4">Xóa tài khoản</button>
+                         <div class="d-grid gap-2">
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary mt-4 " name="submit">Sửa thông tin</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary mt-4">
+                                    <a href="change-password.php" style="color: #fff">Đổi mật khẩu</a>
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" onclick="return handeSubmitDelete()" name="delete" class="btn btn-danger mt-4">Xóa tài khoản</button>
+                            </div>
+                        </div>
 
                     </form>
                 </div>

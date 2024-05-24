@@ -1,23 +1,31 @@
 <?php
 // Kết nối đến cơ sở dữ liệu MySQL
-$host = 'localhost';
-$username = 'id21773647_library';
-$password = 'Tt15@20092002';
-$database = 'id21773647_library';
-$conn = mysqli_connect($host, $username, $password, $database);
+$server = 'localhost';
+$user = 'u395921506_thuvienviethan';
+$pass = 'AnhquocQH@2002@';
+$database = 'u395921506_thuvienviethan';
+$conn = mysqli_connect($server, $user, $pass, $database);
+mysqli_set_charset($conn, 'utf8');
 
 // Kiểm tra kết nối
 if (!$conn) {
     die("Kết nối đến cơ sở dữ liệu thất bại: " . mysqli_connect_error());
 }
 
+// Log incoming request data
+file_put_contents('log.txt', "Received POST data: " . print_r($_POST, true) . "\n", FILE_APPEND);
+
 // Lấy dữ liệu từ yêu cầu POST của ứng dụng Android
-$masv = $_POST['masv'];
-$matkhau = $_POST['matkhau'];
+$madocgia = mysqli_real_escape_string($conn, $_POST['madocgia']);
+$password = mysqli_real_escape_string($conn, $_POST['password']);
 
 // Truy vấn để kiểm tra thông tin đăng nhập
-$sql = "SELECT * FROM sinhvien WHERE masv = '$masv' AND matkhau = '$matkhau'";
+$sql = "SELECT * FROM docgia WHERE madocgia = '$madocgia' AND password = '$password'";
 $result = mysqli_query($conn, $sql);
+
+// Log the query and result
+file_put_contents('log.txt', "SQL Query: $sql\n", FILE_APPEND);
+file_put_contents('log.txt', "Query Result: " . print_r(mysqli_num_rows($result), true) . "\n", FILE_APPEND);
 
 // Kiểm tra kết quả trả về
 if (mysqli_num_rows($result) > 0) {

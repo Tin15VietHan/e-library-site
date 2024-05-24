@@ -68,14 +68,14 @@ if (isset($_POST['btngui'])) {
   }
 }
 ?>
-<?php require('layouts/footer.php'); ?>
+
 <div class="content-wrapper" style="min-height: 365px;">
   <section class="content">
     <div class="container-fluid">
       <h3><b>TẤT CẢ SÁCH</b></h3></br>
       <div class="form-wrapper">
         <form action="" method="GET">
-          <input type="text" name="txtsearch" class="searchform" placeholder="Tìm kiếm..."/>
+          <input type="text" name="txtsearch" class="searchform1" placeholder="Tìm kiếm..."/>
           <button class="sbutton" type="submit">Tìm Sách</button>
         </form>
       </div>
@@ -182,7 +182,7 @@ if (isset($_POST['btngui'])) {
   </section>
 </div>
 
-
+<?php require('layouts/footer.php'); ?>
 
 <style>
   .sbutton {
@@ -196,6 +196,10 @@ if (isset($_POST['btngui'])) {
   }
 
   .form {
+    border: 2px solid black;
+    border-radius: 5px;
+  }
+  .searchform1 {
     border: 2px solid black;
     border-radius: 5px;
   }

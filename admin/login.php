@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
-    <div class="col-md-6 d-flex flex-column justify-content-between position-relative" style="background-image: url('https://img.upanh.tv/2024/05/20/Navy-Blue-Modern-Pricing-Table-Comparison-Graph-3.png'); background-size: cover; background-position: center;">
+    <div class="col-md-6 d-flex flex-column justify-content-between position-relative" style="background-image: url('https://img.upanh.tv/2024/05/23/snapedit_1716476085245.png'); background-size: cover; background-position: center;">
         <div class="color-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;  z-index: 1;"></div>
         <div class="container position-relative" style="z-index: 2;">
             <!-- Optional content here -->

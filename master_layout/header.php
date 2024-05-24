@@ -1,6 +1,5 @@
-<?php ob_start();
-session_start(); ?>
-<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<?php ob_start();  session_start(); ?>
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh');?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +19,8 @@ session_start(); ?>
   <!-- animation styles -->
   <link rel="stylesheet" href="./assets/css/animate.css" />
   <!-- custom styles -->
-  <link rel="stylesheet" href="stylese.css" />
-  <link rel="stylesheet" href="./assets/css/stylee.css" id="style">
+    <link rel="stylesheet" href="stylese.css" />
+  <link rel="stylesheet" href="./assets/css/stylee.css"   id="style">
   <!-- owl carousel styles-->
   <link rel="stylesheet" href="./assets/css/owl.carousel.css">
   <link rel="stylesheet" href="./assets/css/owl.transitions.css">
@@ -46,25 +45,30 @@ session_start(); ?>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+        });
+    </script>
+    Content-Disposition: inline; filename="filename.pdf"
+X-Content-Type-Options: nosniff
 </head>
 
 <body>
   <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0" nonce="dT0uS0Mq"></script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0" nonce="dT0uS0Mq"></script>
   <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1280181819534389" crossorigin="anonymous"></script>
   <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1280181819534389" data-ad-slot="8373286137" data-ad-format="auto" data-full-width-responsive="true"></ins>
   <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
   </script> -->
   <!-- preloader start -->
-  <!-- <div id="preloader">
-    <div id="status">
-
-    </div>
-  </div> -->
+  <div id="preloader">
+    <div id="status"></div>
+  </div>
   <div class="wrapper">
     <!-- header toolbar start -->
-    <div class="header-toolbar" style="background: #dfe4ea;">
+    <div class="header-toolbar" style="background: #cccs;">
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-uppercase">
@@ -72,9 +76,9 @@ session_start(); ?>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="row  text-center">
                   <?php if (isset($_SESSION['account'])) : ?>
-                    <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #106494; font-family: 'Reem Kufi Fun', sans-serif;"><?php echo 'Xin chào, ' . $_SESSION['account']['hoten'] . ' . Cảm ơn bạn đã truy cập trang web của chúng tôi !'; ?>.</marquee>
+                    <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #00f; font-family: 'Reem Kufi Fun', sans-serif;" ><?php echo 'Xin chào, ' . $_SESSION['account']['hoten'] . ' . Cảm ơn bạn đã truy cập trang web của chúng tôi !'; ?>.</marquee>
                   <?php else : ?>
-                    <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #106494; font-family: 'Reem Kufi Fun', sans-serif;">Xin chào bạn đọc thân mến, Để nâng cao quyền riêng tư Vui lòng đăng nhập để đọc truyện.</marquee>
+                    <marquee behavior="scroll" direction="left" scrollamount="10" style="font-size: 15px; color: #106494; font-family: 'Reem Kufi Fun', sans-serif;" >Xin chào bạn đọc thân mến, Để nâng cao quyền riêng tư Vui lòng đăng nhập để đọc truyện.</marquee>
                   <?php endif; ?>
                 </div>
               </div>
@@ -88,6 +92,24 @@ session_start(); ?>
   <?php require_once(realpath(dirname(__FILE__) . "/menu.php")); ?>
 
   <!-- preloader end -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const toggleCheckbox = document.getElementById('toggleCheckbox');
+      const body = document.body; // Thay body bằng phần tử chứa nội dung trang của bạn nếu cần
+
+      toggleCheckbox.addEventListener('change', function() {
+        if (toggleCheckbox.checked) {
+          // Chuyển sang chế độ tối
+          body.classList.add('dark-mode'); // Thêm lớp CSS dark-mode
+        } else {
+          // Chuyển sang chế độ sáng
+          body.classList.remove('dark-mode'); // Xóa lớp CSS dark-mode
+        }
+      });
+    });
+  </script>
+
+
 
   <style>
     a {
@@ -98,11 +120,11 @@ session_start(); ?>
       margin: 0;
       height: 100%;
       transition: background-color .25s;
-      color: #1e1e1e;
-
+      color: #ccc;
       background-size: 300% 300%;
       background-position: top left;
       transition: background-position .6s;
+      
     }
 
     /* Điều chỉnh kích thước và vị trí của nút toggle */
@@ -174,7 +196,7 @@ session_start(); ?>
 
     body:has(.iput:checked) {
       background-position: 100% 100%;
-      color: #d0d0d0;
+      color: #fff;
 
     }
 

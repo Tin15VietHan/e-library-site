@@ -41,7 +41,7 @@ mysqli_close($conn);
                 <form name="muonsach" id="FormHD">
                     <div class="form-group">
                         <label for="madocgia">Mã Độc Giả</label>
-                        <input type="text" class="autocomplete-madocgia" id="madocgia">
+                        <input type="text" class="autocomplete-madocgia" id="madocgia" onblur="getDocGiaInfo()">
                     </div>
                     <div class="form-group">
                         <label for="tensv">Tên Độc Giả Mượn Sách</label>
@@ -77,7 +77,7 @@ mysqli_close($conn);
                 <div class="container" id="printContent" style="display: block !important;">
                     <div class="header">
                         <div class="title">PHIẾU MƯỢN SÁCH</div>
-                        <div><strong>E-library</strong></div>
+                        <div><strong>E-Library Việt Hàn</strong></div>
                         <div>Số 8 Hồ Tông Thốc, Nghi Phú, Thành Phố Vinh, Nghệ An</div>
                         <div>SĐT: 0799339567 – 0876492111</div>
                     </div>
@@ -126,29 +126,19 @@ mysqli_close($conn);
 
 <script>
 // Bắt sự kiện khi nhấn vào nút "+"
-document.getElementById("addbook").addEventListener("click", function() {
-    var inputContainer = document.getElementById("inputContainer");
-    var newInput = document.createElement("input");
-    newInput.type = "text";
-    newInput.className = "autocomplete-sach";
-    newInput.style.marginTop = "10px";
-    inputContainer.appendChild(newInput);
-    inputContainer.appendChild(document.createElement("br"));
-    createAutocompleteForNewInput(newInput);
-});
-
-// Xử lý khi form được gửi đi
 // Xử lý khi form được gửi đi
 document.getElementById('FormHD').addEventListener('submit', function(event) {
     event.preventDefault(); // Ngăn chặn việc gửi biểu mẫu đi
-
+    event.preventDefault();
+    var confirmation = confirm("Vui lòng kiểm tra lại dữ liệu trước khi tạo hóa đơn, hóa đơn này sẽ được lưu vào hệ thống ngay sau đó!");
+    if (confirmation) {
     var madocgia = document.getElementById('madocgia').value;
     var hoten = document.getElementById('hoten').value;
     var sdt = document.getElementById('sdt').value;
     var diachi = document.getElementById('diachi').value;
     var ngayhentra = document.getElementById('ngayhentra').value;
     var books = document.querySelectorAll('.autocomplete-sach');
-    var booksArray = Array.from(books).map(book => book.value).filter(book => book.trim() !== '');
+    var booksArray = Array.from(books).map(book => book.value).filter(book => book.trim() !== '');};
 
     document.getElementById('htmadocgia').innerText = "Mã Độc Giả: " + madocgia;
     document.getElementById('hthoten').innerText = "Người mượn: " + hoten;
@@ -207,9 +197,35 @@ function createAutocompleteForNewInput(input) {
     });
 }
 
+function getDocGiaInfo() {
+    var madocgia = document.getElementById('madocgia').value;
+    if (madocgia.trim() !== "") {
+        $.ajax({
+            type: 'POST',
+            url: 'them_nguoimuonsach.php',
+            data: { madocgia: madocgia },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    document.getElementById('hoten').value = response.data.hoten;
+                    document.getElementById('sdt').value = response.data.sdt;
+                    document.getElementById('diachi').value = response.data.diachi;
+                } else {
+                    alert('Không tìm thấy thông tin độc giả.');
+                }
+            },
+            error: function() {
+                alert('Đã xảy ra lỗi khi lấy thông tin độc giả.');
+            }
+        });
+    }
+}
+
+
+
 // Khởi tạo autocomplete cho các trường input mặc định
 $(document).ready(function() {
-    $('.autocomplete-ma').autocomplete({
+    $('.autocomplete-madocgia').autocomplete({
         source: function(request, response) {
             $.ajax({
                 url: "timdocgia.php",
@@ -221,6 +237,27 @@ $(document).ready(function() {
             });
         }
     });
+    document.getElementById('addbook').addEventListener('click', function() {
+    var inputContainer = document.getElementById('inputContainer');
+    var newInput = document.createElement('input');
+    newInput.type = 'text';
+    newInput.className = 'autocomplete-sach';
+    newInput.style.marginTop = '10px';
+    inputContainer.appendChild(newInput);
+    $(newInput).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "timsach.php",
+                dataType: "json",
+                data: { term: request.term },
+                success: function(data) {
+                    response(data.map(item => ({ label: item, value: item })));
+                }
+            });
+        }
+    });
+});
+
 
     $('.autocomplete-sinhvien').autocomplete({
         source: function(request, response) {
@@ -274,4 +311,7 @@ $(document).ready(function() {
         }
     });
 });
+
 </script>
+
+

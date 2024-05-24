@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
      * Nếu không thỏa mãn thì thông báo không tồn tại tài khoản
      * Nếu thoả mãn thì mình đổi mật khẩu ngẫu nhiên và gửi mail lại kho người dùng
      */
-    $query = "SELECT * FROM taikhoanadmin where email = '{$email}' AND username = '{$username}'";
+    $query = "SELECT * FROM docgia where email = '{$email}' AND username = '{$username}'";
     $result = mysqli_query($conn, $query); // thực hiện lệnh sql => trả về 1 mảng (các bản ghi)
     // Đếm xem có bao nhiêu bản ghi thỏa mãn mãn câu sql. Nếu mà > 0 => thông báo
     if (mysqli_num_rows($result) == 0) { // mysqli_num_rows: kiểm tra (đếm) có bao nhiêu bản ghi (rows)
@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
         // Gửi email thông báo
         $dt = date("Y-m-d H:i:s");
         $password = generateRandomString(7);
-        $query = "UPDATE taikhoanadmin SET password = '{$password}', updated_at = CURRENT_TIMESTAMP() where email = '{$email}' AND username = '{$username}'";
+        $query = "UPDATE docgia SET password = '{$password}' where email = '{$email}' AND username = '{$username}'";
         if (mysqli_query($conn, $query)) {
             // Gửi thông báo về email
             $mail = new PHPMailer(true);
@@ -79,8 +79,8 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="col col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Quên mật khẩu
+                <div class="panel-heading" style="text-align: center; font-weight: 900; font-size: 30px; color: #106494; font-family: 'Verdana', sans-serif;">
+                 Quên Mật Khẩu
                 </div>
                 <div class="panel-body">
                     <?php if (count($errors) > 0) : ?>
@@ -93,14 +93,14 @@ if (isset($_POST['submit'])) {
                     <?php endif; ?>
                     <form method="POST" action="" onsubmit="return handeFormSubmit();">
                         <div class="form-group">
-                            <label for="email">Email </label>
+                            <label for="email" style="color: #106494;">Email </label>
                             <input type="text" class="form-control" name="email" id="email" placeholder="Nhập Email">
                         </div>
                         <div class="form-group">
-                            <label for="username">Tên đăng nhập</label>
+                            <label for="username" style="color: #106494;">Tên đăng nhập</label>
                             <input type="text" class="form-control" name="username" id="username" placeholder="Nhập tên">
                         </div>
-                        <button type="submit" class="btn btn-primary mt-4" name="submit">Cấp lại mật khẩu</button>
+                        <button type="submit" class="btn btn-primary btn-block mt-4" name="submit">Cấp Lại Mật Khẩu</button>
                     </form>
                 </div>
             </div>

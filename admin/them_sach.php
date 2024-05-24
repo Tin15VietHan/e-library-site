@@ -92,8 +92,11 @@ if (isset($_POST['sbm'])) {
     $soluong = $_POST['soluong'];
     $idaccount = $_SESSION['account_admin']['id'];  
     $accounts_id = (int)$idaccount;
+    $tacgia=$_POST['tacgia'];
+    $namxuatban=$_POST['namxuatban'];
+    $loaisach=$_POST['loaisach'];
     
-    $sql = "INSERT INTO sach (tensach, anh, gioithieusach, noidungdientu, khoaID, soluong, loaisach, luotxem) VALUES ('$title', '$Url_Anh_Bia', '$content', '$Url_Pdf', '$category_id', '$soluong', '0', '0')";
+    $sql = "INSERT INTO sach (tensach, anh, gioithieusach, noidungdientu, khoaID, soluong, tacgia, namxuatban, loaisach, luotxem) VALUES ('$title', '$Url_Anh_Bia', '$content', '$Url_Pdf', '$category_id', '$soluong','$tacgia', '$namxuatban','$loaisach', '0')";
     if (mysqli_query($conn, $sql))
     //Thông báo nếu thành công
     {
@@ -166,7 +169,7 @@ if (isset($_POST['sbm'])) {
                     <div class="form-group">
 
                         <label for="">Khoa</label>
-                        <select name="category_id" id="category_id">
+                        <select name="khoaID" id="khoaID">
                             <?php while ($row = mysqli_fetch_assoc($query_category)) : ?>
                                 <option value=<?php echo $row['id']; ?>> <?php echo $row['tenkhoa']; ?></option>
                             <?php endwhile; ?>
@@ -179,8 +182,8 @@ if (isset($_POST['sbm'])) {
 
                     <div class="form-group">
                         <label for="">Loại Sách</label>
-                        <input type="radio" name="loaisach" value="GIẤY" checked>Giấy
-                        <input type="radio" name="loaisach" value="GIẤY+ĐIỆN TỬ"> Giấy+ Điện Tử
+                        <input type="radio" name="loaisach" value="Giấy" checked>Giấy
+                        <input type="radio" name="loaisach" value="Giấy+ Điện Tử"> Giấy+ Điện Tử
                     </div>
 
                     <button name="sbm" class="btn btn-success">Thêm</button>

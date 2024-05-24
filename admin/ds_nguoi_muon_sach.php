@@ -28,7 +28,7 @@ $totalPage = ceil($count / $limit) ?? 0;
 $sql_muon_sach = "SELECT * FROM `muon_sach` ORDER BY `muon_sach`.`ngaycapnhat` DESC";
 $queryy =mysqli_query ($conn,$sql_muon_sach);
 ?>
-<?php require('layouts/footer.php'); ?>
+
 <div class="content-wrapper" style="min-height: 365px;">
 
   <section class="content">
@@ -44,7 +44,7 @@ $queryy =mysqli_query ($conn,$sql_muon_sach);
   
   <!-- Thêm dropdown menu cho trạng thái -->
   <select name="status" class='form' style="width: 190px;">
-    <option value="">Chọn Trạng Thái</option>
+    <option value="" disabled selected>Chọn Trạng Thái</option>
     <option value="Đang Mượn">Đang Mượn</option>
     <option value="Đã trả">Đã trả</option>
     <option value="Đã Quá Hạn Trả">Đã Quá Hạn Trả</option>
@@ -117,7 +117,7 @@ endwhile;
   </section>
 </div>
 
-
+<?php require('layouts/footer.php'); ?>
 
 <style>
 

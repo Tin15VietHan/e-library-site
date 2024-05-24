@@ -88,11 +88,11 @@
                     <?php
                     if ($secureHash == $vnp_SecureHash) {
                         if ($_GET['vnp_ResponseCode'] == '00') {
-                            $sql = "UPDATE taikhoanadmin SET status='PREMIUM' WHERE id = $iduser";
+                            $sql = "UPDATE accounts SET status='PREMIUM' WHERE id = $iduser";
                             $result = mysqli_query($conn, $sql);
                             if ($result && mysqli_affected_rows($conn) <= 0) {
                                 echo "<span style='color:red'>Lỗi cơ sở dữ liệu</span>";
-                            }
+                            } 
                             echo "<span style='color:green'>GD thanh cong</span>";
                         } else {
                             echo "<span style='color:red'>GD Khong thanh cong</span>";
@@ -101,7 +101,6 @@
                         echo "<span style='color:red'>Chu ky khong hop le</span>";
                     }
                     ?>
-
                 </label>
             </div>
         </div>
@@ -109,35 +108,31 @@
             &nbsp;
         </p>
         <footer class="footer">
-            <?php
-            ?>
             <p>&copy; VNPAY <?php echo date('Y') ?></p>
-            <div id="countdown"></div>
-        </footer>
+             <div id="countdown"></div>
+             <p><a href='https://e-library.site/logout.php'>Quay lại đăng nhập để kích hoạt premium</a></p>
+        </foote
     </div>
 </body>
 
 </html>
 
 <script>
-    // Số giây để đếm ngược
-    var seconds = 10;
+// Số giây để đếm ngược
+var seconds = 10;
 
+// Lấy phần tử có id="countdown" từ HTML
+var countdownElement = document.getElementById("countdown");
 
-
-    // Lấy phần tử có id="countdown" từ HTML
-    var countdownElement = document.getElementById("countdown");
-
-    // Đếm ngược và cập nhật giá trị trên trang
-    var countdownInterval = setInterval(function() {
-        seconds--;
-        countdownElement.textContent = "Redirecting in " + seconds + " seconds...";
-
-        // Nếu countdown kết thúc, chuyển hướng về trang index
-        if (seconds <= 0) {
-            clearInterval(countdownInterval); // Dừng đếm ngược
-            window.location.href = "https://localhost/e-library-site/logout.php"; // Chuyển hướng về trang index.php
-
-        }
-    }, 1000); // Cập nhật mỗi 1 giây (1000 milliseconds)
+// Đếm ngược và cập nhật giá trị trên trang
+var countdownInterval = setInterval(function() {
+    seconds--;
+    countdownElement.textContent = "Đang kích hoạt tài khoản " + seconds + " seconds...";
+    
+    // Nếu countdown kết thúc, chuyển hướng về trang index
+    if (seconds <= 0) {
+        clearInterval(countdownInterval); // Dừng đếm ngược
+        window.location.href = "https://e-library.site/logout.php"; // Chuyển hướng về trang index.php
+    }
+}, 1000); // Cập nhật mỗi 1 giây (1000 milliseconds)
 </script>

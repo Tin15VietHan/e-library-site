@@ -43,9 +43,9 @@ if (isset($_POST['submit'])) {
 <div class="container">
     <div class="row">
         <div class="col col-md-6 col-md-offset-3">
-            <div class="panel panel-defaul">
-                <div class="panel-heading" style="background-color:#106494;color:#fff;text-align:center">
-                    Đăng nhập
+            <div class="panel panel-default">
+               <div class="panel-heading" style="text-align: center; font-weight: 900; font-size: 30px; color: #106494; font-family: 'Verdana', sans-serif;">
+                 Đăng nhập
                 </div>
                 <div class="panel-body">
                     <?php if (count($errors) > 0) : ?>
@@ -57,35 +57,70 @@ if (isset($_POST['submit'])) {
                         <p class="success" style="color: green;"> <?php echo $success; ?> </p>
                     <?php endif; ?>
 
-                    <form method="post" action="" onsubmit="return handeFormSubmit();" style="border-color:#106494">
+                    <form method="post" action="" onsubmit="return handleFormSubmit();" style="">
                         <div class="form-group">
-                            <label for="username">Email hoặc tên đăng nhập</label>
+                            <label for="username" style="color: #106494;">Email hoặc tên đăng nhập</label>
                             <input type="text" class="form-control" name="username" id="username" placeholder="Nhập Email hoặc tên đăng nhập">
                         </div>
                         <div class="form-group">
-                            <label for="password">Mật khẩu</label>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Mật khẩu">
+                            <label for="password" style="color: #106494;">Mật khẩu</label>
+                            
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Mật khẩu">
+                                <div class="input-group-append">
+                                    
+                                    
+                                <div class="input-group-text">
+                                        <input type="checkbox" id="showPassword" style="padding-bottom: 20px;" onclick="togglePasswordVisibility()">
+                                        <small><label for="showPassword" style="color: #106494;">Hiện mật khẩu</label></small>
+                                    </div>
+                                </div>                        
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-4" name="submit">Đăng nhập</button>
+                        <div class="row mt-3">
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-link btn-sm">
+                                    <a href="forget-password.php" style="color: #106494; text-decoration: none;">Quên mật khẩu</a>
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm">
+                                    <a href="regisin.php" style="color: #106494; text-decoration: none;">Tạo tài khoản</a>
+                                </button>
+                            </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mt-4" name='submit'>Đăng nhập</button>
-                        <button type="button" class="btn btn-primary mt-4" style="margin-left: auto; margin-right:auto;"><a href="forget-password.php" style="color: #fff">Quên mật khẩu</a>
-                            <br><button type="button" class="btn btn-primary mt-4" style="float: right"><a href="regisin.php" style="color: #fff;">Tạo tài khoản</a></button>
                     </form>
+
 
                 </div>
             </div>
         </div>
-        <!-- <div class="col-sm-12 col-md-5" style="height:100px; background-color: red;">
-
-        </div> -->
     </div>
 </div>
+
+<script>
+function togglePasswordVisibility() {
+    var passwordField = document.getElementById("password");
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+}
+</script>
+
 
 <?php include_once('./master_layout/footer.php') ?>
 <style>
     body {
         background: aliceblue;
     }
+    .panel-defaul{
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+}
 </style>
 <script src="./assets/js/login.js"></script>
 <script src="./assets/js/jquery.min.js"></script>

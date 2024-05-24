@@ -1,6 +1,6 @@
 <?php if (isset($_SESSION['account_admin'])) : ?>
   <footer class="main-footer">
-    <strong>Web Quản Trị <a href="#">Anh Quốc QH</a></strong>
+    <strong>Web Quản Trị <a href="#">E-LIBRARY VIỆT HÀN</a></strong>
     <div class="float-right d-none d-sm-inline-block">
       <b>Nhóm</b> 03
     </div>

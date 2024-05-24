@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost';
-$username = 'id21773647_library';
-$password = 'Tt15@20092002';
-$database = 'id21773647_library';
+$server = 'localhost';
+$user = 'u395921506_Vtvp7';
+$pass = 'AnhquocQH@2002@';
+$database = 'u395921506_PqhSG';
 
 class SinhVien {
     public $id;
@@ -22,7 +22,7 @@ class SinhVien {
     }
 }
 
-$conn = mysqli_connect($host, $username, $password, $database);
+$conn = mysqli_connect($server, $user, $pass, $database); // Fixed variable names
 mysqli_set_charset($conn, 'utf8');
 
 $id = $_GET['id']; // Nhận ID từ yêu cầu GET

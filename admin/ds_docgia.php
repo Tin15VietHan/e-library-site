@@ -83,7 +83,7 @@ $totalPage = ceil($count / $limit) ?? 0;
                 <th>Địa Chỉ</th>
                 <th>Khoa</th>
                
-                <th colspan="2"><a href="them_sinhvien.php">Thêm</a></th>
+                <th colspan="2"><a href="them_docgia.php">Thêm</a></th>
 
               </tr>
             </thead>

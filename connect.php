@@ -1,13 +1,8 @@
 <?php
 $server = 'localhost';
-$user = 'root';
-$pass = '';
-$database = 'elibrary';
-
-// $server = 'localhost';
-// $user = 'id21773647_library';
-// $pass = 'It15@123456';
-// $database = 'id21773647_library';
+$user = 'u395921506_thuvienviethan';
+$pass = 'AnhquocQH@2002@';
+$database = 'u395921506_thuvienviethan';
 
 
 $conn = mysqli_connect($server, $user, $pass, $database);

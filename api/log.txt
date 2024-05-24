@@ -1,0 +1,264 @@
+Received POST data: Array
+(
+    [madocgia] => Q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'Q2501' AND password = '25012003'
+Query Result: 1
+Received POST data: Array
+(
+    [madocgia] => q
+    [password] => q
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'q' AND password = 'q'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => Q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'Q2501' AND password = '25012003'
+Query Result: 1
+Received POST data: Array
+(
+    [madocgia] => q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'q2501' AND password = '25012003'
+Query Result: 1
+Received POST data: Array
+(
+    [madocgia] => q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'q2501' AND password = '25012003'
+Query Result: 1
+Received POST data: Array
+(
+    [madocgia] => ddwztc
+    [password] => ewlwqh
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'ddwztc' AND password = 'ewlwqh'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => ddwztc
+    [password] => ewlwqh
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'ddwztc' AND password = 'ewlwqh'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => jytiul
+    [password] => ewlwqh
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'jytiul' AND password = 'ewlwqh'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => jytiul
+    [password] => ewlwqh
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'jytiul' AND password = 'ewlwqh'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => jytiul
+    [password] => ewlwqh
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'jytiul' AND password = 'ewlwqh'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => jytiul
+    [password] => pquvwt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'jytiul' AND password = 'pquvwt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => jytiul
+    [password] => pquvwt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'jytiul' AND password = 'pquvwt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => sfjjqs
+    [password] => vxjwzt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'sfjjqs' AND password = 'vxjwzt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => sfjjqs
+    [password] => vxjwzt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'sfjjqs' AND password = 'vxjwzt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => sfjjqs
+    [password] => hyqflu
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'sfjjqs' AND password = 'hyqflu'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => sfjjqs
+    [password] => hyqflu
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'sfjjqs' AND password = 'hyqflu'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => bphzzn
+    [password] => hyqflu
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'bphzzn' AND password = 'hyqflu'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => bphzzn
+    [password] => hyqflu
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'bphzzn' AND password = 'hyqflu'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => bphzzn
+    [password] => zlbbam
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'bphzzn' AND password = 'zlbbam'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => bphzzn
+    [password] => zlbbam
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'bphzzn' AND password = 'zlbbam'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => xnkdzn
+    [password] => zlbbam
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'xnkdzn' AND password = 'zlbbam'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => xnkdzn
+    [password] => zlbbam
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'xnkdzn' AND password = 'zlbbam'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => xnkdzn
+    [password] => yuaqvt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'xnkdzn' AND password = 'yuaqvt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => xnkdzn
+    [password] => yuaqvt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'xnkdzn' AND password = 'yuaqvt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => hbdedy
+    [password] => yuaqvt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'hbdedy' AND password = 'yuaqvt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => hbdedy
+    [password] => yuaqvt
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'hbdedy' AND password = 'yuaqvt'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => hbdedy
+    [password] => azskfw
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'hbdedy' AND password = 'azskfw'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => hbdedy
+    [password] => azskfw
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'hbdedy' AND password = 'azskfw'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => hbdedy
+    [password] => uckehk
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'hbdedy' AND password = 'uckehk'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => hbdedy
+    [password] => uckehk
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'hbdedy' AND password = 'uckehk'
+Query Result: 0
+Received POST data: Array
+(
+    [madocgia] => q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'q2501' AND password = '25012003'
+Query Result: 1
+Received POST data: Array
+(
+    [madocgia] => q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'q2501' AND password = '25012003'
+Query Result: 1
+Received POST data: Array
+(
+    [madocgia] => q2501
+    [password] => 25012003
+)
+
+SQL Query: SELECT * FROM docgia WHERE madocgia = 'q2501' AND password = '25012003'
+Query Result: 1

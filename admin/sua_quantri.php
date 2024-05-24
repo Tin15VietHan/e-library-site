@@ -50,7 +50,7 @@ $quyen=$_POST['quyen'];
 
 
 // Create connection
-$conn = new mysqli("localhost", "root", "", "elibrary");
+$conn = new mysqli("localhost", "u395921506_thuvienviethan", "AnhquocQH@2002@", "u395921506_thuvienviethan");
 // Check connection
 if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);

@@ -1,5 +1,6 @@
 <?php
 require('./../connect.php'); 
+ob_start();
 
 // Hàm xử lý dữ liệu đầu vào
 function sanitize_input($data) {
@@ -54,6 +55,7 @@ $data = str_replace(' ', '-', $data);
         $sql = "INSERT INTO khoa (tenkhoa) VALUES('$tenkhoa')";
         $query = mysqli_query($conn, $sql);
         header("location: ds_danhmuc.php");
+        
     }
 }
 
@@ -148,3 +150,6 @@ background-color: white;
 }
 
 </style>
+<?php
+ob_end_flush(); // Flush bộ đệm đầu ra và kết thúc buffering
+?>

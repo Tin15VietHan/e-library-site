@@ -12,18 +12,18 @@ if (!$id) {
 
 $query = mysqli_query($conn, "SELECT * FROM `muon_sach` WHERE id='$id'");
 $row = mysqli_fetch_assoc($query);
-$fullname = isset($_SESSION['fullname']) ? $_SESSION['fullname'] : '';
+$nguoitao = isset($_SESSION['hoten']) ? $_SESSION['hoten'] : '';
 
 if (isset($_POST['update_user'])) {
-    $masv = $_POST['masv'];
-    $tennguoimuon = $_POST['ten_nguoi_muon'];
+    $madocgia = $_POST['madocgia'];
+    $hoten = $_POST['hoten'];
     $sdt = $_POST['sdt'];
-    $diachi = $_POST['dia_chi'];
+    $diachi = $_POST['diachi'];
     $sachmuon = $_POST['sach_muon'];
     $ngayhentra = $_POST['ngay_hen_tra'];
     $trangthai = $_POST['trang_thai'];
 
-    $sql = "UPDATE `muon_sach` SET masv='$masv', ten_nguoi_muon='$tennguoimuon', sdt='$sdt', dia_chi='$diachi', sach_muon='$sachmuon', ngay_hen_tra='$ngayhentra', trang_thai='$trangthai', updated_at = CURRENT_TIMESTAMP() , data_creator = '$fullname' WHERE id='$id'";
+    $sql = "UPDATE `muon_sach` SET madocgia='$madocgia', hoten='$hoten', sdt='$sdt', diachi='$diachi', sach_muon='$sachmuon', ngay_hen_tra='$ngayhentra', trang_thai='$trangthai', ngaycapnhat = CURRENT_TIMESTAMP() , nguoitao = '$nguoitao' WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
         echo "Cập nhật thành công";
@@ -38,10 +38,10 @@ if (isset($_POST['update_user'])) {
 <div class="fix_form">
     <form method="POST" class="form2">
         <h2>Sửa Người Mượn Sách</h2>
-        <label>Mã Sinh Viên: <input type="text" value="<?php echo $row['masv']; ?>" name="masv"></label><br />
-        <label>Tên Người Mượn: <input type="text" value="<?php echo $row['ten_nguoi_muon']; ?>" name="ten_nguoi_muon"></label><br />
+        <label>Mã Độc Giả: <input type="text" value="<?php echo $row['madocgia']; ?>" name="madocgia"></label><br />
+        <label>Tên Người Mượn: <input type="text" value="<?php echo $row['hoten']; ?>" name="hoten"></label><br />
         <label>Số Điện Thoại: <input type="number" value="<?php echo $row['sdt']; ?>" name="sdt"></label><br />
-        <label>Địa Chỉ: <input type="text" value="<?php echo $row['dia_chi']; ?>" name="dia_chi"></label><br />
+        <label>Địa Chỉ: <input type="text" value="<?php echo $row['diachi']; ?>" name="diachi"></label><br />
         <label>Sách Đang Mượn: </label><br />
         <textarea class="form-control" rows="3" name="sach_muon" style="width: 400px; color:black;"><?php echo $row['sach_muon']; ?></textarea>
         <label>Ngày Mượn: <input type="datetime-local" value="<?php echo $row['ngay_muon']; ?>" name="ngay_muon" readonly></label><br />

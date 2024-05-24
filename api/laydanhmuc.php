@@ -1,34 +1,34 @@
 <?php
-$host = 'localhost';
-$username = 'id21773647_library';
-$password = 'Tt15@20092002';
-$database = 'id21773647_library';
+$server = 'localhost';
+$user = 'u395921506_thuvienviethan';
+$pass = 'AnhquocQH@2002@';
+$database = 'u395921506_thuvienviethan';
 
+class khoa{
+    public $id;
+    public $tenkhoa;
 
-class categories{
-    function __construct($id, $name){
+    function __construct($id, $tenkhoa){
         $this->id = $id;
-        $this->name = $name;
+        $this->tenkhoa = $tenkhoa;
     }
 }
 
-
-$conn = mysqli_connect("$host","$username","$password","$database");
+$conn = mysqli_connect($server, $user, $pass, $database); // Fix variable names here
 mysqli_set_charset($conn, 'utf8');
 
-$sql = 'SELECT * FROM `categories`';
+$sql = 'SELECT * FROM `khoa`';
 $query = mysqli_query($conn, $sql);
 
 $arr = array();
 
 while($row = mysqli_fetch_assoc($query)){
     $id = $row['id'];
-    $name = $row['name'];
-  
+    $tenkhoa = $row['tenkhoa'];
     
-    array_push($arr, new categories ($id, $name));
+    array_push($arr, new khoa ($id, $tenkhoa));
 }
+
 $json = json_encode($arr);
 echo $json;
 ?>
-

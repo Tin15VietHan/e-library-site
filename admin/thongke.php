@@ -135,7 +135,7 @@ mysqli_close($conn);
 					<div class="small-box bg-info">
 						<div class="inner">
 							<h3><?php echo $totaldanhmuc; ?></h3>
-							<h4>THỂ LOẠI</h4>
+							<h4>KHOA</h4>
 						</div>
 						<div class="icon">
 							<i class='bx bx-book-bookmark'></i>
@@ -167,7 +167,7 @@ mysqli_close($conn);
 						<div class="icon">
 							<i class='bx bx-user'></i>
 						</div>
-						<a style="color: aliceblue !important;" href='ds_docgia.php' class='small-box-footer'>Chi tiết <i class='fas fa-arrow-circle-right'></i></a>
+						<a style="color: aliceblue !important;" href='ds_sinhvien.php' class='small-box-footer'>Chi tiết <i class='fas fa-arrow-circle-right'></i></a>
 					</div>
 				</div>
 				<!-- ./col -->

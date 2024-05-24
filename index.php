@@ -4,10 +4,11 @@ include_once('functions.php');
 require('./connect.php');
 
 ?>
-<div class="container blogging-style" style="background: #ffffff;">
+<div class="container blogging-style" style="background: #ffffff;   /* Thêm viền phía trên */
+">
   <div class="page-header" style="margin-top: 5px;">
 
-    <h2>Trang chủ</h2>
+    <h2 >Trang chủ</h2>
 
   </div>
 

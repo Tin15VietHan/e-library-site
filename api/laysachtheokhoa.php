@@ -1,31 +1,34 @@
 <?php
-$host = 'localhost';
-$username = 'id21773647_library';
-$password = 'Tt15@20092002';
-$database = 'id21773647_library';
+$server = 'localhost';
+$user = 'u395921506_thuvienviethan';
+$pass = 'AnhquocQH@2002@';
+$database = 'u395921506_thuvienviethan';
 
 // Establish database connection
-$conn = mysqli_connect($host, $username, $password, $database);
+$conn = mysqli_connect($server, $user, $pass, $database);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 mysqli_set_charset($conn, 'utf8');
 
-// Check if category_id is provided
-if (isset($_GET["category_id"])) {
-    $category_id = mysqli_real_escape_string($conn, $_GET["category_id"]);
+// Check if khoaID is provided
+if (isset($_GET["khoaID"])) {
+    $khoaID = mysqli_real_escape_string($conn, $_GET["khoaID"]);
 
-    // Define a Post class for better data structure
-    class Post {
+    // Define a sach class for better data structure
+    class Sach {
         public $id;
-        public $title;
-        public $image;
+        public $tensach;
+        public $anh;
         
-        function __construct($id, $title, $image) {
+        function __construct($id, $tensach, $anh) {
             $this->id = $id;
-            $this->title = $title;
-            $this->image = $image;
+            $this->tensach = $tensach;
+            $this->anh = $anh;
         }
     }
 
-    $sql = "SELECT * FROM `posts` WHERE `category_id` = '$category_id'";
+    $sql = "SELECT * FROM `sach` WHERE `khoaID` = '$khoaID'";
     $query = mysqli_query($conn, $sql);
 
     $posts = array();
@@ -33,10 +36,10 @@ if (isset($_GET["category_id"])) {
     if ($query) {
         while ($row = mysqli_fetch_assoc($query)) {
             $id = $row['id'];
-            $title = $row['title'];
-            $image = $row['image'];
+            $tensach = $row['tensach'];
+            $anh = $row['anh'];
             
-            $post = new Post($id, $title, $image);
+            $post = new Sach($id, $tensach, $anh);
             $posts[] = $post;
         }
         // Convert posts array to JSON and echo it
@@ -48,7 +51,7 @@ if (isset($_GET["category_id"])) {
 
     mysqli_close($conn);
 } else {
-    // Handle case where category_id is not provided
+    // Handle case where khoaID is not provided
     echo "Category ID not provided.";
 }
 ?>

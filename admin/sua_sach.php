@@ -58,8 +58,11 @@ function sanitize_input($data) {
         
         $content = $_POST['gioithieusach'];
         $category_id = $_POST['category_id'];
+        $tacgia=$_POST['tacgia'];
+        $namxuatban=$_POST['namxuatban'];
+        $loaisach=$_POST['loaisach'];
   
-         $sql = "UPDATE sach SET tensach ='$title', anh = '$image', gioithieusach = '$content', khoaID= $category_id where id = $id";
+        $sql = "UPDATE sach SET tensach ='$title', anh = '$image', gioithieusach = '$content', noidungdientu='$Url_Pdf',khoaID= '$category_id',tacgia='$tacgia', namxuatban='$namxuatban', loaisach='$loaisach', where id = $id";
     
         $query = mysqli_query($conn, $sql);
        
@@ -74,7 +77,7 @@ function sanitize_input($data) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document2</title>
+    <title>Sửa Sách</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
@@ -84,24 +87,38 @@ function sanitize_input($data) {
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <h2>Sửa bài viết</h2>
+                <h2>Sửa Sách</h2>
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
 
                     <div class="form-group">
-                        <label for="">Tiêu đề</label>
+                        <label for="">Tên sách </label>
                         <input type="text" name="tensach" class="form-control" require value="<?php echo $row_up['tensach'] ?>">
                     </div>
 
                     <div class="form-group">
-                        <label for="">Ảnh bài viết</label>
+                        <label for="">Ảnh bìa</label>
                         <input type="file" name="anh" class="form-control">
                     </div>
     
                     <div class="form-group">
-                        <label for="">Nội dung</label>
+                        <label for="">Nội dung giới thiệu </label>
                         <textarea name="gioithieusach" class="form-control form-control-size" id="content" value="" require><?php echo $row_up['gioithieusach'] ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nội dung sách (File Pdf, không có thì để trống)</label>
+                        <input type="file" name="file" id="file" onchange="checkFile()" class="form-control">
+                        <div id="fileError2" style="color: red;"></div>
+                    </div>
+                     <div class="form-group">
+                        <label for="">Tác Giả</label>
+                        <input type="text" name="tacgia" class="form-control" require>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="">Năm Xuất Bản</label>
+                        <input type="text" name="namxuatban" class="form-control" require>
                     </div>
 
                     <div class="form-group">
@@ -115,8 +132,8 @@ function sanitize_input($data) {
 
                      <div class="form-group">
                         <label for="">Loại Sách</label>
-                        <input type="radio" name="status" value="GIẤY" <?php if($row_up['loaisach'] == 'GIẤY') echo 'checked';?>>Giấy
-                        <input type="radio" name="status" value="GIẤY+ĐIỆN TỬ" <?php if($row_up['loaisach'] == 'GIẤY+ĐIỆN TỬ') echo 'checked';?>> Giấy+ Điện Tử
+                        <input type="radio" name="status" value="GIẤY" <?php if($row_up['loaisach'] == 'Giấy') echo 'checked';?>>Giấy
+                        <input type="radio" name="status" value="GIẤY+ĐIỆN TỬ" <?php if($row_up['loaisach'] == 'Giấy+ Điện Tử') echo 'checked';?>> Giấy+ Điện Tử
                     </div>
     
                     

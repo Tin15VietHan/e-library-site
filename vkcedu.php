@@ -246,6 +246,10 @@ var WP_Statistics_Tracker_Object = {"hitRequestUrl":"https:\/\/vkc.edu.vn\/wp-js
 </ul>
 </li>
 <li id="menu-item-2253" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2253 menu-item-design-default has-dropdown"><a href="index.php" class="nav-top-link">Thư Viện Điện Tử<i class="icon-angle-down" ></i></a>
+<ul class="sub-menu nav-dropdown nav-dropdown-default">
+	<li id="menu-item-654" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-654"><a href="https://vkc.edu.vn/hop-tac-quoc-te/hoat-dong-hop-tac/">Hoạt động hợp tác</a></li>
+	<li id="menu-item-653" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-653"><a href="https://vkc.edu.vn/hop-tac-quoc-te/du-an-hop-tac/">Dự án hợp tác</a></li>
+</ul>
 </li>
 <li class="header-divider"></li>            </ul>
           </div>

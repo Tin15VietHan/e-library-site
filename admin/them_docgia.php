@@ -77,7 +77,7 @@ if (isset($_POST['add'])) {
             <p class="errors">Vui lòng nhập tên độc giả</p>
         <?php endif; ?>
         <label>Mật khẩu</label><input type="text" name="password" /><br />
-        <?php if (isset($_POST['add']) && empty($_POST['passwword'])) : ?>
+        <?php if (isset($_POST['add']) && empty($_POST['password'])) : ?>
             <p class="errors">Vui lòng nhập mật khẩu</p>
         <?php endif; ?>
         <br />
